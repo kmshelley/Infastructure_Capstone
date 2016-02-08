@@ -85,7 +85,7 @@ def acquire_and_clean_NHSTA_data(year,type='FARS'):
         z = zipfile.ZipFile(outfile)
         for f in z.namelist():
             #convert each SAS file to a pandas data frame
-            if f.split('.')[-1] == 'sas7bdat':
+            if f.lower().split('.')[-1] == 'sas7bdat':
                 unzipped = z.extract(f) #extract the file
                 df = convert_SAS_to_df(unzipped) #convert to pandas dataframe
                 os.remove(unzipped) #remove extracted file
