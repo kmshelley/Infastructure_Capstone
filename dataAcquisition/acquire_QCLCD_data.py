@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:        acquire_QCLCD_data.py
-# Purpose:     Downloads weather data from NOAA into MongoDB
+# Purpose:     Downloads weather data from NOAA 
 #
 # Author:      Katherine Shelley
 #
