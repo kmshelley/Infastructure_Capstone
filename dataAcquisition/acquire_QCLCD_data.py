@@ -18,9 +18,17 @@ import contextlib
 import ast
 import pandas as pd
 import geojson
+from elasticsearch import Elasticsearch
+import ConfigParser
 
-QCLCD_url = 'http://www.ncdc.noaa.gov/orders/qclcd/'
-#http://cdo.ncdc.noaa.gov/qclcd_ascii/199607.tar.gz <- filename format before 7/2007
+
+#read in the config file
+config = ConfigParser.ConfigParser()
+config.read('../config/capstone_config.ini')
+
+QCLCD_url = config.get('QCLCD','url')
+ES_url = config.get('ElasticSearch','host')
+
 
 def clean_up_files():
     import glob
@@ -146,10 +154,5 @@ def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1
     except Exception as e:
         print "#####ERROR: %s" % e
 
-###CHANGE THESE FIELDS###
-temp_data_dir = 'E:/GoogleDrive/DataSciW210/Final/datasets'
-months = range(2,0,-1)
-years = range(2016,2015,-1)
-######
 
-collect_and_store_weather_data(months,years)
+
