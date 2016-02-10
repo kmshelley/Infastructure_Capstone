@@ -28,7 +28,7 @@ config.read('../config/capstone_config.ini')
 
 QCLCD_url = config.get('QCLCD','url')
 ES_url = config.get('ElasticSearch','host')
-
+temp_data_dir = 'E:/GoogleDrive/DataSciW210/Final/datasets'
 
 def clean_up_files():
     import glob
