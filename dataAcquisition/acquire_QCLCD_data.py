@@ -19,16 +19,18 @@ import ast
 import pandas as pd
 import geojson
 from elasticsearch import Elasticsearch
+from elasticsearch import helpers
 import ConfigParser
+from pprint import pprint
 
 
 #read in the config file
 config = ConfigParser.ConfigParser()
-config.read('../config/capstone_config.ini')
+config.read('./config/capstone_config.ini')
 
 QCLCD_url = config.get('QCLCD','url')
 ES_url = config.get('ElasticSearch','host')
-temp_data_dir = os.path.join(os.getcwd(),'tmp')
+temp_data_dir = config.get('MISC','temp_data_dir')
 
 def clean_up_files():
     import glob
@@ -53,7 +55,7 @@ def download_QCLCD_data(url,filename):
     return outFilePath
     
 
-def extract_hourly_records(outFilePath):
+def extract_hourly_records_as_DF(outFilePath):
     #input: Location of zipped NOAA QCLCD data file
     #output: Pandas dataframe of weather records
     if os.path.isfile(outFilePath) and zipfile.is_zipfile(outFilePath):
@@ -72,6 +74,68 @@ def extract_hourly_records(outFilePath):
         z.close()
         return df #return the weather observation dataframe
 
+def extract_hourly_records(outFilePath,stations):
+    #input: Location of zipped NOAA QCLCD data file
+    #output: list of weather records as python dictionaries,
+    #filtered for only weather stations in stations list
+    dateformat = '%Y%m%d'
+    timeformat = '%H%M'
+    if os.path.isfile(outFilePath) and zipfile.is_zipfile(outFilePath):
+        #if the url passed to the def exists and is a valid zip file
+        #added for Linux (was creating an empty file for non-existent url downloads)
+        z = zipfile.ZipFile(outFilePath)
+        records = []
+        for f in z.namelist():
+            ##LOAD HOURLY WEATHER DATA INTO PANDAS DATAFRAME
+            if f.find('hourly.txt') > -1:
+                #get observation info
+                with contextlib.closing(z.open(f,'r')) as hourlyFile:
+                    csv_dict = csv.DictReader(hourlyFile) #read the CSV as list of row dicts
+                    for row in csv_dict:
+                        if row['WBAN'] in stations:
+                            decode_row = {}
+                            #decode text, I was getting utf-8 errors without this
+                            for k in row:
+                                decode_row[k] = row[k].decode('utf-8','ignore')
+                                
+
+                            #convert strings to correct format, add ID field 
+                            decode_row['Date'] = dt.datetime.strptime(decode_row['Date'],dateformat)
+                            decode_row['Time'] = dt.datetime.strptime(decode_row['Time'],timeformat)
+                            #fields to convert to floating point decimal
+                            float_fields = ["Visibility",
+                                            "DryBulbFarenheit",
+                                            "DryBulbCelsius",
+                                            "WetBulbFarenheit",
+                                            "WetBulbCelsius",
+                                            "DewPointFarenheit",
+                                            "DewPointCelsius",
+                                            "RelativeHumidity",
+                                            "WindSpeed",
+                                            "StationPressure",
+                                            "PressureChange",
+                                            "SeaLevelPressure",
+                                            "HourlyPrecip",
+                                            "Altimeter"]
+                            #convert strings to floats
+                            for field in float_fields:
+                                try:
+                                    if decode_row[field]=='M' or decode_row[field]=='': decode_row[field]=99999.0 #'M' stands for 'missing', change to 99999
+                                    
+                                    decode_row[field] = float(decode_row[field])
+                                except:
+                                    decode_row[field] = 99999.0 #Attempt to change to 99999
+                                    
+                            #ID: <Station ID>_<YYYYMMDD>_<HH>
+                            decode_row['obs_id'] = '%s_%s_%s' % (decode_row['WBAN'],dt.datetime.strftime(decode_row['Date'],dateformat),dt.datetime.strftime(decode_row['Time'],'%H'))
+
+                            #append to list of records
+                            records.append(decode_row)
+        return records
+                        
+
+
+    
 def extract_station_records(outFilePath,station_file=None):
     #input: Location of zipped NOAA QCLCD data file
     #output: geojson feature collection of weather station locations, updates existing station geojson file if passed
@@ -107,15 +171,53 @@ def extract_station_records(outFilePath,station_file=None):
                     #If the stations geojson feature collection doesn't already exist, create it from the current stations dict
                     station_geojson = geojson.FeatureCollection([curr_stations[wban] for wban in curr_stations]) 
                     
-##                with open(station_file,'w')as geo:
-##                     geojson.dump(station_geojson,geo)
         z.close()
         return station_geojson #return the weather observation dataframe
+ 
+
+def upload_docs_to_ES(docs,index,id_field):
+    #input: list of JSON documents
+    #uploads each feature element to ElasticSearch
+    es = Elasticsearch(ES_url)
+    actions = []
+    #build the list of ElasticSearch uploads for bulk command
+    for doc in docs:
+        action = {
+            "_index": index,
+            "_type": index,
+            "_id": doc[id_field],
+            "_source": doc
+            }
+        actions.append(action)
+    try:
+        helpers.bulk(es, actions)
+        print "Sucessfully uploaded %s records!" % str(len(actions))
+    except Exception as e:
+        print '#### ERROR:s'
+        pprint(e)
     
+
+
+def delete_ES_records(index,doc_type):
+    #deletes all ElasticSearch records for an index
+    es = Elasticsearch(ES_url) #connect to ElasticSearch instance
+
+    try:
+        records = [res['_id'] for res in es.search(index)['hits']['hits']] #list of all WBAN station ID's
+        for rec in records: es.delete(index=index,doc_type=doc_type,id=rec)
+
+        print "Sucessfully deleted: %s" % records
+    except Exception as e:
+        print '#### ERROR: %s' % e
+        
+        
+   
 def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1)):
     #input: list of months and years
     #output: downloads and extracts hourly weather observations and WBAN station location information
+    
     try:
+        es = Elasticsearch(ES_url) #connect to ElasticSearch instance
         total_start = dt.datetime.now()
 
         for year in years:
@@ -124,26 +226,18 @@ def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1
                 
                 #download monthly zipped file
                 qclcd = download_QCLCD_data(QCLCD_url,'QCLCD%04d%02d.zip' % (year,month))
-                #get hourly weather records for all stations
-                df = extract_hourly_records(qclcd)
-                ## OPTIONAL ## write df to CSV
-                df.to_csv(os.path.join(temp_data_dir,'QCLCD%04d%02d.csv' % (year,month)),index=False) #write out the CSV
-
-                #get station locatio information
-                geo_file = os.path.join(temp_data_dir,'WBAN_stations.json')
-                stations = extract_station_records(qclcd,geo_file)
-                ## OPTIONAL ## write the geojson file to flat file
-                with open(geo_file,'w') as geo:
-                    geojson.dump(stations,geo)
-
                 
-                
-                
-                ####KASANE: This is where we would load the data into ElasticSearch. My code updates a flat GeoJSON file for the
-                ## station locations, but we will possibly want to push that to ElasticSearch as well.
-                ####
+                try:
+                    stations = [str(res['_id']) for res in es.search('weather_stations')['hits']['hits']] #list of all WBAN station ID's
+                    #get hourly weather records for NY stations only
+                    records = extract_hourly_records(qclcd,stations)
 
-
+                    #upload the documents to ElasticSearch
+                    upload_docs_to_ES(records,'weather_observations','obs_id')
+                    
+                except Exception as e:
+                    print '#### ERROR: %s' % e
+                
 
                 os.remove(qclcd)
                 
@@ -153,6 +247,3 @@ def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1
 
     except Exception as e:
         print "#####ERROR: %s" % e
-
-
-

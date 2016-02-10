@@ -2,8 +2,14 @@ import requests
 import urllib
 import geojson
 import csv
+import ConfigParser
 
-api_key = 'XXXX'
+
+#read in the config file
+config = ConfigParser.ConfigParser()
+config.read('../config/capstone_config.ini')
+
+api_key = config.get('GoogleAPI','api_key')
 
 
 def get_geojson_position(address):
@@ -28,7 +34,5 @@ def geojson_from_address_file(filename,address_field):
             if point: features.append(geojson.Feature(geometry=point,properties=row))
     return geojson.FeatureCollection(features)
 
-geo = geojson_from_address_file('E:/GoogleDrive/DataSciW210/Final/datasets/FDNY_Firehouse_Listing.csv','FacilityAddress')
-with open('E:/GoogleDrive/DataSciW210/Final/datasets/FDNY_Firehouses.geojson','w') as geofile:
-    geojson.dump(geo,geofile)
+
     
