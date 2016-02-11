@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+
+		<title>NYC Collisions</title>
+
+		<style>
+			body, html { margin:0; padding:0; height:100%;}
+			#heatmapContainerWrapper { width:100%; height:100%; position:absolute; }
+			#heatmapContainer { width:100%; height:100%; }
+			#districtBoundary { width:100%; height:100%; }
+			h1 { position:absolute; background:white; padding:10px;}
+		</style>
+		<style src="assets/css/ol.css"></style>
+	</head>
+
+	<body>
+	<h3>All New York City Collisions</h3>
+	<div id="heatmapContainerWrapper">
+		<div id="heatmapContainer"></div>
+	</div>
+	<div id="map" style="width: 100%, height: 400px"></div>
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="assets/js/colorbrewer.js"></script>
+	<script src="assets/js/jquery-1.11.3.js"></script>
+	<script src="assets/js/d3.min.js"></script>
+	<script src="assets/js/topojson.v1.min.js"></script>
+    <script src="assets/js/ol.js"></script>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="assets/js/heatmap.min.js"></script>
+    <script src="assets/js/leaflet-heatmap.js"></script>
+
+	
+	<script>
+		//define the density layer
+		var colors = colorbrewer.YlGnBu[5].reverse();
+		var density_vector = new ol.source.Vector({
+										url: 'assets/data/NYPD_Motor_Vehicle_Collisions.json',
+										format: new ol.format.GeoJSON()
+									});
+		var heatmapLayer = new ol.layer.Heatmap({
+			source: density_vector,
+			//gradient:colors,
+			radius: 10,
+			opacity: 0.9,
+			blur:2
+		});
+		
+		
+			//build the map
+			var map = new ol.Map({
+				layers: [
+							new ol.layer.Tile({source: new ol.source.OSM()}),
+							heatmapLayer
+							
+						],
+				view: new ol.View({
+									center: ol.proj.fromLonLat([-73.960483, 40.789020]),
+									zoom: 13
+								}),
+				target: 'map'
+			});
+			
+					
+			/*//export heatmap layers as GeoJSON
+			var geoJSON = new ol.format.GeoJSON();
+			var json = geoJSON.writeFeatures( map );
+			console.log(json)*/
+
+	  
+	</script>
+
+	</body>
+</html>
