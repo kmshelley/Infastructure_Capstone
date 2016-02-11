@@ -175,19 +175,36 @@ def extract_station_records(outFilePath,station_file=None):
         return station_geojson #return the weather observation dataframe
  
 
-def upload_docs_to_ES(docs,index,id_field):
+def upload_docs_to_ES(docs,index,id_field,geofile=False):
     #input: list of JSON documents
     #uploads each feature element to ElasticSearch
     es = Elasticsearch(ES_url)
+    es.indices.create(index)
+    #if the data is in geojson format, set the geo_point mapping
+    if geofile:
+        mapping = {index:{"properties":{"loc":{"type":"geo_point","store":"yes"}}}}
+        es.indices.put_mapping(index=index, doc_type=index, body=mapping)
+
     actions = []
     #build the list of ElasticSearch uploads for bulk command
     for doc in docs:
         action = {
             "_index": index,
             "_type": index,
-            "_id": doc[id_field],
-            "_source": doc
             }
+        if geofile:
+            #add the point to the document properties
+            doc['properties']['loc'] = doc['geometry']['coordinates']
+
+            #load the document properties into ES
+            action['_source'] = doc['properties']
+            
+            #get id from geojson properties document
+            action['_id'] = doc['properties'][id_field]
+        else:
+            #assign id for typical json document
+            action['_id'] = doc[id_field]
+            action['_source'] = doc
         actions.append(action)
     try:
         helpers.bulk(es, actions)
@@ -197,16 +214,24 @@ def upload_docs_to_ES(docs,index,id_field):
         pprint(e)
     
 
-
+    
 def delete_ES_records(index,doc_type):
-    #deletes all ElasticSearch records for an index
+    #deletes all ElasticSearch records for an index (recrusively runs until index is empty
     es = Elasticsearch(ES_url) #connect to ElasticSearch instance
 
     try:
         records = [res['_id'] for res in es.search(index)['hits']['hits']] #list of all WBAN station ID's
-        for rec in records: es.delete(index=index,doc_type=doc_type,id=rec)
+        if len(records) > 0:
+            deleted = 0
+            for rec in records:
+                es.delete(index=index,doc_type=doc_type,id=rec)
+                deleted+=1
 
-        print "Sucessfully deleted: %s" % records
+            print "Sucessfully deleted: %s" % deleted
+            delete_ES_records(index,doc_type)
+        else:
+            return
+            
     except Exception as e:
         print '#### ERROR: %s' % e
         
