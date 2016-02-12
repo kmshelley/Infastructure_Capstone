@@ -22,7 +22,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 import ConfigParser
 from pprint import pprint
-
+from dataStorage import upload_to_Elasticsearch
 
 #read in the config file
 config = ConfigParser.ConfigParser()
@@ -132,9 +132,6 @@ def extract_hourly_records(outFilePath,stations):
                             #append to list of records
                             records.append(decode_row)
         return records
-                        
-
-
     
 def extract_station_records(outFilePath,station_file=None):
     #input: Location of zipped NOAA QCLCD data file
@@ -175,68 +172,6 @@ def extract_station_records(outFilePath,station_file=None):
         return station_geojson #return the weather observation dataframe
  
 
-def upload_docs_to_ES(docs,index,id_field,geofile=False):
-    #input: list of JSON documents
-    #uploads each feature element to ElasticSearch
-    es = Elasticsearch(ES_url)
-    es.indices.create(index)
-    #if the data is in geojson format, set the geo_point mapping
-    if geofile:
-        mapping = {index:{"properties":{"loc":{"type":"geo_point","store":"yes"}}}}
-        es.indices.put_mapping(index=index, doc_type=index, body=mapping)
-
-    actions = []
-    #build the list of ElasticSearch uploads for bulk command
-    for doc in docs:
-        action = {
-            "_index": index,
-            "_type": index,
-            }
-        if geofile:
-            #add the point to the document properties
-            doc['properties']['loc'] = doc['geometry']['coordinates']
-
-            #load the document properties into ES
-            action['_source'] = doc['properties']
-            
-            #get id from geojson properties document
-            action['_id'] = doc['properties'][id_field]
-        else:
-            #assign id for typical json document
-            action['_id'] = doc[id_field]
-            action['_source'] = doc
-        actions.append(action)
-    try:
-        helpers.bulk(es, actions)
-        print "Sucessfully uploaded %s records!" % str(len(actions))
-    except Exception as e:
-        print '#### ERROR:s'
-        pprint(e)
-    
-
-    
-def delete_ES_records(index,doc_type):
-    #deletes all ElasticSearch records for an index (recrusively runs until index is empty
-    es = Elasticsearch(ES_url) #connect to ElasticSearch instance
-
-    try:
-        records = [res['_id'] for res in es.search(index)['hits']['hits']] #list of all WBAN station ID's
-        if len(records) > 0:
-            deleted = 0
-            for rec in records:
-                es.delete(index=index,doc_type=doc_type,id=rec)
-                deleted+=1
-
-            print "Sucessfully deleted: %s" % deleted
-            delete_ES_records(index,doc_type)
-        else:
-            return
-            
-    except Exception as e:
-        print '#### ERROR: %s' % e
-        
-        
-   
 def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1)):
     #input: list of months and years
     #output: downloads and extracts hourly weather observations and WBAN station location information
@@ -251,6 +186,7 @@ def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1
                 
                 #download monthly zipped file
                 qclcd = download_QCLCD_data(QCLCD_url,'QCLCD%04d%02d.zip' % (year,month))
+                #qclcd = 'E:/GoogleDrive/DataSciW210/Final/datasets/QCLCD201602.zip'
                 
                 try:
                     stations = [str(res['_id']) for res in es.search('weather_stations')['hits']['hits']] #list of all WBAN station ID's
@@ -258,7 +194,7 @@ def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1
                     records = extract_hourly_records(qclcd,stations)
 
                     #upload the documents to ElasticSearch
-                    upload_docs_to_ES(records,'weather_observations','obs_id')
+                    upload_to_Elasticsearch.upload_docs_to_ES(records,'weather_observations','obs_id')
                     
                 except Exception as e:
                     print '#### ERROR: %s' % e
