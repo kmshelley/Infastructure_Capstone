@@ -14,7 +14,7 @@ from elasticsearch import Elasticsearch,helpers
 from dataStorage import upload_to_Elasticsearch
 
 
-def upload_collision_data(flatfile,index,doc_type)
+def upload_collision_data(flatfile,index,doc_type):
     with open(flatfile) as csvfile:  
         csv_reader = csv.DictReader(csvfile)
         records = []
