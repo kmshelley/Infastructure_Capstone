@@ -21,5 +21,8 @@ if __name__ == '__main__':
     ######
 
     #collision data processing and upload
-    collisions = 'E:/GoogleDrive/DataSciW210/Final/datasets/collisions.csv'
+    #collisions = 'E:/GoogleDrive/DataSciW210/Final/datasets/collisions.csv'
+    collisions = '../../colSmall.csv'
+    #collisions = 'E:/GoogleDrive/DataSciW210/Final/datasets/collisions.csv'
+ 
     acquire_NYC_Collisions.upload_collision_data(collisions,index="saferoad",doc_type="collisions")

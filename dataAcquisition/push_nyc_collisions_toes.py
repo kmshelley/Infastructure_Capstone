@@ -38,6 +38,7 @@ def upload_docs_to_ES(docs,index,type):
 #Second argument is ES password
 #Thrid arg is server IP
 #es = ElasticSearch('http://' + sys.argv[3] + ':9200/',username=sys.argv[1], password=sys.argv[2])
+print 'http://' + sys.argv[1] + ':' + sys.argv[2] + '@' + sys.argv[3] + ':9200/'
 es = Elasticsearch(['http://' + sys.argv[1] + ':' + sys.argv[2] + '@' + sys.argv[3] + ':9200/'])
 
 indexName = "saferoad" #this is like a group of tables under common theme
