@@ -7,7 +7,7 @@ import ConfigParser
 
 #read in the config file
 config = ConfigParser.ConfigParser()
-config.read('../config/capstone_config.ini')
+config.read('./config/capstone_config.ini')
 
 api_key = config.get('GoogleAPI','api_key')
 
@@ -34,5 +34,3 @@ def geojson_from_address_file(filename,address_field):
             if point: features.append(geojson.Feature(geometry=point,properties=row))
     return geojson.FeatureCollection(features)
 
-
-    

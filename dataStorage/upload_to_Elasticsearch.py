@@ -7,24 +7,14 @@ from pprint import pprint
 
 #read in the config file
 config = ConfigParser.ConfigParser()
-#config.read('./config/capstone_config.ini')
-#print os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + '/capston_config.ini'
-#print os.path.isfile(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + '/capstone_config.ini') 
-
-#move config file to outside git so we don't accidentally check it in
-config.read(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + '/capstone_config.ini')
-
+config.read('./config/capstone_config.ini')
 ES_url = config.get('ElasticSearch','host')
-ES_password = config.get('ElasticSearch','password')
-ES_username= config.get('ElasticSearch','username')
+
 
 def upload_docs_to_ES(docs,index,doc_type,id_field,geopoint=False):
     #input: list of JSON documents, an index name, document type, ID field, and name of an (OPTIONAL) geopoint field.
     #uploads each feature element to ElasticSearch
-    #es = Elasticsearch(ES_url)
-    print 'http://' + ES_url + ':' + ES_username + '@' + ES_password + ':9200/'
-    es = Elasticsearch(['http://' + ES_username + ':' + ES_password + '@' + ES_url + ':9200/'])
- 
+    es = Elasticsearch(ES_url)
     try:
         es.indices.create(index)
     except:
@@ -33,8 +23,8 @@ def upload_docs_to_ES(docs,index,doc_type,id_field,geopoint=False):
     
     #if the data has a location field, set the geo_point mapping
     if geopoint:
-        mapping = {index:{'properties':{geopoint:{'type':'geo_point','store':'yes'}}}}
-        es.indices.put_mapping(index=index, doc_type=index, body=mapping)
+        mapping = {doc_type:{'properties':{geopoint:{'type':'geo_point','store':'yes'}}}}
+        es.indices.put_mapping(index=index, doc_type=doc_type, body=mapping)
 
     actions = []
     #build the list of ElasticSearch uploads for bulk command
