@@ -7,14 +7,23 @@ from pprint import pprint
 
 #read in the config file
 config = ConfigParser.ConfigParser()
-config.read('./config/capstone_config.ini')
+#config.read('./config/capstone_config.ini')
+#getting config file two folders up so we don't check in password by mistake
+config.read(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + '/capstone_config.ini')
+
+
 ES_url = config.get('ElasticSearch','host')
+ES_password = config.get('ElasticSearch','password')
+ES_username= config.get('ElasticSearch','username')
 
 
 def upload_docs_to_ES(docs,index,doc_type,id_field,geopoint=False):
     #input: list of JSON documents, an index name, document type, ID field, and name of an (OPTIONAL) geopoint field.
     #uploads each feature element to ElasticSearch
-    es = Elasticsearch(ES_url)
+    #es = Elasticsearch(ES_url)
+
+    es = Elasticsearch(['http://' + ES_username + ':' + ES_password + '@' + ES_url + ':9200/'])
+    
     try:
         es.indices.create(index)
     except:

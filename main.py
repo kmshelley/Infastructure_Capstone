@@ -16,10 +16,10 @@ if __name__ == '__main__':
     
     import geojson
     #stations = address_geocoding.geojson_from_address_file('E:/GoogleDrive/DataSciW210/Final/datasets/FDNY_Firehouse_Listing_cleaned.csv','geoAddress')
-    with open('E:/GoogleDrive/DataSciW210/Final/datasets/FDNY_FireStations.json','r') as geo:
-        stations = geojson.load(geo)['features']
+    #with open('E:/GoogleDrive/DataSciW210/Final/datasets/FDNY_FireStations.json','r') as geo:
+    #    stations = geojson.load(geo)['features']
         
-    upload_to_Elasticsearch.upload_docs_to_ES(stations,'emergency_stations','fdny','FacilityName','loc')
+    #upload_to_Elasticsearch.upload_docs_to_ES(stations,'emergency_stations','fdny','FacilityName','loc')
 
     # Weather data collection
     ###CHANGE THESE FIELDS###
@@ -30,4 +30,6 @@ if __name__ == '__main__':
 
     #collision data processing and upload
 ##    collisions = 'E:/GoogleDrive/DataSciW210/Final/datasets/collisions.csv'
-##    acquire_NYC_Collisions.upload_collision_data(collisions,index="saferoad",doc_type="collisions")
+    #collisions = '../../colSmall.csv'
+    #collisions = '../../collisions.csv'
+    #acquire_NYC_Collisions.upload_collision_data(collisions,index="saferoad",doc_type="collisions")
