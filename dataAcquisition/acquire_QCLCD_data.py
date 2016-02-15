@@ -80,6 +80,7 @@ def extract_hourly_records(outFilePath,stations):
     #filtered for only weather stations in stations list
     dateformat = '%Y%m%d'
     timeformat = '%H%M'
+    datetime_format = dateformat + ' ' + timeformat
     if os.path.isfile(outFilePath) and zipfile.is_zipfile(outFilePath):
         #if the url passed to the def exists and is a valid zip file
         #added for Linux (was creating an empty file for non-existent url downloads)
@@ -128,7 +129,8 @@ def extract_hourly_records(outFilePath,stations):
                                     
                             #ID: <Station ID>_<YYYYMMDD>_<HH>
                             decode_row['obs_id'] = '%s_%s_%s' % (decode_row['WBAN'],dt.datetime.strftime(decode_row['Date'],dateformat),dt.datetime.strftime(decode_row['Time'],'%H'))
-
+                            decode_row['DateTime'] = dt.datetime.strftime(decode_row['Date'] + ' ' + decode_row['Time'],datetime_format)
+                            
                             #append to list of records
                             records.append(decode_row)
         return records

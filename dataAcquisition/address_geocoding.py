@@ -3,6 +3,7 @@ import urllib
 import geojson
 import csv
 import ConfigParser
+import datetime as dt
 
 
 #read in the config file
@@ -33,4 +34,30 @@ def geojson_from_address_file(filename,address_field):
             point = get_geojson_position(row[address_field])
             if point: features.append(geojson.Feature(geometry=point,properties=row))
     return geojson.FeatureCollection(features)
+
+
+def google_drive_distance(origin,destination):
+    #input: a string representing an address, or lng-lat pair for two locations
+    #output: Google Maps estimated drive distance (meters)
+    if type(origin) is list:
+        orig = '%s, %s' % (str(origin[1]),str(origin[0])) #convert lng-lat list to string
+    else:
+        origin = orig
+    if type(destination) is list:
+        dest = '%s, %s' % (str(destination[1]),str(destination[0])) #convert lng-lat list to string
+    else:
+        dest = destination
+
+    url = 'https://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&key=%s' % (urllib.quote_plus(orig),urllib.quote_plus(dest),api_key)
+    
+    r = requests.get(url)
+    if r.status_code==200:
+        results = r.json()
+        if len(results['routes']) > 0 and  results['status'] == 'OK':
+            total_dist = 0
+            for leg in results['routes'][0]['legs']:
+                total_dist+=leg['distance']['value']
+            return total_dist
+    
+    return False
 
