@@ -7,9 +7,9 @@ from pprint import pprint
 
 #read in the config file
 config = ConfigParser.ConfigParser()
-#config.read('./config/capstone_config.ini')
+config.read('./config/capstone_config.ini')
 #getting config file two folders up so we don't check in password by mistake
-config.read(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + '/capstone_config.ini')
+#config.read(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + '/capstone_config.ini')
 
 
 ES_url = config.get('ElasticSearch','host')
@@ -17,7 +17,7 @@ ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
 
-def upload_docs_to_ES(docs,index,doc_type,id_field,geopoint=False):
+def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape=False):
     #input: list of JSON documents, an index name, document type, ID field, and name of an (OPTIONAL) geopoint field.
     #uploads each feature element to ElasticSearch
     #es = Elasticsearch(ES_url)
@@ -33,6 +33,10 @@ def upload_docs_to_ES(docs,index,doc_type,id_field,geopoint=False):
     #if the data has a location field, set the geo_point mapping
     if geopoint:
         mapping = {doc_type:{'properties':{geopoint:{'type':'geo_point','store':'yes'}}}}
+        es.indices.put_mapping(index=index, doc_type=doc_type, body=mapping)
+
+    if geoshape:
+        mapping = {doc_type:{'properties':{geoshape:{'type':'geo_shape'}}}}
         es.indices.put_mapping(index=index, doc_type=doc_type, body=mapping)
 
     actions = []
@@ -52,10 +56,10 @@ def upload_docs_to_ES(docs,index,doc_type,id_field,geopoint=False):
             action['_source'] = doc['properties']
             
             #get id from geojson properties document
-            action['_id'] = doc['properties'][id_field]        
+            if id_field: action['_id'] = doc['properties'][id_field]        
         else:
             #assign id for typical json document
-            action['_id'] = doc[id_field]
+            if id_field: action['_id'] = doc[id_field]
             action['_source'] = doc
             
         actions.append(action)
