@@ -17,7 +17,10 @@ class SearchGrid():
         self.width = width #number of grid squares per row (grid is width X width)
         self.bbox = {'sw': ll.LatLon(bbox[1],bbox[0]),'ne':ll.LatLon(bbox[3],bbox[2])}#bounding box
         self.p = Proj(proj_str)
-        self.filter_poly = Polygon([self.p(lng,lat) for (lng,lat) in filter_poly])
+        if filter_poly: 
+            self.filter_poly = Polygon([self.p(lng,lat) for (lng,lat) in filter_poly])
+        else:
+            self.filter_poly=False
 
         #characteristics of the grid
         self.diagonal_dist = self.bbox['sw'].distance(self.bbox['ne']) #distance between bounding coordinates
