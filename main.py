@@ -1,5 +1,5 @@
 from classes.SearchGrid import SearchGrid
-from dataAcquisition import acquire_QCLCD_data, acquire_NYC_Collisions, address_geocoding, mta_status
+from dataAcquisition import acquire_QCLCD_data, acquire_NYC_Collisions, address_geocoding
 from dataAnalysis import driving_distance
 from dataStorage import upload_to_Elasticsearch
 import geojson
