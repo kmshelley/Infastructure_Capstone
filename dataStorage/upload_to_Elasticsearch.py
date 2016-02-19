@@ -32,15 +32,22 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
     
     #if the data has a location field, set the geo_point mapping
     if geopoint:
-        mapping = {doc_type:{'properties':{geopoint:{'type':'geo_point','store':'yes'}}}}
-        es.indices.put_mapping(index=index, doc_type=doc_type, body=mapping)
+        try:
+            mapping = {doc_type:{'properties':{geopoint:{'type':'geo_point','store':'yes'}}}}
+            es.indices.put_mapping(index=index, doc_type=doc_type, body=mapping)
+        except:
+            pass
 
     if geoshape:
-        mapping = {doc_type:{'properties':{geoshape:{'type':'geo_shape'}}}}
-        es.indices.put_mapping(index=index, doc_type=doc_type, body=mapping)
+        try:
+            mapping = {doc_type:{'properties':{geoshape:{'type':'geo_shape'}}}}
+            es.indices.put_mapping(index=index, doc_type=doc_type, body=mapping)
+        except:
+            pass
 
     actions = []
     #build the list of ElasticSearch uploads for bulk command
+    index=0
     for doc in docs:
         action = {
             '_index': index,
@@ -63,6 +70,22 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
             action['_source'] = doc
             
         actions.append(action)
+        index +=1
+
+        #upload 10k records at a time
+        if index == 10000:
+            try:
+                helpers.bulk(es, actions)
+                print 'Sucessfully uploaded %s records!' % str(len(actions))
+                actions = []
+                index=0
+            except Exception as e:
+                print '#### ERROR:s'
+                pprint(e)
+            
+        
+    
+    #upload remaining 10k records        
     try:
         helpers.bulk(es, actions)
         print 'Sucessfully uploaded %s records!' % str(len(actions))

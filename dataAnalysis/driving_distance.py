@@ -89,9 +89,16 @@ def great_circle_distance_to_collision(loc_file,closest_field,dist_field):
                         helpers.bulk(es, actions)
                         #pprint(actions)
                         print 'Successfully updated %s records!' % index
+                        actions = []
                         index=0
                     except Exception as e:
                         print '### ERRROR: %s' % e
+        #push final set of actions
+        try:
+            helpers.bulk(es, actions)
+            print 'Successfully updated %s records!' % index
+        except Exception as e:
+            print '### ERRROR: %s' % e
                     
                         
 
