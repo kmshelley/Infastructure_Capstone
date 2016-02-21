@@ -17,12 +17,18 @@ ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
 
-def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape=False):
+def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape=False,delete_index=False):
     #input: list of JSON documents, an index name, document type, ID field, and name of an (OPTIONAL) geopoint field.
     #uploads each feature element to ElasticSearch
     #es = Elasticsearch(ES_url)
 
     es = Elasticsearch(['http://' + ES_username + ':' + ES_password + '@' + ES_url + ':9200/'])
+
+    if delete_index:
+        try :
+            es.indices.delete(index=index, ignore=400)
+        except :
+            pass
     
     try:
         es.indices.create(index)
@@ -40,7 +46,7 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
 
     if geoshape:
         try:
-            mapping = {doc_type:{'properties':{geoshape:{'type':'geo_shape'}}}}
+            mapping = {doc_type:{'properties':{geoshape:{'type':'geo_shape','tree':'quadtree', 'precision': '1m'}}}}
             es.indices.put_mapping(index=index, doc_type=doc_type, body=mapping)
         except:
             pass
@@ -56,14 +62,13 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
         #check if the document is a geojson document
         validation = geojson.is_valid(doc)
         if validation['valid'].lower() == 'yes':
-            #add the point to the document properties
-            doc['properties'][geopoint] = list(geojson.utils.coords(doc))[0]
-
+            #add the point/shape to the document properties
+            if geopoint: doc['properties'][geopoint] = list(geojson.utils.coords(doc))[0]
+            if geoshape: doc['properties'][geoshape] = list(geojson.utils.coords(doc))[0]
+            #get id from geojson properties document
+            if id_field: action['_id'] = doc['properties'][id_field]      
             #load the document properties into ES
             action['_source'] = doc['properties']
-            
-            #get id from geojson properties document
-            if id_field: action['_id'] = doc['properties'][id_field]        
         else:
             #assign id for typical json document
             if id_field: action['_id'] = doc[id_field]
@@ -90,7 +95,7 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
         helpers.bulk(es, actions)
         print 'Sucessfully uploaded %s records!' % str(len(actions))
     except Exception as e:
-        print '#### ERROR:s'
+        print '#### ERROR:'
         pprint(e)
     
 
