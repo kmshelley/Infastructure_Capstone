@@ -29,8 +29,11 @@ config = ConfigParser.ConfigParser()
 config.read('./config/capstone_config.ini')
 
 QCLCD_url = config.get('QCLCD','url')
-ES_url = config.get('ElasticSearch','host')
 temp_data_dir = config.get('MISC','temp_data_dir')
+
+ES_url = config.get('ElasticSearch','host')
+ES_password = config.get('ElasticSearch','password')
+ES_username= config.get('ElasticSearch','username')
 
 def clean_up_files():
     import glob
@@ -97,27 +100,39 @@ def extract_hourly_records(outFilePath,stations):
                             decode_row = {}
                             #decode text, I was getting utf-8 errors without this
                             for k in row:
-                                decode_row[k] = row[k].decode('utf-8','ignore')
+                                decode_row['weather_' + k] = row[k].decode('utf-8','ignore')
+                                
                                 
 
-                            #convert strings to correct format, add ID field 
-                            decode_row['Date'] = dt.datetime.strptime(decode_row['Date'],dateformat)
-                            decode_row['Time'] = dt.datetime.strptime(decode_row['Time'],timeformat)
+                            #convert strings to correct format, add ID field
+                            #create datetime field
+                            decode_row['weather_DateTime'] = dt.datetime.strptime(decode_row['weather_Date'] + ' ' + decode_row['weather_Time'],datetime_format)
+                            decode_row['weather_DateTime'] = dt.datetime.strftime(decode_row['weather_DateTime'],'%Y-%m-%dT%H:%M:%S%z')
+                            
+                            #create properly formatted date field
+                            decode_row['weather_Date'] = dt.datetime.strptime(decode_row['weather_Date'],dateformat)
+                            decode_row['weather_Date'] = dt.datetime.strftime(decode_row['weather_Date'],'%Y-%m-%d')
+
+                            #create properly formatted time field
+                            decode_row['weather_Time'] = dt.datetime.strptime(decode_row['weather_Time'],timeformat)
+                            decode_row['weather_Time'] = dt.datetime.strftime(decode_row['weather_Time'],'%H:%M:%S%z')
+
+                            
                             #fields to convert to floating point decimal
-                            float_fields = ["Visibility",
-                                            "DryBulbFarenheit",
-                                            "DryBulbCelsius",
-                                            "WetBulbFarenheit",
-                                            "WetBulbCelsius",
-                                            "DewPointFarenheit",
-                                            "DewPointCelsius",
-                                            "RelativeHumidity",
-                                            "WindSpeed",
-                                            "StationPressure",
-                                            "PressureChange",
-                                            "SeaLevelPressure",
-                                            "HourlyPrecip",
-                                            "Altimeter"]
+                            float_fields = ["weather_Visibility",
+                                            "weather_DryBulbFarenheit",
+                                            "weather_DryBulbCelsius",
+                                            "weather_WetBulbFarenheit",
+                                            "weather_WetBulbCelsius",
+                                            "weather_DewPointFarenheit",
+                                            "weather_DewPointCelsius",
+                                            "weather_RelativeHumidity",
+                                            "weather_WindSpeed",
+                                            "weather_StationPressure",
+                                            "weather_PressureChange",
+                                            "weather_SeaLevelPressure",
+                                            "weather_HourlyPrecip",
+                                            "weather_Altimeter"]
                             #convert strings to floats
                             for field in float_fields:
                                 try:
@@ -128,8 +143,7 @@ def extract_hourly_records(outFilePath,stations):
                                     decode_row[field] = 99999.0 #Attempt to change to 99999
                                     
                             #ID: <Station ID>_<YYYYMMDD>_<HH>
-                            decode_row['obs_id'] = '%s_%s_%s' % (decode_row['WBAN'],dt.datetime.strftime(decode_row['Date'],dateformat),dt.datetime.strftime(decode_row['Time'],'%H'))
-                            decode_row['DateTime'] = dt.datetime.strftime(decode_row['Date'] + ' ' + decode_row['Time'],datetime_format)
+                            decode_row['weather_obs_id'] = '%s_%s_%s' % (decode_row['weather_WBAN'],decode_row['weather_Date'],decode_row['weather_Time'])
                             
                             #append to list of records
                             records.append(decode_row)
@@ -179,7 +193,7 @@ def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1
     #output: downloads and extracts hourly weather observations and WBAN station location information
     
     try:
-        es = Elasticsearch(ES_url) #connect to ElasticSearch instance
+        es = Elasticsearch(['http://' + ES_username + ':' + ES_password + '@' + ES_url + ':9200/']) #connect to ElasticSearch instance
         total_start = dt.datetime.now()
 
         for year in years:
@@ -196,17 +210,16 @@ def collect_and_store_weather_data(months=range(2,0,-1),years=range(2016,2015,-1
                     records = extract_hourly_records(qclcd,stations)
 
                     #upload the documents to ElasticSearch
-                    upload_to_Elasticsearch.upload_docs_to_ES(records,'weather_observations','obs_id')
+                    #upload_to_Elasticsearch.create_es_index_and_mapping_cURL(index='weather',doc_type='hourly_obs',time_field='weather_Time',time_type='strict_t_time_no_millis',date_field='weather_date',date_type='strict_date_optional_time',datetime_field='weather_DateTime',datetime_type='strict_date_time_no_millis')
+                    upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(records,index='weather',doc_type='hourly_obs',id_field='weather_obs_id')
                     
                 except Exception as e:
                     print '#### ERROR: %s' % e
-                
-
                 os.remove(qclcd)
                 
                 print "Finished collecting weather data for %04d%02d." % (year,month)
-                print "Total Runtime: %s " % (dt.datetime.now() - local_start)
-        print "Finished!\nTotal Run Time: %s " % (dt.datetime.now() - total_start)
+                print "Total Runtime: %s " % str(dt.datetime.now() - local_start)
+        print "Finished!\nTotal Run Time: %s " % str(dt.datetime.now() - total_start)
 
     except Exception as e:
         print "#####ERROR: %s" % e
