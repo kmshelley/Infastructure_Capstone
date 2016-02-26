@@ -34,7 +34,7 @@ def create_es_index_and_mapping_cURL(index,doc_type,time_field=False,time_type=F
             if err: print '\n' + err + '\n\n'
         except Exception as e:
             print "Error deleting index:"
-            print e + '\n\n'
+            print e
     try:
         #create the index, set the replicas so uploads will not err out
         settings = {"settings":
@@ -63,7 +63,7 @@ def create_es_index_and_mapping_cURL(index,doc_type,time_field=False,time_type=F
     except Exception as e:
         #do not try to recreate the index
         print "Error creating index:"
-        print e + '\n\n'
+        print e
         
     #double-check that the correct number of replicas are being used
     p = subprocess.Popen(['curl','-XPUT','%s/%s/_settings' % (es,index),'-d','{"number_of_replicas": 1}'])
@@ -171,7 +171,7 @@ def bulk_upload_docs_to_ES_cURL(docs,index,doc_type,id_field=False,geopoint=Fals
             if err: print '\n' + err + '\n\n'
         except Exception as e:
             print "Error deleting index:"
-            print e + '\n\n'
+            print e
     try:
         #create the index, set the replicas so uploads will not err out
         settings = {"settings":
@@ -197,7 +197,7 @@ def bulk_upload_docs_to_ES_cURL(docs,index,doc_type,id_field=False,geopoint=Fals
     except Exception as e:
         #do not try to recreate the index
         print "Error creating index:"
-        print e + '\n\n'
+        print e
 
 
     #double-check that the correct number of replicas are being used

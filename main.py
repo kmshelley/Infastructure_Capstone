@@ -2,6 +2,7 @@ from classes.SearchGrid import SearchGrid
 from dataAcquisition import acquire_QCLCD_data, acquire_NYC_Collisions, address_geocoding
 from dataAnalysis import driving_distance
 from dataStorage import upload_to_Elasticsearch
+from dataCleaning import filter_shapefile
 import geojson,sys
 
 __author__ = 'Katherine'
@@ -24,26 +25,13 @@ if __name__ == '__main__':
 
 
     #   Upload streetmap data to Elasticsearch   #
-##    from pyproj import Proj
-##    p = Proj(init='epsg:2030')
-##    with open('./flatDataFiles/NYC_streets_complete.json','r') as geo:
-##        streets = filter_shapefile.street_map_centers(geojson.load(geo),p)
-##
-##    with open('./flatDataFiles/NYC_streets_centers.json','w') as geo:
-##        geojson.dump(streets,geo)
-
-    #complete street segments
-##    with open('./flatDataFiles/NYC_streets_complete.json','r') as geo:
-##        streets = filter_shapefile.street_map_centers(geojson.load(geo),p) 
-##    upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(streets,index='nyc_streets',doc_type='complete_segments',geoshape='points',shape_type='linestring')
-
-    #complete street segments
     with open('./flatDataFiles/NYC_streets_starts.json','r') as geo:
-        streets = filter_shapefile.street_map_centers(geojson.load(geo),p) 
+        streets = geojson.load(geo)['features']
     upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(streets,index='nyc_street_start',doc_type='start_points',geopoint='coords')
 
-    #complete street segments
+    #street segment centers    
     with open('./flatDataFiles/NYC_streets_centers.json','r') as geo:
-        streets = filter_shapefile.street_map_centers(geojson.load(geo),p) 
+        streets = geojson.load(geo)['features']
     upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(streets,index='nyc_street_center',doc_type='center_points',geopoint='coords')
+
 
