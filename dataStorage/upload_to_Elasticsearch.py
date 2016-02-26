@@ -133,7 +133,7 @@ def upload_individual_docs_to_ES_cURL(docs,index,doc_type,id_field=False,geopoin
         if validation['valid'].lower() == 'yes':
             #add the point/shape to the document properties
             if geopoint: doc['properties'][geopoint] = list(geojson.utils.coords(doc))[0]
-            if geoshape: doc['properties'][geoshape] = list(geojson.utils.coords(doc))[0]
+            if geoshape: doc['properties'][geoshape] = doc['geometry']
             #load the document properties into ES
             to_upload = deepcopy(doc['properties'])
         else:
@@ -217,7 +217,7 @@ def bulk_upload_docs_to_ES_cURL(docs,index,doc_type,id_field=False,geopoint=Fals
         if validation['valid'].lower() == 'yes':
             #add the point/shape to the document properties
             if geopoint: doc['properties'][geopoint] = list(geojson.utils.coords(doc))[0]
-            if geoshape: doc['properties'][geoshape] = list(geojson.utils.coords(doc))[0]
+            if geoshape: doc['properties'][geoshape] = doc['geometry']
             #load the document properties into ES
             to_upload = deepcopy(doc['properties'])
         else:
@@ -297,7 +297,7 @@ def upload_individual_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=Fal
         if validation['valid'].lower() == 'yes':
             #add the point/shape to the document properties
             if geopoint: doc['properties'][geopoint] = list(geojson.utils.coords(doc))[0]
-            if geoshape: doc['properties'][geoshape] = list(geojson.utils.coords(doc))[0]
+            if geoshape: doc['properties'][geoshape] = doc['geometry']
             #load the document properties into ES
             to_upload = deepcopy(doc['properties'])
         else:
@@ -362,7 +362,7 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
         if validation['valid'].lower() == 'yes':
             #add the point/shape to the document properties
             if geopoint: doc['properties'][geopoint] = list(geojson.utils.coords(doc))[0]
-            if geoshape: doc['properties'][geoshape] = list(geojson.utils.coords(doc))[0]
+            if geoshape: doc['properties'][geoshape] = doc['geometry']
             #get id from geojson properties document
             if id_field: action['_id'] = doc['properties'][id_field]      
             #load the document properties into ES
