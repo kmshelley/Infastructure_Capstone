@@ -396,7 +396,56 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
         print '#### ERROR:'
         pprint(e)
     
+def update_ES_records_curl(docs,index,doc_type,id_field):
+    #Input: index name, doc type, existing record ID, and a document to post to ES
+    #Output: posts the updated document to ES with cURL; uses upsertt o add new docs
 
+    es = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    
+##    #double-check that the correct number of replicas are being used
+##    try:
+##        p = subprocess.Popen(['curl','-XPOST','%s/%s/_settings' % (es,index),'-d','{"number_of_replicas": 1}'])
+##        out, err = p.communicate()
+##    except:
+##        pass
+##        
+    #iterate through and upload individual documents
+    actions = []
+    idx = 0
+    bulk = 0
+    for doc in docs:
+        bulk+=1
+        idx+=1
+        #check if the document is a geojson document
+        if id_field:
+            _id = doc[id_field]
+        else:
+            _id=idx
+        actions.append('{ "update" : {"_id" : "%s", "_type" : "%s", "_index" : "%s"} }\n' % (_id,doc_type,index))
+        actions.append('{ "doc": %s, "doc_as_upsert" : true }\n' % json.dumps(doc))
+
+        #upload 10k records at a time
+        if idx >= 10000:
+            with open('bulk.txt','w') as bulk_file:
+                bulk_file.writelines(actions) #write the actions to a file to be read by the bulk cURL command
+            #upload the remaining records
+            p = subprocess.Popen(['curl','-XPOST','%s/_bulk' % es,'--data-binary','@bulk.txt'],stderr=subprocess.PIPE)
+            out, err = p.communicate()
+            if err:            
+                print err + '\n\n'
+            bulk=0
+            actions=[]
+        
+    #upload the remaining records
+    with open('bulk.txt','w') as bulk_file:
+        bulk_file.writelines(actions) #write the actions to a file to be read by the bulk cURL command
+    p = subprocess.Popen(['curl','-XPOST','%s/_bulk' % es,'--data-binary','@bulk.txt'],stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    if err:            
+        print err
+    #os.remove('bulk.txt')
+        
+    
     
 def delete_ES_records(index,doc_type):
     #deletes all ElasticSearch records for an index (recrusively runs until index is empty
