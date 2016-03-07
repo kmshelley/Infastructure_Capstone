@@ -5,7 +5,9 @@ lazy val common = Seq(
   libraryDependencies ++= Seq(
     "org.apache.spark" %% "spark-core" % "1.5.0",
     "org.elasticsearch" %% "elasticsearch-spark" % "2.2.0",
-    "joda-time" % "joda-time" % "2.9.2"
+    "joda-time" % "joda-time" % "2.9.2",
+    "org.joda" % "joda-convert" % "1.8.1",
+    "org.apache.spark" %% "spark-mllib" % "1.5.0"
   ),
   mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
      {
@@ -18,5 +20,5 @@ lazy val common = Seq(
 lazy val twitter_popularity = (project in file(".")).
   settings(common: _*).
   settings(
-    name := "ESToGraphX",
-    mainClass in (Compile, run) := Some("ESToGraphX.Main"))
+    name := "LogReg",
+    mainClass in (Compile, run) := Some("LogReg.Main"))

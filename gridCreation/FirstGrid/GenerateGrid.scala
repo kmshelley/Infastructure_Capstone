@@ -32,14 +32,17 @@ object Main extends App {
 	val sc = new SparkContext(conf)
 
 	//set start and end time
+	//set timezone to Eastern so we are accounting for "lost" hour when DST started
+	val nyczone:DateTimeZone = DateTimeZone.forID("America/New_York");
+
 	//val d1: org.joda.time.DateTime =new DateTime("2012-07-01T00:00:00-00:00")
-	val d1: org.joda.time.DateTime =new DateTime(2012,7,1,0,0,DateTimeZone.UTC)
+	val d1: org.joda.time.DateTime =new DateTime(2012,7,1,0,0,nyczone)
 	//LocalDateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour) 
 	
 	//final date is 2016-02-22 so have end date to one day later but it will not be included in the final list of dates
 	//val d2: org.joda.time.DateTime = new DateTime("2012-07-03T00:00:00-00:00")
 	//val d2: org.joda.time.DateTime = new DateTime("2016-02-23T00:00:00-00:00")
-	val d2: org.joda.time.DateTime = new DateTime(2016,2,23,0,0,DateTimeZone.UTC)
+	val d2: org.joda.time.DateTime = new DateTime(2016,2,23,0,0,nyczone)
 	print(d1)
 
 	//find out hours inbetween
@@ -54,13 +57,12 @@ object Main extends App {
 	}
 
 	//class for defining schema, we will start with only three attributes
-	case class GridRow(grid_id: String, grid_zipcode: Integer, grid_fullDate: Date, grid_dayOfWeek: Integer,grid_isAccident:Integer)
-	//case class GridRow(grid_id: String, grid_zipcode: Integer, grid_fullDate: Date,grid_isAccident:Integer)
+	 case class GridRow(grid_id: String, grid_zipcode: Integer, grid_fullDate: Date, grid_dayOfWeek: Integer,grid_hourOfDay: Integer,grid_isAccident:Integer, grid_month:Integer, grid_day:Integer)
 
 	//function to merge zipcode with each hour intervals, which returns arrray of GridRow, which gets flatmapped
 	def mergeWithZipCodes(dt:DateTime): Array[GridRow] = {
 
-val zipCodes = Array(10310,10311,10312,10005,10014,10018,10474,11235,11356,10453,11416,11425,11426,11430,11104,11212,11213,11214,10309,10454,10306,10452,10458,11232,11236,10459,10462,10463,11351,11354,11231,11357,11362,11368,10455,10456,10460,11210,11217,11223,10152,10154,10165,10172,10280,10457,10465,11234,11237,10467,10466,10472,10029,10039,11233,10115,10119,10169,10303,11373,10461,10471,11414,11003,11004,11238,11413,10031,10037,10044,11377,10032,10033,10034,11412,11101,10069,10111,10162,10167,11228,11229,11369,11005,11105,10170,10171,10174,10308,10451,10468,11364,11365,11355,11359,11360,11366,11367,10473,10009,11375,11358,11361,11363,11371,10110,11379,11411,11001,11040,10010,10011,10279,10282,10302,10065,10173,10177,10271,10278,10305,10019,10027,10040,11225,11230,10470,10006,10016,11106,10002,10003,10012,10013,10475,11226,10103,10112,10153,10168,10023,10030,10036,10038,10024,10028,10075,11372,11374,11378,11102,11109,11204,11206,11216,11224,11697,11417,11429,11436,11434,11201,11205,11207,11219,11221,11581,11422,11432,11433,11435,11691,11420,11421,11424,11427,11451,11385,11203,11209,11215,11218,11220,11692,11694,11415,11418,11419,11428)
+val zipCodes = Array(10271,10278,10279,10280,10282,10803,10301,10302,10303,10304,10305,10306,10307,10308,10309,10310,10311,10312,10314,11351,11354,11355,11356,11357,11358,11359,11360,11361,11362,11363,11364,11365,11366,11367,11368,11369,11370,11371,11372,11373,11374,11375,11377,11378,11379,11385,11201,11411,11412,11413,11414,11415,11416,11417,11418,11419,11420,11421,11422,11423,11424,11425,11426,11427,11428,11429,11430,11432,11433,11434,11435,11436,11451,11040,10451,10452,10453,10454,10455,10456,10457,10458,10459,10460,10461,10462,10463,10464,10465,10466,10467,10468,10469,10470,10471,10472,10473,10474,10475,11001,11004,11005,10001,10002,10003,10004,10005,10006,10007,10009,10010,10011,10012,10013,10014,10016,10017,10018,10019,10020,10021,10022,10023,10024,10025,10026,10027,10028,10029,10030,10031,10032,10033,10034,10035,10036,10037,10038,10039,10040,10044,10065,10069,10075,11101,11102,11103,11104,11105,11106,11109,10103,10110,10111,10112,10115,10119,10128,10152,10153,10154,11691,11692,11693,11694,11697,10162,10165,10167,10168,10169,10170,10171,10172,10173,10174,10177,11203,11204,11205,11206,11207,11208,11209,11210,11211,11212,11213,11214,11215,11216,11217,11218,11219,11220,11221,11222,11223,11224,11225,11226,11228,11229,11230,11231,11232,11233,11234,11235,11236,11237,11238,11239)
 
 		val gr:Array[GridRow] = new Array[GridRow](zipCodes.length)
 
@@ -70,20 +72,20 @@ val zipCodes = Array(10310,10311,10312,10005,10014,10018,10474,11235,11356,10453
 		val dateInString = dtfOut.print(dt)
 
 	 	for ( i <- 0 to (zipCodes.length - 1)) {
-	     		gr(i) = GridRow(dateInString+ "_" +zipCodes(i).toString,zipCodes(i),dt.toDate(), dt.getDayOfWeek(),0)
+	     		gr(i) = GridRow(dateInString+ "_" +zipCodes(i).toString,zipCodes(i),dt.toDate(), dt.getDayOfWeek(),dt.getHourOfDay(),0,dt.getMonthOfYear(),dt.getDayOfMonth())
 			//gr(i) = GridRow(dt.getMillis().toString+ "_" +zipCodes(i).toString,zipCodes(i),dt.toDate(), dt.getDayOfWeek())
       		}
 		return gr
 	}
 
 	val dateRdd = sc.parallelize(dates).flatMap(d => mergeWithZipCodes(d))
-
+	//println(dateRdd.getClass.getName)
 
 	//dateRdd.collect().foreach(println)
 
 	//println(dateRdd.first())
 	//save to ES
-	EsSpark.saveToEs(dateRdd, "grids/rows", Map("es.mapping.id" -> "grid_id"))
+	EsSpark.saveToEs(dateRdd, "dataframe/rows", Map("es.mapping.id" -> "grid_id"))
 }
 
 
