@@ -1,0 +1,4 @@
+chown -R elasticsearch:elasticsearch /media/elasticsearch
+chown -R elasticsearch:elasticsearch /home/elasticsearch
+
+mount /dev/xvdc1 /media/elasticsearch

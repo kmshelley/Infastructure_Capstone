@@ -1,0 +1,4 @@
+jupyter notebook --generate-config
+#above will create config file
+put your conf here
+~/.jupyter/jupyter_notebook_config.py 

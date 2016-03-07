@@ -1,0 +1,19 @@
+
+#create profile name
+ipython profile create
+
+#password auth
+create a new python file with 2 lines below
+from IPython.lib import passwd
+print passwd()
+
+run this python file, enter passwords, it will print out sha:...
+
+open ipython_config.py  and put below
+c.NotebookApp.password = 'sha1:6c8......'
+c.NotebookApp.ip = '5............'             
+
+#start ipython`
+ipython notebook --ip='put ip' 
+or
+jupyter notebook --ip...

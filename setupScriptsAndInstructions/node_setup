@@ -1,0 +1,108 @@
+#per hank use Ubuntu for ES
+#according to ES doc, powerful vm is recommended.
+slcli vs create --datacenter=sjc01 --cpu=8 --memory=65536 --os=UBUNTU_LATEST_64 --hostname=es3 --domain=es.com --disk=100 --disk=750 --san --network=1000 --key ***
+
+apt-get install yum
+apt-get install yum-utils
+apt-get install -y curl unzip net-tools jq rsync
+sudo apt-get update
+sudo apt-get install software-properties-common python-software-properties
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update
+apt-get install -y openjdk-8-jre
+
+java -version
+
+echo "export JAVA_HOME=/usr/bin/java" >> ~/.bash_profile
+chmod 700 ~/.bash_profile
+source ~/.bash_profile
+fdisk /dev/xvdc
+#n,default,default,default,default,w
+sudo mkfs -t ext3 /dev/xvdc1
+
+mkdir /media/elasticsearch
+mount /dev/xvdc1 /media/elasticsearch
+mkdir /media/elasticsearch/logs1
+mkdir /media/elasticsearch/data1
+
+#you need to create user since elasticsearch wont let you start it as a root
+#since newly created user does not have all access u hv to provide it
+groupadd elasticsearch
+useradd -g elasticsearch elasticsearch
+chown -R elasticsearch:elasticsearch /media/elasticsearch
+cp /etc/sudoers /etc/sudoers.backup
+echo "elasticsearch ALL=(ALL:ALL) ALL" >> /etc/sudoers
+mkdir /home/elasticsearch
+chown -R elasticsearch:elasticsearch /home/elasticsearch
+
+#set password for elastichsearch
+passwd elasticsearch
+
+su elasticsearch
+
+
+
+cd ~
+curl -OL https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.2.0/elasticsearch-2.2.0.deb
+sudo dpkg -i elasticsearch-2.2.0.deb 
+
+#tar xzf elasticsearch-2.2.0.tar.gz
+#cd elasticsearch-2.2.0
+#cd config/
+echo "export JAVA_HOME=/usr/bin/java" >> ~/.bash_profile
+echo "export ES_MIN_MEM=32g" >> ~/.bash_profile
+echo "export ES_MAX_MEM=32g" >> ~/.bash_profile
+echo "export ES_HEAP_SIZE=32g" >> ~/.bash_profile
+
+chmod 700 ~/.bash_profile
+source ~/.bash_profile
+
+chown -R elasticsearch:elasticsearch /etc/elasticsearch
+chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
+chown -R elasticsearch:elasticsearch /var
+
+/usr/share/elasticsearch/bin/plugin install license
+/usr/share/elasticsearch/bin/plugin install shield
+/usr/share/elasticsearch/bin/plugin install marvel-agent
+#config stuff is in /etc/elasticsearch
+#do this only once for shield - not sure if it needs to be done on every new node
+#add user (and it will ask u for pwd)
+sudo shield/esusers useradd accident -r admin
+
+#get elasticsearch.yml from existing node
+scp elasticsearch@MY IP:elasticsearch.yml .
+#change master
+#change network.host to this machine's ip
+# set up zen discovery stuff if trying to add to an existing cluster
+
+#start elastic search
+sudo /etc/init.d/elasticsearch start
+
+#check cluster health
+curl -u username:passwd -XGET   'http://myip:9200/_cluster/health?pretty=true'
+
+#instal pandas
+sudo apt-get install python-pandas
+pip install geojson
+pip install elasticsearch
+apt-get install git
+
+
+#notebook setup
+pip install jupyter
+
+#kibana setup - do only on node that u want to access kibana from
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb http://packages.elastic.co/kibana/4.4/debian stable main" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update && sudo apt-get install kibana
+
+
+#modify kibana.yml
+open /opt/kibana/config/kibana.yml 
+#server.host: to ip
+#elasticsearch.url: "http://IP:9200"
+#elasticsearch.username: "putUsername_Here"
+#elasticsearch.password: "putPasswordHere"
+
+#start kibana
+sudo /etc/init.d/kibana start
