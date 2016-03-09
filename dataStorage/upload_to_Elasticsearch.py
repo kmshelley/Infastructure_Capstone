@@ -231,7 +231,7 @@ def bulk_upload_docs_to_ES_cURL(docs,index,doc_type,id_field=False,geopoint=Fals
         actions.append('%s\n' % json.dumps(to_upload))
 
         #upload 10k records at a time
-        if idx >= 10000:
+        if bulk >= 10000:
             with open('bulk.txt','w') as bulk_file:
                 bulk_file.writelines(actions) #write the actions to a file to be read by the bulk cURL command
             #upload the remaining records
@@ -398,7 +398,7 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
     
 def update_ES_records_curl(docs,index,doc_type,id_field):
     #Input: index name, doc type, existing record ID, and a document to post to ES
-    #Output: posts the updated document to ES with cURL; uses upsertt o add new docs
+    #Output: posts the updated document to ES with cURL; uses upsert to add new docs
 
     es = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
     
