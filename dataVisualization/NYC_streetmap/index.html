@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+
+		<title>NYC Collisions</title>
+
+		<style>
+			body, html { margin:0; padding:0; height:100%;}
+			#heatmapContainerWrapper { width:100%; height:100%; position:absolute; }
+			#heatmapContainer { width:100%; height:100%; }
+			#map { width:50%; height:100%; }
+			h1 { position:absolute; background:white; padding:10px;}
+		</style>
+		<style src="assets/css/ol.css"></style>
+	</head>
+
+	<body>
+	<h3>All New York City Collisions</h3>
+	<div id="heatmapContainerWrapper">
+		<div id="heatmapContainer"></div>
+	</div>
+	<div id="map" style="width: 200px, height: 400px"></div>
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="assets/js/colorbrewer.js"></script>
+	<script src="assets/js/jquery-1.11.3.js"></script>
+	<script src="assets/js/d3.min.js"></script>
+	<script src="assets/js/ol.js"></script>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+	<script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+	
+	<script src="assets/data/nyc_zip_codes.js"></script>
+	
+	<script>
+	function getColor(d) {
+		return d > 0.99 ? '#800026' :
+			   d > 0.90 ? '#BD0026' :
+			   d > 0.75 ? '#E31A1C' :
+			   d > 0.50 ? '#FC4E2A' :
+			   d > 0.25 ? '#FD8D3C' :
+			   d > 0.10 ? '#FEB24C' :
+			   d > 0.05 ? '#FED976' :
+						  '#FFEDA0';
+	}
+	function style(feature) {
+		return {
+			//fillColor: getColor(feature.properties.density),
+			weight: 1,
+			opacity: 0.7,
+			color: 'white',
+			fillOpacity: 0.7
+		};
+	}
+	
+	var map = L.map('map').setView([40.66391877278807,-73.93834608174572], 10);
+	
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		maxZoom: 18,
+		id: 'mapbox.light',
+		accessToken: 'pk.eyJ1Ijoia21zaGVsbGV5IiwiYSI6ImNpbDh2Nmg3NTBmZ2N1a20wNjR0c2pka3oifQ.Z7q1QzUQYFKFXN9JSALt9w'
+	}).addTo(map);
+	
+	L.geoJson(zip_codes).addTo(map);
+	
+	</script>
+	<!--<script>
+		//define the density layer
+		var zip_codes = new ol.layer.Vector({
+						  title: 'zip_codes',
+						  source: new ol.source.Vector({
+							 url: './assets/data/nyc_zip_codes.json',
+							 format: new ol.format.GeoJSON()
+						  })
+					  });
+		
+		
+		//build the map
+		var map = new ol.Map({
+			layers: [new ol.layer.Tile({source: new ol.source.OSM()}),zip_codes],
+			view: new ol.View({
+								center: ol.proj.fromLonLat([-73.93834608174572, 40.66391877278807]),
+								zoom: 13
+							}),
+			target: 'map'
+		});
+			
+					
+			/*//export heatmap layers as GeoJSON
+			var geoJSON = new ol.format.GeoJSON();
+			var json = geoJSON.writeFeatures( map );
+			console.log(json)*/
+
+	  
+	</script>-->
+
+	</body>
+</html>
