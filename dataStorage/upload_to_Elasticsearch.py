@@ -174,9 +174,7 @@ def bulk_upload_docs_to_ES_cURL(docs,index,doc_type,id_field=False,geopoint=Fals
             print e
     try:
         #create the index, set the replicas so uploads will not err out
-        settings = {"settings":
-                    {"number_of_replicas" : 1}
-                    }
+        settings = {"settings": {"number_of_replicas" : 1} }
         p = subprocess.Popen(['curl','-XPUT','%s/%s' % (es,index),'-d',json.dumps(settings)])
         out, err = p.communicate()
         if err: print '\n' + err + '\n\n'
@@ -416,7 +414,7 @@ def update_ES_records_curl(docs,index,doc_type,id_field):
     for doc in docs:
         bulk+=1
         idx+=1
-        #check if the document is a geojson document
+
         if id_field:
             _id = doc[id_field]
         else:
@@ -469,3 +467,15 @@ def delete_ES_records(index,doc_type):
         
         
    
+def get_latest_record(index,doc_type,datetime_field):
+    #input: index, doc_type, and a date-time field
+    #output: returns the latest ES record based on the datetime field
+    
+    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    es = Elasticsearch(es_url)
+
+    query = '{"sort": [ { "%s":   { "order": "desc" }} ] }' % datetime_field
+
+    return helpers.scan(es,index=index,doc_type=doc_type,query=query,preserve_order=True).next()['_source']
+
+
