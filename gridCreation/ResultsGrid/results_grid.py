@@ -14,12 +14,14 @@ ES_url = config.get('ElasticSearch','host')
 ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
+
 def create_combinations(**kwargs):
     #creates a list of dicts with all combinations of combined kwarg lists
     return [dict(izip(kwargs,x)) for x in (product(*kwargs.itervalues()))]
 
+
 def create_results_grid():
-    #input: index name, document type, dict of fields and lists of field values by which to create the grid
+    #input: None
     #output: creates a grid index in ES with an entry for each combination of kwargs elements
     start = dt.datetime.now()
     

@@ -2,6 +2,7 @@ import os
 import geojson, json
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
+from elasticsearch.exceptions import NotFoundError
 import ConfigParser
 from pprint import pprint
 from copy import deepcopy
@@ -475,7 +476,22 @@ def get_latest_record(index,doc_type,datetime_field):
     es = Elasticsearch(es_url)
 
     query = '{"sort": [ { "%s":   { "order": "desc" }} ] }' % datetime_field
+    try:
+        return helpers.scan(es,index=index,doc_type=doc_type,query=query,preserve_order=True).next()['_source']
+    except:
+        return None
 
-    return helpers.scan(es,index=index,doc_type=doc_type,query=query,preserve_order=True).next()['_source']
 
+def get_first_record(index,doc_type,datetime_field):
+    #input: index, doc_type, and a date-time field
+    #output: returns the latest ES record based on the datetime field
+    
+    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    es = Elasticsearch(es_url)
 
+    query = '{"sort": [ { "%s":   { "order": "asc" }} ] }' % datetime_field
+
+    try:
+        return helpers.scan(es,index=index,doc_type=doc_type,query=query,preserve_order=True).next()['_source']
+    except:
+        return None

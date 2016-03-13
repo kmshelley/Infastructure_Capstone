@@ -86,6 +86,7 @@ def add_zcta_zip_to_collisions():
 
         #set the ZCTA zip fieldmapping
         mapping['properties']['collision_ZCTA_ZIP'] = {'type':'string'}
+        mapping['properties']['collision_ZCTA_ZIP_NoSuffix'] = {'type':'string'}
         
         #use cURL to put the mapping
         p = subprocess.Popen(['curl','%s/%s/_mapping/%s' % (es_url,'saferoad','collisions'),'-d','%s' % json.dumps(mapping)],stderr=subprocess.PIPE)
@@ -137,7 +138,8 @@ def add_zcta_zip_to_collisions():
                     max_area = poly.area
                     max_zip = shape['_id']
             
-            result['_source']['collision_ZCTA_ZIP'] = max_zip              
+            result['_source']['collision_ZCTA_ZIP'] = max_zip
+            result['_source']['collision_ZCTA_ZIP_NoSuffix'] =  max_zip
         updates.append(result['_source'])
 
         if idx >= 10000:

@@ -2,15 +2,41 @@ __author__ = 'Katherine'
 
 from dataAcquisition import open_data_api, acquire_QCLCD_data, acquire_NYC_Collisions
 from dataStorage import upload_to_Elasticsearch
-from dataCleaning import find_closest_geo_record
+from dataCleaning import find_closest_geo_record, collision_geoshape_update
 import ConfigParser
 import time, datetime as dt
 from dateutil.parser import parse
+import os
 import geojson
 import csv
 from pyproj import Proj
+import subprocess
 
 
+#read in the config file
+config = ConfigParser.ConfigParser()
+config.read('./config/capstone_config.ini')
+
+#spark conf
+memory = config.get('Spark','memory')
+parallelism = config.get('Spark','parallelism')
+cores = config.get('Spark','cores')
+
+#NYC Open Data portal
+api_key = config.get('Socrata','api_key')
+nyc_url = config.get('NYC Portal','url')
+vision_zero_endpoint = config.get('NYC Portal','vision_zero')
+
+ny_state_url = config.get('NY State Portal','url')
+registration = config.get('NY State Portal','car_registration')
+
+ES_url = config.get('ElasticSearch','host')
+ES_password = config.get('ElasticSearch','password')
+ES_username= config.get('ElasticSearch','username')
+
+zip_codes = config.get('zip codes','zip_codes')
+
+    
 def reload_zip_codes():
     ## RELOAD ZIP CODES AND COLLISIONS
     with open('./flatDataFiles/nyc_zip_codes.json', 'r') as geofile:
@@ -49,21 +75,48 @@ def reload_zip_codes():
 
 def reload_all_collisions():
     #add all collisions
-    with open('./flatDataFiles/collisions.csv','rb') as csvfile:
+    p = subprocess.Popen(['wget','https://nycopendata.socrata.com/api/views/h9gi-nx95/rows.csv'])
+    #subprocess.call('curl -XDELETE %s/%s' % (es,index))
+    out, err = p.communicate()
+    if err: print '\n' + err + '\n\n'
+
+    #wait for the file to download
+    p.wait()
+            
+    with open('rows.csv','rb') as csvfile:
         docs = csv.DictReader(csvfile)
         acquire_NYC_Collisions.upload_collision_data_from_flatfile(docs,index='saferoad',doc_type='collisions',new_mapping=True)
+
+    #remove the csv file
+    os.remove('rows.csv')
+
+def update_grid():
+    cmd = ['/usr/local/spark/bin/spark-submit',
+           '--master',
+           'spark://spark1:7077',
+           '--executor-memory',
+           memory,
+           '--conf',
+           'spark.default.parallelism=%s' % str(parallelism),
+           '--conf',
+           'spark.cores.max=%s' % str(cores),
+           '--jars',
+           '/usr/local/spark/jars/elasticsearch-hadoop-2.2.0.jar',
+           './gridCreation/pysparkGrid.py']
+           
     
+    subprocess.call(cmd)
+    #subprocess.call('curl -XDELETE %s/%s' % (es,index))
+    print "Done creating grid!"
     
 def daily_update():
     #Updates weather and collisions data indefinitely
     while True:
         start = dt.datetime.now()
    
-        #   Upload weather data to Elasticsearch   #
+        #   Upload latest weather data to Elasticsearch   #
         acquire_QCLCD_data.collect_and_store_weather_data(months=[start.month],years=[start.year])
-        
 
-        #   Upload collisions data to Elasticsearch   #
         #   Upload latest collisions data to Elasticsearch   #
         last_coll = upload_to_Elasticsearch.get_latest_record(index='saferoad',doc_type='collisions',datetime_field='collision_DATETIME_C')
         coll_time = parse(last_coll['collision_DATETIME_C']).replace(tzinfo=None) #get the date of the latest collision record
@@ -71,18 +124,19 @@ def daily_update():
         #query all collisions from 7 days prior to the latest record, in case earlier records are late being uploaded or updated
         soql = "date > '%s'" % dt.datetime.strftime(coll_time - dt.timedelta(days=7),'%Y-%m-%dT%H:%M:%S')
         collisions = None
-        while not collisions:
+        for i in range(10):
+            #try to update the collisions 10 times, then move on.
             try:
                 collisions = open_data_api.get_open_data(nyc_url,vision_zero_endpoint,api_key,limit=5000,query=soql)
+                acquire_NYC_Collisions.upload_collision_data_from_socrata(collisions,index='saferoad',doc_type='collisions')
+                break
             except:
                 #sometimes connection to Socrata doesn't work, wait 6 mintues and try again
                 print "Failed to access Socrata. Sleeping for 1 minute."
-                time.sleep(60) 
-        acquire_NYC_Collisions.upload_collision_data_from_socrata(collisions,index='saferoad',doc_type='collisions')
-        
-
-        #   Update the grid    #
-        
+                time.sleep(60)
+                
+        #   Update the grid  - Uses Spark  #
+        update_grid()
 
         
         end = dt.datetime.now()
@@ -90,28 +144,16 @@ def daily_update():
             
 if __name__ == '__main__':
     '''Main Entry Point to the Program'''
-    #read in the config file
-    config = ConfigParser.ConfigParser()
-    config.read('./config/capstone_config.ini')
-
-    #NYC Open Data portal
-    api_key = config.get('Socrata','api_key')
-    nyc_url = config.get('NYC Portal','url')
-    vision_zero_endpoint = config.get('NYC Portal','vision_zero')
-
-    ny_state_url = config.get('NY State Portal','url')
-    registration = config.get('NY State Portal','car_registration')
-
-    ES_url = config.get('ElasticSearch','host')
-    ES_password = config.get('ElasticSearch','password')
-    ES_username= config.get('ElasticSearch','username')
-
-    zip_codes = config.get('zip codes','zip_codes')
 
     #reload collisions
-    reload_all_collisions()
+    #reload_all_collisions()
 
+    #set zcta zipcode
+    #collision_geoshape_update.add_zcta_zip_to_collisions()
+
+    #update_grid()
+    
     #run the daily update
-    #daily_update()
+    daily_update()
 
 

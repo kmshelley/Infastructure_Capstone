@@ -63,7 +63,10 @@ def upload_collision_data_from_flatfile(docs,index,doc_type,new_mapping=False):
             row["GEOJSON_C"] = (float(row["LONGITUDE"]),float(row['LATITUDE']))
             row["GEOSHAPE_C"] = { "type": "point", "coordinates": [float(row["LONGITUDE"]),float(row['LATITUDE'])] }
             #convert date and time into one variable
-            row["DATETIME_C"] = dt.datetime.strptime(row["DATE"] + " " + row["TIME"]+ ':00', "%m/%d/%Y %H:%M:%S")
+            coll_date = parse(row['DATE']).replace(tzinfo=None)
+            coll_time = parse(row['TIME']).replace(tzinfo=None)
+            row["DATETIME_C"] = dt.datetime.strftime(coll_date + dt.timedelta(hours=coll_time.hour,seconds=coll_time.minute*60), "%Y-%m-%dT%H:%M:%S")
+            #row["DATETIME_C"] = dt.datetime.strptime(row["DATE"] + " " + row["TIME"]+ ':00', "%m/%d/%Y %H:%M:%S")
             #assign a unique id based on date, time, and location
             #row["ID"] = hashlib.sha224(row["DATE"] + row["TIME"] + row["LATITUDE"] + row["LONGITUDE"]).hexdigest()
 
@@ -81,7 +84,7 @@ def upload_collision_data_from_flatfile(docs,index,doc_type,new_mapping=False):
 
     if new_mapping:
         #if this is a new index, use function that creates the mapping
-        upload_to_Elasticsearch.upload_docs_to_ES(records,index,doc_type,id_field="collision_UNIQUE KEY",geopoint="collision_GEOJSON_C",geoshape="collision_GEOSHAPE_C")
+        upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(records,index,doc_type,id_field="collision_UNIQUE KEY",geopoint="collision_GEOJSON_C",geoshape="collision_GEOSHAPE_C",delete_index=True)
     else:
         #update existing index
         upload_to_Elasticsearch.update_ES_records_curl(records,index,doc_type,id_field="collision_UNIQUE KEY") 
