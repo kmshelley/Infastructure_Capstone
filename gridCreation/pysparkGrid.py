@@ -49,6 +49,7 @@ config = ConfigParser.ConfigParser()
 config.read('./config/capstone_config.ini')
 
 ES_url = config.get('ElasticSearch','host')
+ES_hosts = config.get('ElasticSearch','hostlist')
 ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
@@ -384,7 +385,7 @@ def create_full_feature_grid(index="dataframe",doc_type="rows"):
     start = dt.datetime.now()
     
     es_write_conf = {
-        "es.nodes" : ES_url,
+        "es.nodes" : ES_hosts,
         "es.port" : "9200",
         "es.net.http.auth.user" : ES_username, 
         "es.net.http.auth.pass" : ES_password,
@@ -440,13 +441,13 @@ def add_fields_to_grid(grid_index,grid_doc,new_index=None,new_doc_type=None):
     #Configuration for reading and writing to ES
     es_read_conf = { 
             "es.resource" : "%s/%s" % (grid_index,grid_doc), 
-            "es.nodes" : ES_url, 
+            "es.nodes" : ES_hosts, 
             "es.net.http.auth.user" : ES_username, 
             "es.net.http.auth.pass" : ES_password 
         }
 
     es_write_conf = {
-            "es.nodes" : ES_url,
+            "es.nodes" : ES_hosts,
             "es.port" : "9200",
             "es.net.http.auth.user" : ES_username, 
             "es.net.http.auth.pass" : ES_password,
@@ -482,7 +483,7 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
     start = dt.datetime.now()
     
     es_write_conf = {
-        "es.nodes" : ES_url,
+        "es.nodes" : ES_hosts,
         "es.port" : "9200",
         "es.net.http.auth.user" : ES_username, 
         "es.net.http.auth.pass" : ES_password,
