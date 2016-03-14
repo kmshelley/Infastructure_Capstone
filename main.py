@@ -18,6 +18,7 @@ config = ConfigParser.ConfigParser()
 config.read('./config/capstone_config.ini')
 
 #spark conf
+SPARK_HOME = config.get('Spark','home')
 memory = config.get('Spark','memory')
 parallelism = config.get('Spark','parallelism')
 cores = config.get('Spark','cores')
@@ -34,7 +35,7 @@ ES_url = config.get('ElasticSearch','host')
 ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
-zip_codes = config.get('zip codes','zip_codes')
+zip_codes = config.get('zip codes','zip_codes').split(',')
 
     
 def reload_zip_codes():
@@ -91,7 +92,7 @@ def reload_all_collisions():
     os.remove('rows.csv')
 
 def update_grid():
-    cmd = ['/usr/local/spark/bin/spark-submit',
+    cmd = ['%s/bin/spark-submit' % SPARK_HOME,
            '--master',
            'spark://spark1:7077',
            '--executor-memory',
@@ -106,7 +107,7 @@ def update_grid():
            
     
     subprocess.call(cmd)
-    #subprocess.call('curl -XDELETE %s/%s' % (es,index))
+
     print "Done creating grid!"
     
 def daily_update():
@@ -121,8 +122,8 @@ def daily_update():
         last_coll = upload_to_Elasticsearch.get_latest_record(index='saferoad',doc_type='collisions',datetime_field='collision_DATETIME_C')
         coll_time = parse(last_coll['collision_DATETIME_C']).replace(tzinfo=None) #get the date of the latest collision record
 
-        #query all collisions from 7 days prior to the latest record, in case earlier records are late being uploaded or updated
-        soql = "date > '%s'" % dt.datetime.strftime(coll_time - dt.timedelta(days=7),'%Y-%m-%dT%H:%M:%S')
+        #query all collisions from 10 days prior to the latest record, in case earlier records are late being uploaded or updated
+        soql = "date > '%s'" % dt.datetime.strftime(coll_time - dt.timedelta(days=10),'%Y-%m-%dT%H:%M:%S')
         collisions = None
         for i in range(10):
             #try to update the collisions 10 times, then move on.
@@ -140,6 +141,7 @@ def daily_update():
 
         
         end = dt.datetime.now()
+        print "Finished update. Took %s. Sleeping for 24 hours." % str(end-start)
         time.sleep(86400 - (end-start).total_seconds()) #run again in 24 hours
             
 if __name__ == '__main__':
