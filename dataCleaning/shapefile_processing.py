@@ -21,42 +21,33 @@ def shapefile_to_geojson(shp_file,p=None):
     for shape in sf.iterShapes():
         rec = recs.next()
         props = {k:v for k,v in zip([f[0] for f in sf.fields[1:]],rec)}
+        zipcode = props['ZCTA5CE10']
         if p:
             coords = [p(x,y,inverse=True) for x,y in shape.points]
         else:
             coords = [(lng,lat) for lng,lat in shape.points]
             
         if shape.shapeType == 1:
-            features.append(geojson.Feature(geometry=geojson.Point(coords[0]),properties=props))
+            features.append(geojson.Feature(geometry=geojson.Point(coords[0]),properties={'zipcode':zipcode}))
             
         if shape.shapeType == 3:
-            features.append(geojson.Feature(geometry=geojson.LineString(coords),properties=props))
+            features.append(geojson.Feature(geometry=geojson.LineString(coords),properties={'zipcode':zipcode}))
             
         if shape.shapeType == 5:
             if len(shape.parts) == 1:
-                try:
-                    features.append(geojson.Feature(geometry=geojson.Polygon([coords]),properties=props))
-                except Exception as e:
-                    #print coords
-                    print e
+                geom = geojson.Polygon([[(pt1,pt2) for pt1,pt2 in coords]])
+                features.append(geojson.Feature(geometry=geom,properties={'zipcode':zipcode}))
             else:
-                idx=0
-                for i in range(1,len(shape.parts)):
-                    if i < len(shape.parts):
-                        part = coords[idx:shape.parts[i]]
-                        props['ZCTA5CE10'] = props['ZCTA5CE10'] + '-' + str(i)
-                        idx = shape.parts[i]
-                        try:
-                            features.append(geojson.Feature(geometry=geojson.Polygon([part]),properties=props))
-                        except Exception as e:
-                            print e
+                for i in range(len(shape.parts)):                            
+                    if i < len(shape.parts)-1:
+                        part = coords[shape.parts[i]:shape.parts[i+1]]  
                     else:
-                        part = coords[idx:]
-                        props['ZCTA5CE10'] = props['ZCTA5CE10'] + '-' + str(len(shape.parts))
-                        try:
-                            features.append(geojson.Feature(geometry=geojson.Polygon([part]),properties=props))
-                        except Exception as e:
-                            print e
+                        part = coords[shape.parts[-1]:]
+                        
+                    geom = geojson.Polygon([[(pt1,pt2) for pt1,pt2 in part]])
+                    feat = geojson.Feature(geometry=geom,properties={'zipcode':zipcode+ '-' + str(i+1)})
+                    
+                    features.append(feat)
 
     return geojson.FeatureCollection(features)
 
@@ -184,19 +175,19 @@ def street_map_centers(geo,p):
 
 
 
-shp_file = 'C:/Users/Katherine/Google Drive/DataSciW210/Final/datasets/NYC_polygon/NY_area_zips.shp'
+shp_file = 'C:/Users/Katherine/Desktop/GIS/ArcMap_Data/ny_counties/nyc_zipcodes/zcta_filtered.shp'
 
 ##zips = shapefile_to_geojson(shp_file)
 ##with open('E:/GoogleDrive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/nyc_zip_codes.json','w') as geo_file:
 ##    geojson.dump(zips,geo_file)
     
-with open('C:/Users/Katherine/Google Drive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/NYC_polygon.json','r') as geo_file:
-    poly = list(geojson.utils.coords(geojson.load(geo_file)['features'][0]))
-    
-p = Proj(init='epsg:2263')
-zips = filter_shapefile(shp_file,poly,p)
-
-with open('C:/Users/Katherine/Google Drive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/nyc_zip_codes.json','w') as geo_file:
-    geojson.dump(zips,geo_file)
+##with open('C:/Users/Katherine/Google Drive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/NYC_polygon.json','r') as geo_file:
+##    poly = list(geojson.utils.coords(geojson.load(geo_file)['features'][0]))
+##    
+##p = Proj(init='epsg:2263')
+##zips = filter_shapefile(shp_file,poly,p)
+geo = shapefile_to_geojson(shp_file)
+with open('C:/Users/Katherine/Google Drive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/nyc_zip_codes_filtered.json','w') as geo_file:
+    geojson.dump(geo,geo_file)
     
 

@@ -73,7 +73,6 @@ def combination_iter(**kwargs):
     for x in product(*kwargs.itervalues()):
         yield dict(izip(kwargs,x))
 
-
 def feature_grid(timestamp):
     #create grid record
     #datetime fields
@@ -220,7 +219,7 @@ def add_weather(g):
     update = deepcopy(g)
     date_hour = parse(g['grid_fullDate']).replace(tzinfo=None)
     
-    query = '{               "query": {                 "bool": {                   "must": {                     "wildcard": { "zipcode" : "%s*" }                   }                 }               }             }' % g['grid_zipcode']
+    query = '{"query": { "bool": { "must": { "wildcard": { "zipcode" : "%s*" } } } } }' % g['grid_zipcode']
 
     #find the largest zip code area to represent the grid area
     max_area = 0
@@ -422,6 +421,15 @@ def create_full_feature_grid(index="dataframe",doc_type="rows"):
             conf=es_write_conf)
     
 
+def reset_grid_collisions(rdd):
+    #input: Spark Elasticsearch RDD
+    #output: mapped RDD with new collision information
+    return rdd.map(lambda (key,row): (key,add_collisions(row)))
+
+def reset_grid_weather(rdd):
+    #Input: Spark Elasticsearch RDD
+    #output: mapped RDD with new weather information
+    return rdd.map(lambda (key,row): (key,add_weather(row)))
 
 # ### PySpark Elasticsearch Update Grid
 # 
@@ -429,9 +437,9 @@ def create_full_feature_grid(index="dataframe",doc_type="rows"):
 
 # In[8]:
 
-def add_fields_to_grid(grid_index,grid_doc,new_index=None,new_doc_type=None):
-    #input: grid index and doc type, OPTIONAL new index name, document type
-    #output: updates the existing grid with new fields
+def add_fields_to_grid(grid_index,grid_doc,new_index=None,new_doc_type=None,functions=[]):
+    #input: grid index and doc type, OPTIONAL new index name, document type, a list of functions to perform on the grid RDD
+    #output: updates the existing grid with new fields based on functions provided
     
     if new_index and new_doc_type: 
         index,doc_type = new_index,new_doc_type
@@ -465,9 +473,11 @@ def add_fields_to_grid(grid_index,grid_doc,new_index=None,new_doc_type=None):
 
     
     ## THIS IS WHERE YOU ADD NEW FIELDS ##
-    #run updates via map functions to add new variables
-    grid.map(update_functions)
- 
+    #run updates via provided functions to add new variables
+    for f in functions:
+        eval_str = '%s(grid)' % f #string defines function to run on the grid RDD
+        grid = eval(eval_str) #evaluate function
+    
     #write the new grid to Elasticsearch
     grid.saveAsNewAPIHadoopFile(
             path='-', 
@@ -532,13 +542,5 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
 
 
 # ### Run Grid creation and update code here
-
-# In[9]:
-
-create_new_grid_timestamps(index='nyc_dataframe',doc_type='rows')
-
-
-# In[ ]:
-
-
+create_new_grid_timestamps(index="nyc_dataframe",doc_type="rows")
 
