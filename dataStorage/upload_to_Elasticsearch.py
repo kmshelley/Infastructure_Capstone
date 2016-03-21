@@ -157,10 +157,18 @@ def upload_individual_docs_to_ES_cURL(docs,index,doc_type,id_field=False,geopoin
     print "Finished uploading documents. %s succeeded. %s failed." % (succeeded,failed)
 
 
-def bulk_upload_docs_to_ES_cURL(docs,index,doc_type,id_field=False,geopoint=False,geoshape=False,delete_index=False):
+def bulk_upload_docs_to_ES_cURL(docs,**kwargs):
     #input: list of JSON documents, an index name, document type, ID field, and name of an (OPTIONAL) geopoint field.
     #uploads each feature element to ElasticSearch using subprocess and cURL
     #es = Elasticsearch(ES_url)
+
+    #define keyword inputs
+    index = kwargs.get('index', 'index_tmp')
+    doc_type = kwargs.get('doc_type', 'doc_tmp')
+    id_field = kwargs.get('id_field', False)
+    geopoint = kwargs.get('geopoint', False)
+    geoshape = kwargs.get('geoshape', False)
+    delete_index = kwargs.get('delete_index', False)    
     
     es = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
 
@@ -424,7 +432,7 @@ def update_ES_records_curl(docs,index,doc_type,id_field):
         actions.append('{ "doc": %s, "doc_as_upsert" : true }\n' % json.dumps(doc))
 
         #upload 10k records at a time
-        if idx >= 10000:
+        if bulk >= 10000:
             with open('bulk.txt','w') as bulk_file:
                 bulk_file.writelines(actions) #write the actions to a file to be read by the bulk cURL command
             #upload the remaining records

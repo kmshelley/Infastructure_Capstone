@@ -11,7 +11,7 @@ import csv
 from dateutil.parser import parse
 from elasticsearch import Elasticsearch,helpers
 from dataStorage import upload_to_Elasticsearch
-from dataCleaning import collision_geoshape_update
+from dataCleaning import add_ZCTA
 
 def upload_collision_data_from_socrata(docs,index,doc_type,new_mapping=False):
     #input: list of collisions documents
@@ -38,7 +38,7 @@ def upload_collision_data_from_socrata(docs,index,doc_type,new_mapping=False):
                 newrow["collision_" + key] = value
 
             #add ZCTA zip code fields
-            newrow = collision_geoshape_update.add_zcta_zip_to_collision_rec(newrow)
+            newrow = add_ZCTA.add_zcta_zip_to_collision_rec(newrow)
             newrow['collision_ZCTA_ZIP_NoSuffix'] =  newrow['collision_ZCTA_ZIP'].split('-')[0]
                     
             records.append(newrow)	
@@ -77,9 +77,9 @@ def upload_collision_data_from_flatfile(docs,index,doc_type,new_mapping=False):
                     newrow["collision_" + key] = value
 
             #add ZCTA zip code fields
-            #newrow = collision_geoshape_update.add_zcta_zip_to_collision_rec(newrow)
+            newrow = add_ZCTA.add_zcta_zip_to_collision_rec(newrow)
             #newrow['collision_ZCTA_ZIP_NoSuffix'] =  newrow['collision_ZCTA_ZIP'].split('-')[0]
-                    
+            
             records.append(newrow)	
 
     if new_mapping:
