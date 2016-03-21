@@ -1,8 +1,9 @@
 __author__ = 'Katherine'
-
 from dataAcquisition import open_data_api, acquire_QCLCD_data, acquire_NYC_Collisions
 from dataStorage import upload_to_Elasticsearch
-from dataCleaning import find_closest_geo_record, collision_geoshape_update
+from dataCleaning import find_closest_geo_record, collision_geoshape_update, add_ZCTA
+#from gridCreation import pysparkGrid
+from gridCreation.ResultsGrid import results_grid
 import ConfigParser
 import time, datetime as dt
 from dateutil.parser import parse
@@ -19,17 +20,20 @@ config.read('./config/capstone_config.ini')
 
 #spark conf
 SPARK_HOME = config.get('Spark','home')
-memory = config.get('Spark','memory')
-parallelism = config.get('Spark','parallelism')
-cores = config.get('Spark','cores')
+memory = config.get('Spark','memory_large')
+parallelism = config.get('Spark','parallelism_large')
+cores = config.get('Spark','cores_large')
 
 #NYC Open Data portal
 api_key = config.get('Socrata','api_key')
 nyc_url = config.get('NYC Portal','url')
 vision_zero_endpoint = config.get('NYC Portal','vision_zero')
+nyc_311_endpoint = config.get('NYC Portal','nyc_311')
 
+#NYC Open Data portal
 ny_state_url = config.get('NY State Portal','url')
-registration = config.get('NY State Portal','car_registration')
+registration_endpoint = config.get('NY State Portal','car_registration')
+liquor_endpoint = config.get('NY State Portal','liquor')
 
 ES_url = config.get('ElasticSearch','host')
 ES_password = config.get('ElasticSearch','password')
@@ -109,7 +113,27 @@ def update_grid():
     subprocess.call(cmd)
 
     print "Done creating grid!"
+
+def run_predictions():
+    cmd = ['%s/bin/spark-submit' % SPARK_HOME,
+           '--master',
+           'spark://spark1:7077',
+           '--executor-memory',
+           memory,
+           '--conf',
+           'spark.default.parallelism=%s' % str(parallelism),
+           '--conf',
+           'spark.cores.max=%s' % str(cores),
+           '--jars',
+           '/usr/local/spark/jars/elasticsearch-hadoop-2.2.0.jar',
+           './dataAnalysis/Pyspark_RandomForest.py']
+           
     
+    subprocess.call(cmd)
+
+    print "Done creating grid!"
+
+        
 def daily_update():
     #Updates weather and collisions data indefinitely
     while True:
@@ -122,8 +146,9 @@ def daily_update():
         last_coll = upload_to_Elasticsearch.get_latest_record(index='saferoad',doc_type='collisions',datetime_field='collision_DATETIME_C')
         coll_time = parse(last_coll['collision_DATETIME_C']).replace(tzinfo=None) #get the date of the latest collision record
 
+        search_time = dt.datetime.strftime(coll_time - dt.timedelta(days=10),'%Y-%m-%dT%H:%M:%S')
         #query all collisions from 10 days prior to the latest record, in case earlier records are late being uploaded or updated
-        soql = "date > '%s'" % dt.datetime.strftime(coll_time - dt.timedelta(days=10),'%Y-%m-%dT%H:%M:%S')
+        soql = "date > '%s'" % search_time
         collisions = None
         for i in range(10):
             #try to update the collisions 10 times, then move on.
@@ -132,30 +157,97 @@ def daily_update():
                 acquire_NYC_Collisions.upload_collision_data_from_socrata(collisions,index='saferoad',doc_type='collisions')
                 break
             except:
-                #sometimes connection to Socrata doesn't work, wait 6 mintues and try again
+                #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
+                print "Failed to access Socrata. Sleeping for 1 minute."
+                time.sleep(60)
+
+        #get historical 311 requests
+        soql = "incident_zip in%s AND complaint_type='Street Condition' AND created_date > '%s'" % (str(tuple(zip_codes)),search_time)
+        for i in range(10):
+            #try to update the collisions 10 times, then move on.
+            try:
+                upload = {'index':'311_requests','doc_type':'requests','id_field':'unique_key'}
+                open_data_api.upload_open_data_to_Elasticsearch(nyc_url,nyc_311_endpoint,api_key,soql,upload)
+                break
+            except:
+                #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
+                print "Failed to access Socrata. Sleeping for 1 minute."
+                time.sleep(60)
+
+##        #get historical ny state auto registration
+##        soql = "record_type='VEH' AND zip in%s AND reg_valid_date > %s)" % (str(tuple(zip_codes)),search_time)
+##        for i in range(10):
+##            #try to update the collisions 10 times, then move on.
+##            try:
+##                upload = {'index':'vehicle_reg','doc_type':'reg','id_field'='unique_key'}
+##                open_data_api.upload_open_data_to_Elasticsearch(ny_state_url,registration_endpoint,api_key,query=soql,upload)
+##                break
+##            except:
+##                #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
+##                print "Failed to access Socrata. Sleeping for 1 minute."
+##                time.sleep(60)
+
+        #get historical liquor licenses
+        soql = "zip in%s AND license_original_issue_date > '%s'" % (str(tuple(zip_codes)),search_time)
+        for i in range(10):
+            #try to update the collisions 10 times, then move on.
+            try:
+                upload = {'index':'liquor_licenses','doc_type':'lic','id_field':'license_serial_number'}
+                open_data_api.upload_open_data_to_Elasticsearch(ny_state_url,liquor_endpoint,api_key,query=soql,kwargs=upload)
+                break
+            except:
+                #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
                 print "Failed to access Socrata. Sleeping for 1 minute."
                 time.sleep(60)
                 
+                
         #   Update the grid  - Uses Spark  #
         update_grid()
+
+        # Run the Model #
+        run_predictions()
 
         
         end = dt.datetime.now()
         print "Finished update. Took %s. Sleeping for 24 hours." % str(end-start)
         time.sleep(86400 - (end-start).total_seconds()) #run again in 24 hours
-            
+
+    
 if __name__ == '__main__':
     '''Main Entry Point to the Program'''
 
-    #reload collisions
-    #reload_all_collisions()
-
-    #set zcta zipcode
-    #collision_geoshape_update.add_zcta_zip_to_collisions()
-
-    #update_grid()
-    
-    #run the daily update
     daily_update()
+##    collision_geoshape_update.fix_zcta_zip('saferoad','collisions')
+##    add_ZCTA.add_zcta_zip_to_index(index='311_requests',doc_type='requests',loc_field='location',id_field='unique_key')
+##    add_ZCTA.add_zcta_zip_to_index(index='liquor_licenses',doc_type='lic',loc_field='location',id_field='license_serial_number')
+##    from elasticsearch import Elasticsearch
+##    from elasticsearch import helpers
+##    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+##    es = Elasticsearch(es_url)
+##    docs=[]
+##    idx=0
+##    for obs in helpers.scan(es,index='nyc_dataframe',doc_type='rows'):
+##        #condition fields
+##        idx+=1
+##        obs['_source']['weather_Rain_Dummy'] = 0
+##        if obs['_source']['weather_Rain']> 0:
+##            obs['_source']['weather_Rain_Dummy'] = 1
+##            
+##        obs['_source']['weather_Fog_Dummy'] = 0
+##        if obs['_source']['weather_Fog']> 0:
+##            obs['_source']['weather_Fog_Dummy'] = 1
+##            
+##        obs['_source']['weather_SnowHailIce_Dummy'] = 0
+##        if obs['_source']['weather_SnowHailIce']> 0:
+##            obs['_source']['weather_SnowHailIce_Dummy'] = 1
+##            
+##        docs.append(obs['_source'])
+##        if idx > 100000:
+##            upload_to_Elasticsearch.update_ES_records_curl(docs,index='nyc_dataframe',doc_type='rows',id_field='grid_id')
+##            idx=0
+##            docs=[]
+##    upload_to_Elasticsearch.update_ES_records_curl(docs,index='nyc_dataframe',doc_type='rows',id_field='grid_id')
+    #update_grid()
+
 
 

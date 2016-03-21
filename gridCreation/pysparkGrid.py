@@ -32,9 +32,11 @@ from pyproj import Proj
 from pprint import pprint
 from copy import deepcopy
 import datetime as dt
+import time
 from dateutil.parser import parse
 import json, csv
 from itertools import izip, product
+import requests
 
 from dataStorage import upload_to_Elasticsearch
 
@@ -55,6 +57,9 @@ ES_username= config.get('ElasticSearch','username')
 
 zip_codes = config.get('zip codes','zip_codes').split(',')
 broadcast_zip = sc.broadcast(zip_codes)
+
+wu_api = config.get('Wunderground','api_keys').split(',')
+
 
 central_park_wban = "94728"
 
@@ -106,6 +111,44 @@ def feature_grid(timestamp):
     return output
     
 
+def result_grid(timestamp):
+    #create grid record
+    #datetime fields
+    output = []
+    for zipcode in broadcast_zip.value:
+        g = {}
+        g['grid_zipcode'] = zipcode
+        g['grid_id'] = dt.datetime.strftime(timestamp,'%m%d%H%M') + '_' + zipcode
+
+        g['grid_realDateTime'] = dt.datetime.strftime(timestamp,'%m/%d/%Y %H:%M')
+        g['grid_dateHourStr'] = dt.datetime.strftime(timestamp,'%m%d%H')
+        g['grid_jsDateTime'] = dt.datetime.strftime(timestamp,'%Y/%m/%d')
+
+        g['probability'] = float(0)
+        
+        g['grid_year'] = timestamp.year
+        g['grid_month'] = timestamp.month
+        g['grid_day'] = timestamp.day
+        g['grid_dayOfWeek'] = timestamp.isoweekday()
+        g['grid_Weekday'] = 1 if g['grid_dayOfWeek'] < 6 else 0
+        g['grid_hourOfDay'] = timestamp.hour
+        g['grid_Morning'] = 1 if g['grid_hourOfDay'] in range(6,10) else 0
+        g['grid_Midday'] = 1 if g['grid_hourOfDay'] in range(10,14) else 0
+        g['grid_Afternoon'] = 1 if g['grid_hourOfDay'] in range(14,18) else 0
+        g['grid_Evening'] = 1 if g['grid_hourOfDay'] in range(18,22) else 0
+        g['grid_Midnight'] = 1 if (g['grid_hourOfDay'] >= 22 or g['grid_hourOfDay'] < 6) else 0
+        g['grid_fullDate'] = dt.datetime.strftime(timestamp,'%Y-%m-%dT%H:%M:%S')
+        
+        
+        #add collisions and weather data
+        g = add_weather_prediction(g)
+        g = add_current_311(g)
+        g = add_current_liquor(g)
+        g = predict_probabilities(g)
+    
+        ### ADD ADDITIONAL FEATURE ENGINEERING FUNCTIONS HERE ###
+        output.append((g['grid_id'],g))
+    return output
 
 # ### Data Cleaning Functions
 # The following cells contain functions to collect and clean disparate data sets and add them to the grid. These functions can be used with Spark transformations and actions.
@@ -126,7 +169,7 @@ def add_collisions(g):
     query = '''{
                 "query": {
                     "bool": {
-                        "must" : { "term": { "collision_ZCTA_ZIP_NoSuffix" : "%s"} },
+                        "must" : { "term": { "collision_ZCTA_ZIP" : "%s"} },
                         "must" : {
                             "range" : {
                                 "collision_DATETIME_C" : {
@@ -265,32 +308,44 @@ def add_weather(g):
         weather_list = observation['weather_WeatherType'].split(' ') #space delimited list
         #Types of rain
         update['weather_Rain'] = 0 #no rain
+        update['weather_Rain_Dummy'] = 0
         if '-RA' in weather_list or '-DZ' in weather_list or '-SH' in weather_list or '-FZRA' in weather_list: 
             update['weather_Rain'] = 1 #light rain
+            update['weather_Rain_Dummy'] = 1
         if 'RA' in weather_list or 'DZ' in weather_list or 'SH' in weather_list or 'FZRA' in weather_list: 
             update['weather_Rain'] = 2 #moderate rain
+            update['weather_Rain_Dummy'] = 1
         if '+RA' in weather_list or '+DZ' in weather_list or '+SH' in weather_list or '+FZRA' in weather_list: 
             update['weather_Rain'] = 3 #heavy rain
+            update['weather_Rain_Dummy'] = 1
 
 
         #Types of snow/hail/ice
         update['weather_SnowHailIce'] = 0 #none
+        update['weather_SnowHailIce_Dummy'] = 0 #none
         if '-SN' in weather_list or '+SG' in weather_list or '-GS' in weather_list or '-GR' in weather_list or '-PL' in weather_list or '-IC' in weather_list:
             update['weather_SnowHailIce'] = 1 #light
+            update['weather_SnowHailIce_Dummy'] = 1 #dummy
         if 'SN' in weather_list or '+SG' in weather_list or 'GS' in weather_list or 'GR' in weather_list or 'PL' in weather_list or 'IC' in weather_list:
-            update['weather_SnowHailIce'] = 2 #moderate 
+            update['weather_SnowHailIce'] = 2 #moderate
+            update['weather_SnowHailIce_Dummy'] = 1 #dummy
         if '+SN' in weather_list or '+SG' in weather_list or '+GS' in weather_list or '+GR' in weather_list or '+PL' in weather_list or '+IC' in weather_list:
-            update['weather_SnowHailIce'] = 3 #heavy             
+            update['weather_SnowHailIce'] = 3 #heavy
+            update['weather_SnowHailIce_Dummy'] = 1 #dummy          
 
 
         #Types of fog/mist
         update['weather_Fog'] = 0 #none
+        update['weather_Fog_Dummy'] = 0 #none
         if '-FG' in weather_list or '-BR' in weather_list or '-HZ' in weather_list:
             update['weather_Fog'] = 1 #light
+            update['weather_Fog_Dummy'] = 1 #dummy
         if 'FG' in weather_list or 'BR' in weather_list or 'HZ' in weather_list:
-            update['weather_Fog'] = 2 #moderate 
+            update['weather_Fog'] = 2 #moderate
+            update['weather_Fog_Dummy'] = 1 #dummy
         if '+FG' in weather_list or '+BR' in weather_list or '+HZ' in weather_list or 'FG+' in weather_list:
-            update['weather_Fog'] = 3 #heavy 
+            update['weather_Fog'] = 3 #heavy
+            update['weather_Fog_Dummy'] = 1 #dummy
 
     else:
         #find weather observations for central park station and time
@@ -325,32 +380,44 @@ def add_weather(g):
             weather_list = observation['weather_WeatherType'].split(' ') #space delimited list
             #Types of rain
             update['weather_Rain'] = 0 #no rain
+            update['weather_Rain_Dummy'] = 0
             if '-RA' in weather_list or '-DZ' in weather_list or '-SH' in weather_list or '-FZRA' in weather_list: 
                 update['weather_Rain'] = 1 #light rain
+                update['weather_Rain_Dummy'] = 1
             if 'RA' in weather_list or 'DZ' in weather_list or 'SH' in weather_list or 'FZRA' in weather_list: 
                 update['weather_Rain'] = 2 #moderate rain
+                update['weather_Rain_Dummy'] = 1
             if '+RA' in weather_list or '+DZ' in weather_list or '+SH' in weather_list or '+FZRA' in weather_list: 
                 update['weather_Rain'] = 3 #heavy rain
+                update['weather_Rain_Dummy'] = 1
             
 
             #Types of snow/hail/ice
             update['weather_SnowHailIce'] = 0 #none
+            update['weather_SnowHailIce_Dummy'] = 0 #none
             if '-SN' in weather_list or '+SG' in weather_list or '-GS' in weather_list or '-GR' in weather_list or '-PL' in weather_list or '-IC' in weather_list:
                 update['weather_SnowHailIce'] = 1 #light
+                update['weather_SnowHailIce_Dummy'] = 1 #dummy
             if 'SN' in weather_list or '+SG' in weather_list or 'GS' in weather_list or 'GR' in weather_list or 'PL' in weather_list or 'IC' in weather_list:
-                update['weather_SnowHailIce'] = 2 #moderate 
+                update['weather_SnowHailIce'] = 2 #moderate
+                update['weather_SnowHailIce_Dummy'] = 1 #dummy
             if '+SN' in weather_list or '+SG' in weather_list or '+GS' in weather_list or '+GR' in weather_list or '+PL' in weather_list or '+IC' in weather_list:
-                update['weather_SnowHailIce'] = 3 #heavy             
+                update['weather_SnowHailIce'] = 3 #heavy
+                update['weather_SnowHailIce_Dummy'] = 1 #dummy
             
 
             #Types of fog/mist
             update['weather_Fog'] = 0 #none
+            update['weather_Fog_Dummy'] = 0 #none
             if '-FG' in weather_list or '-BR' in weather_list or '-HZ' in weather_list:
                 update['weather_Fog'] = 1 #light
+                update['weather_Fog_Dummy'] = 1 #dummy
             if 'FG' in weather_list or 'BR' in weather_list or 'HZ' in weather_list:
-                update['weather_Fog'] = 2 #moderate 
+                update['weather_Fog'] = 2 #moderate
+                update['weather_Fog_Dummy'] = 1 #dummy
             if '+FG' in weather_list or '+BR' in weather_list or '+HZ' in weather_list or 'FG+' in weather_list:
-                update['weather_Fog'] = 3 #heavy 
+                update['weather_Fog'] = 3 #heavy
+                update['weather_Fog_Dummy'] = 1 #dummy
             
             
             
@@ -368,10 +435,188 @@ def add_weather(g):
             update['weather_Rain'] = 0
             update['weather_SnowHailIce'] = 0
             update['weather_Fog'] = 0
+
+            update['weather_Rain_Dummy'] = 0
+            update['weather_SnowHailIce_Dummy'] = 0
+            update['weather_Fog_Dummy'] = 0
             
     return update
 
+def wunderground_predictions():
+    #get WeatherUnderground 10 day hourly forecast
+    output=[]
+    idx=0
+    switch = len(zip_codes)/len(wu_api) + 1 #simple ratio of zip codes to api keys
+    to_search = deepcopy(zip_codes)
+    keys = deepcopy(wu_api)
+    key = keys.pop()
+    #search by zip code
+    while len(to_search) > 0:
+        idx+=1
+        zipcode = to_search.pop()
+        
+        if idx%10 == 0:
+            #if the current key has been used 10 times, switch to a new key
+            key = keys.pop()
+            
+        wu_url='http://api.wunderground.com/api/%s/hourly10day/q/%s.json' % (key,zipcode)
+        pred = requests.get(wu_url)
+        if pred.status_code==200:
+            for hour in pred.json()['hourly_forecast']:
+                new_hour = {}
+                #define a unique id for the forecast
+                new_hour['pred_id'] = '%s%s%s%s_%s' % (hour['FCTTIME']['year'],
+                                                       hour['FCTTIME']['mon_padded'],
+                                                       hour['FCTTIME']['mday_padded'],
+                                                       hour['FCTTIME']['hour_padded'],
+                                                       zipcode)
 
+                #add zip code for querying
+                new_hour['pred_zipcode'] = zipcode
+                
+                #format datetime fields
+                new_hour.update(hour['FCTTIME'])
+                new_hour['hour'] = int(new_hour['hour_padded'])
+                new_hour['day'] = int(new_hour['mday_padded'])
+                new_hour['month'] = int(new_hour['mon_padded'])
+                new_hour['year'] = int(new_hour['year'])
+                new_hour['epoch'] = float(new_hour['epoch'])
+                #define an ES formatted datetime field
+                timestamp=dt.datetime(new_hour['year'],new_hour['month'],new_hour['day'],new_hour['hour'],0)
+                new_hour['pred_fullDate'] = dt.datetime.strftime(timestamp,'%Y-%m-%dT%H:%M:%S')
+
+                #format weather fields
+                new_hour['temp'] = hour['temp']['english']
+                new_hour['condition'] = hour['condition'].lower()
+                new_hour['forecastStr'] = hour['icon'].lower()
+                new_hour['windspeed'] = hour['wspd']['english']
+                new_hour['precipitation'] = hour['qpf']['english']
+                new_hour['prob_of_precip'] = hour['pop']
+                new_hour['snowfall'] = hour['snow']['english']
+                new_hour['pressure'] = hour['mslp']['english']
+
+                #condition fields
+                new_hour['pred_rain_dummy'] = 0
+                if new_hour['condition'].find('rain') > -1 or new_hour['condition'].find('tstorms') > -1:
+                    new_hour['pred_rain_dummy'] = 1
+                    
+                new_hour['pred_fog_dummy'] = 0
+                if new_hour['condition'].find('fog') > -1 or new_hour['condition'].find('hazy') > -1:
+                    new_hour['pred_fog_dummy'] = 1
+                    
+                new_hour['pred_snow_dummy'] = 0
+                if new_hour['condition'].find('flurries') > -1 or new_hour['condition'].find('sleet') > -1 or new_hour['condition'].find('snow') > -1:
+                    new_hour['pred_snow_dummy'] = 1
+                    
+                output.append((new_hour['pred_id'],new_hour))
+
+        if len(keys) == 0:
+            #if all the api keys have been exhausted, sleep for a minute, then start at the beginning of the api key list
+            time.sleep(60) 
+            keys = deepcopy(wu_api)
+            key = keys.pop()
+        
+            
+    return output    
+
+def add_weather_prediction(g):
+    #ADD CODE FOR WEATHER PREDICTIONS
+    update = deepcopy(g)
+    
+    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    es = Elasticsearch(es_url)
+    
+    time = parse(g['grid_fullDate']).replace(tzinfo=None)
+    
+    query = '''{
+                "query" : {
+                    "bool": {
+                        "must": { "term" : { "pred_zipcode" : "%s" } },
+                        "must" : {
+                            "range" : {
+                                "pred_fullDate" : {
+                                    "gte": "%s",
+                                    "lt": "%s",
+                                    "format": "MM/dd/yyyy HH:mm"
+                                }
+                            }	
+                        }	
+                    }	
+                }
+            }''' % (g['grid_zipcode'],dt.datetime.strftime(time,'%m/%d/%Y %H:%M'),dt.datetime.strftime(time + dt.timedelta(seconds=3600),'%m/%d/%Y %H:%M'))
+
+    
+    observations = list(helpers.scan(es,query=query,index='wunderground',doc_type='hourly')) #get the first observation returned
+    obs = None
+    if len(observations) > 0:
+        min_diff = float('inf')
+        best_obs = None
+        #iterate through the returned observations, add the closest observation in time
+        for obs in observations:
+            obs_time = parse(obs['_source']['pred_fullDate']).replace(tzinfo=None)
+            if abs((obs_time - time).total_seconds()) < min_diff:
+                best_obs = obs['_source']
+                min_diff = abs((obs_time - time).total_seconds())
+                                  
+        obs = best_obs
+                                
+    if obs:
+        #numerical fields
+        try:
+            update['weather_Temp'] = float(obs['temp'])
+        except:
+            update['weather_Temp'] = 70.0
+
+        try:
+            update['weather_WindSpeed'] = float(obs['windspeed'])
+        except:
+            update['weather_WindSpeed'] = 0.0
+
+        try:
+            update['weather_Precip'] = float(obs['precipitation'])
+        except:
+            update['weather_Precip'] = 0.0
+            
+        #bindary weather fields        
+        update['weather_Rain_Dummy'] = obs['pred_rain_dummy']
+        update['weather_SnowHailIce_Dummy'] = obs['pred_snow_dummy']
+        update['weather_Fog_Dummy'] = obs['pred_fog_dummy']
+        
+    else:
+        #numerical fields
+        update['weather_Temp'] = 70.0
+        update['weather_WindSpeed'] = 0.0
+        update['weather_Precip'] = 0.0      
+
+        #bindary weather fields  
+        update['weather_Rain_Dummy'] = 0
+        update['weather_SnowHailIce_Dummy'] = 0
+        update['weather_Fog_Dummy'] = 0
+    return update
+
+def add_current_311(g):
+    #ADD CODE FOR CURRENT OPEN ROAD CONDITION COMPLAINTS
+    update = deepcopy(g)
+    update['road_cond_requests']=0
+        
+    return update
+
+def add_current_liquor(g):
+    #ADD CODE FOR CURRENT ACTIVE LIQUOR LICENSES
+    update = deepcopy(g)
+    update['liquor_licenses']=0
+    
+    return update
+
+def predict_probabilities(g):
+    #Runs trained model on prediciton grid
+    update = deepcopy(g)
+    update['probability']=0
+    
+    return update
+
+
+        
 # ### PySpark Elasticsearch Create Grid
 # 
 # The following cells create the grid from scratch and upload to Elasticsearch.
@@ -421,6 +666,77 @@ def create_full_feature_grid(index="dataframe",doc_type="rows"):
             conf=es_write_conf)
     
 
+def create_results_grid(index="saferoad_results",doc_type="rows",offset=10):
+    #input: index name, document type, day offset (default to 10 days)
+    #output: creates a new grid based on earliest and latest collision records
+    start = dt.datetime.now()
+
+    es = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    #create the index, set the replicas so uploads will not err out
+    settings = {"settings": {"number_of_replicas" : 1} }
+    p = subprocess.Popen(['curl','-XPUT','%s/%s' % (es,index),'-d',json.dumps(settings)])
+    out, err = p.communicate()
+    if err: print '\n' + err + '\n\n'
+        
+    #make sure the mapping of the probability field is double
+    mapping = {'properties': { 'probability': {'type':'double'} } }
+    #use cURL to put the mapping
+    p = subprocess.Popen(['curl','%s/%s/_mapping/%s' % (es,index,doc_type),'-d','%s' % json.dumps(mapping)],stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    if err: print '\n' + err + '\n\n'
+
+    #updates an ES index with WeatherUnderground 10 day hourly forecasts for NYC zip codes
+    wu_write_conf = {
+        "es.nodes" : ES_hosts,
+        "es.port" : "9200",
+        "es.net.http.auth.user" : ES_username, 
+        "es.net.http.auth.pass" : ES_password,
+        "es.resource" : "wunderground/hourly",
+        "es.mapping.id" : "pred_id"
+    }  
+    predictions = sc.parallelize(wunderground_predictions())
+    predictions.saveAsNewAPIHadoopFile(
+            path='-', 
+            outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
+            keyClass="org.apache.hadoop.io.NullWritable", 
+            valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
+            conf=wu_write_conf)
+
+    #Define prediction results grid (looks very similar to dataframe grid
+    es_write_conf = {
+        "es.nodes" : ES_hosts,
+        "es.port" : "9200",
+        "es.net.http.auth.user" : ES_username, 
+        "es.net.http.auth.pass" : ES_password,
+        "es.resource" : "%s/%s" % (index,doc_type),
+        "es.mapping.id" : "grid_id"
+    } 
+    
+    #define the start and end of a leap year for collecting all month-day combos
+    startpoint = dt.datetime.now() #start of results grid
+    endpoint = dt.datetime.now() + dt.timedelta(days=offset) #end point of grid
+    
+    start_date= dt.datetime(startpoint.year,startpoint.month,startpoint.day,0,0)
+    end_date = dt.datetime(endpoint.year,endpoint.month,endpoint.day,0,0)
+
+    t_delta = dt.timedelta(seconds=3600) #one hour
+    next_date = start_date
+    times = []
+    while next_date < end_date:
+        #dates.append(dt.datetime.strftime(next_date,'%m/%d %H:%S'))
+        times.append(next_date)
+        next_date+=t_delta
+        
+    grid = sc.parallelize(times).flatMap(result_grid)
+    
+    grid.saveAsNewAPIHadoopFile(
+            path='-', 
+            outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
+            keyClass="org.apache.hadoop.io.NullWritable", 
+            valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
+            conf=es_write_conf)
+
+    
 def reset_grid_collisions(rdd):
     #input: Spark Elasticsearch RDD
     #output: mapped RDD with new collision information
@@ -542,5 +858,9 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
 
 
 # ### Run Grid creation and update code here
-create_new_grid_timestamps(index="nyc_dataframe",doc_type="rows")
+#create_new_grid_timestamps(index="nyc_dataframe",doc_type="rows")
+#add_fields_to_grid(grid_index='nyc_dataframe',grid_doc='rows',functions=['reset_grid_collisions'])
+    
 
+
+create_results_grid(index="saferoad_results",doc_type="rows",offset=10)
