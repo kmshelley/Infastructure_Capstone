@@ -156,8 +156,9 @@ def daily_update():
                 collisions = open_data_api.get_open_data(nyc_url,vision_zero_endpoint,api_key,limit=5000,query=soql)
                 acquire_NYC_Collisions.upload_collision_data_from_socrata(collisions,index='saferoad',doc_type='collisions')
                 break
-            except:
+            except Exception as e:
                 #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
+                print e
                 print "Failed to access Socrata. Sleeping for 1 minute."
                 time.sleep(60)
 
@@ -169,9 +170,9 @@ def daily_update():
                 upload = {'index':'311_requests','doc_type':'requests','id_field':'unique_key'}
                 open_data_api.upload_open_data_to_Elasticsearch(nyc_url,nyc_311_endpoint,api_key,soql,upload)
                 break
-            except:
+            except Exception as e:
                 #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
-                print "Failed to access Socrata. Sleeping for 1 minute."
+                print e
                 time.sleep(60)
 
 ##        #get historical ny state auto registration
@@ -195,8 +196,9 @@ def daily_update():
                 upload = {'index':'liquor_licenses','doc_type':'lic','id_field':'license_serial_number'}
                 open_data_api.upload_open_data_to_Elasticsearch(ny_state_url,liquor_endpoint,api_key,query=soql,kwargs=upload)
                 break
-            except:
+            except Exception as e:
                 #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
+                print e
                 print "Failed to access Socrata. Sleeping for 1 minute."
                 time.sleep(60)
                 

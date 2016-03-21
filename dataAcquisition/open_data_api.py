@@ -33,5 +33,5 @@ def upload_open_data_to_Elasticsearch(url,endpoint,api_key,query=None,kwargs={})
         #page through the results, appending to the out list
         idx+=10000
         docs = client.get(endpoint,limit=10000,offset=idx,where=query)
-        upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(docs,**kwargs)
+        upload_to_Elasticsearch.update_ES_records_curl(docs,**kwargs)
     client.close()

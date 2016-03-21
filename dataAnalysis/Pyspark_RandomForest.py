@@ -4,12 +4,17 @@ from pyspark import SparkContext, SparkConf
 conf = SparkConf().setAppName('RandomForest')
 sc = SparkContext(conf=conf)
 
+from pyspark.sql import SQLContext
+sqlContext = SQLContext(sc)
+
 #ML Lib libraries
 from pyspark.mllib.tree import RandomForest, RandomForestModel, DecisionTreeModel
 from pyspark.mllib.util import MLUtils
 from pyspark.mllib.regression import LabeledPoint
 from pyspark.ml.feature import OneHotEncoder
 from pyspark.ml.feature import StringIndexer
+
+
 
 #Python Libraries
 import sys

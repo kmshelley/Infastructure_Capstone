@@ -858,7 +858,7 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
 
 
 # ### Run Grid creation and update code here
-#
+#create_new_grid_timestamps(index="nyc_dataframe",doc_type="rows")
 #add_fields_to_grid(grid_index='nyc_dataframe',grid_doc='rows',functions=['reset_grid_collisions'])
     
 
