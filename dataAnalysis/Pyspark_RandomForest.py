@@ -1,5 +1,8 @@
 # # Random Forest Classifier with PySpark MLLib
 # 
+from pyspark import SparkContext, SparkConf
+conf = SparkConf().setAppName('RandomForest')
+sc = SparkContext(conf=conf)
 
 #ML Lib libraries
 from pyspark.mllib.tree import RandomForest, RandomForestModel, DecisionTreeModel
@@ -10,7 +13,7 @@ from pyspark.ml.feature import StringIndexer
 
 #Python Libraries
 import sys
-sys.path.append('../Infrastructure_Capstone')
+sys.path.append('/root/Infrastructure_Capstone')
 import os
 import random
 from copy import deepcopy
