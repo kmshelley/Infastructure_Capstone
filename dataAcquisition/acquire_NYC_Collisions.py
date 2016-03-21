@@ -45,10 +45,12 @@ def upload_collision_data_from_socrata(docs,index,doc_type,new_mapping=False):
 
     if new_mapping:
         #if this is a new index, use function that creates the mapping
-        upload_to_Elasticsearch.upload_docs_to_ES(records,index,doc_type,id_field="collision_UNIQUE KEY",geopoint="collision_GEOJSON_C",geoshape="collision_GEOSHAPE_C")
+        upload = {'index':index,'doc_type':doc_type,'id_field':'collision_UNIQUE KEY','geopoint':'collision_GEOJSON_C','geoshape':'collision_GEOSHAPE_C'}
+        upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(records,**upload)
     else:
         #update existing index
-        upload_to_Elasticsearch.update_ES_records_curl(records,index,doc_type,id_field="collision_UNIQUE KEY") 
+        upload = {'index':index,'doc_type':doc_type,'id_field':'collision_UNIQUE KEY'}
+        upload_to_Elasticsearch.update_ES_records_curl(records,**upload) 
 
 
 
@@ -84,7 +86,9 @@ def upload_collision_data_from_flatfile(docs,index,doc_type,new_mapping=False):
 
     if new_mapping:
         #if this is a new index, use function that creates the mapping
-        upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(records,index,doc_type,id_field="collision_UNIQUE KEY",geopoint="collision_GEOJSON_C",geoshape="collision_GEOSHAPE_C",delete_index=True)
+        upload = {'index':index,'doc_type':doc_type,'id_field':'collision_UNIQUE KEY','geopoint':'collision_GEOJSON_C','geoshape':'collision_GEOSHAPE_C'}
+        upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(records,**upload)
     else:
         #update existing index
-        upload_to_Elasticsearch.update_ES_records_curl(records,index,doc_type,id_field="collision_UNIQUE KEY") 
+        upload = {'index':index,'doc_type':doc_type,'id_field':'collision_UNIQUE KEY'}
+        upload_to_Elasticsearch.update_ES_records_curl(records,**upload) 

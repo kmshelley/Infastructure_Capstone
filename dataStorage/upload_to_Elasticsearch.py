@@ -403,10 +403,14 @@ def upload_docs_to_ES(docs,index,doc_type,id_field=False,geopoint=False,geoshape
         print '#### ERROR:'
         pprint(e)
     
-def update_ES_records_curl(docs,index,doc_type,id_field):
+def update_ES_records_curl(docs,**kwargs):
     #Input: index name, doc type, existing record ID, and a document to post to ES
     #Output: posts the updated document to ES with cURL; uses upsert to add new docs
-
+    #define keyword inputs
+    index = kwargs.get('index', 'index_tmp')
+    doc_type = kwargs.get('doc_type', 'doc_tmp')
+    id_field = kwargs.get('id_field', False)
+    
     es = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
     
 ##    #double-check that the correct number of replicas are being used
