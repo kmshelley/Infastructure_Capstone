@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Saferoad</title>
+
+    <!-- Bootstrap Core CSS -->
+	<!--    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-select.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="css/animate.css" rel="stylesheet" />
+    <!-- Squad theme CSS -->
+    <link href="css/style.css" rel="stylesheet">
+	<link href="color/default.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/d3.slider.css" media="screen" />
+
+    <style>
+        body {
+            font: 11px sans-serif;
+        }
+
+        .node rect {
+            fill-opacity: .9;
+            shape-rendering: crispEdges;
+        }
+
+        .node text {
+            pointer-events: none;
+            //text-shadow: 0 1px 0 #fff;
+            font-weight: bold;
+        }
+
+        .node rect:hover {
+            fill-opacity: .6;
+            stroke-width: 2;
+            font-weight: bold;
+        }
+
+        .link {
+            fill-opacity: .2;
+            stroke: none;
+            stroke-opacity: .2;
+        }
+
+            .link:hover {
+                fill-opacity: .5;
+            }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: black;
+            shape-rendering: crispEdges;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-size: 10px;
+            transform: rotate(0deg);
+        }
+
+        .datarect {
+            fill: steelblue;
+        }
+
+            .datarect:hover {
+
+                fill: #bbbbbb;
+            }
+
+        .title {
+            font: 18px sans-serif;
+        }
+
+        /*#center_elements {
+            display: table;
+
+
+        }*/
+
+        #wheel {
+            //border: thin solid #A8A8A8;
+        }
+
+        .bleh:hover {
+            fill: url(#hover_gradient);
+        }
+
+        .up-down {
+            background: rgba(0, 110, 227, 0.5);
+            color: #fff;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            padding-right: 150px;
+            padding-left: 150px;
+        }
+
+            .up-down:hover {
+                border: none;
+                background: rgba(0, 110, 227, 1);
+            }
+
+        .axis line {
+            stroke: #E5E5E5;
+            stroke-opacity: .5;
+            shape-rendering: crispEdges;
+        }
+
+        .selectTitle {
+			padding-bottom: 4px;
+			padding-left: 5px;
+        }
+
+     .fact-box { margin:10px; padding:10px; }
+
+	 .instructions {
+       padding:20px;
+       font-size:14px;
+     }
+
+	.underline {
+		text-decoration: underline;
+	}
+
+	.inlineBlock {
+		display:inline-block;
+	}
+
+	.text-to-columns {
+	   -webkit-column-count: 2;
+		  -moz-column-count: 2;
+			   column-count: 2;
+
+	   -webkit-column-gap: 20px;
+		  -moz-column-gap: 20px;
+			   column-gap: 20px;
+	}
+
+        .paddingTop10 {
+            padding-top:10px;
+        }
+    </style>
+<!--styles used for saferoad -->
+<style>
+  #map { width: 500px; height: 500px; display:inline-block; }
+  .leaflet-popup-content-wrapper {
+    background: rgb(111, 51, 51);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+  }
+
+  body {
+    font: 10px sans-serif;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+  .overlay {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .focus circle {
+    fill: none;
+    stroke: steelblue;
+  }
+  </style>
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+	<!-- Preloader -->
+	<div id="preloader">
+	  <div id="load"></div>
+	</div>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <a class="navbar-brand" href="index.html">
+                    <h1>Saferoad</h1>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+					<li class="active"><a href="#intro">Home</a></li>
+					<li><a href="#predictions">Predictions</a></li>
+					<li><a href="#about">About</a></li>
+					<!--<li><a href="#about">About Us</a></li>
+                    li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Example menu</a></li>
+                            <li><a href="#">Example menu</a></li>
+                            <li><a href="#">Example menu</a></li>
+                        </ul-->
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+	<!-- Section: Title on top of Image -->
+    <section id="top-title" class="intro" style="height: 300px; padding-top: 150px;">
+		<div class="slogan fluid ">
+			<h2>Saferoad</h2>
+		</div>
+    </section>
+
+	<!-- Section: visualization -->
+	<section id="intro" class="text-center">
+		<!-- about code -->
+		<div id="predictions" class="container " style="margin-bottom: 25px;">
+			<h4>Hourly Collision Predictions for the next 10 days</h4>
+      Date:
+      <select id="dateSelector"></select>
+      Hour:
+      <select id="hourSelector"></select>
+
+      <button id="updateButton">Update</button>
+
+      <a>Animate!</a>
+
+      	<Hr/>
+      	<h4>As of <span id="currentDate"></span> at <span id="currentHour"></span>:</h4>
+      	<div id="map"></div>
+      	<div id="lineChart" style="display:inline-block"></div>
+		</div>
+
+		<div id="about" class="container " style="margin-top: 50px; margin-bottom: 25px;">
+			<hr><h4>About Us</h4>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-6 col-sm-3 col-md-3">
+						<div class="wow bounceInUp" data-wow-delay="0.2s">
+							<div class="team boxed-grey">
+								<div class="inner">
+									<div class="avatar"><img src="img/team/1b.jpg" alt="" class="img-responsive img-circle" /></div>
+									<h5>Julian Phillips</h5>
+									<p class="subtitle">MIDS Student</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-3 col-md-3">
+						<div class="wow bounceInUp" data-wow-delay="0.5s">
+							<div class="team boxed-grey">
+								<div class="inner">
+
+									<div class="avatar"><img src="img/team/2b.jpg" alt="" class="img-responsive img-circle" /></div>
+									<h5>Kasane Utsumi</h5>
+									<p class="subtitle">MIDS Student</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-3 col-md-3">
+						<div class="wow bounceInUp" data-wow-delay="0.8s">
+							<div class="team boxed-grey">
+								<div class="inner">
+									<div class="avatar"><img src="img/team/3b.jpg" alt="" class="img-responsive img-circle" /></div>
+									<h5>David Rose</h5>
+									<p class="subtitle">MIDS Student</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-3 col-md-3">
+						<div class="wow bounceInUp" data-wow-delay="1s">
+							<div class="team boxed-grey">
+								<div class="inner">
+									<div class="avatar"><img src="img/team/4b.jpg" alt="" class="img-responsive img-circle" /></div>
+									<h5>Andrea Soto</h5>
+									<p class="subtitle">MIDS Student</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    <!-- Section: data -->
+
+
+
+
+    <script src="assets/js/colorbrewer.js"></script>
+  	<script src="assets/js/jquery-1.11.3.js"></script>
+  	<script src="assets/js/d3.min.js"></script>
+  	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+  	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  	<script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+  	<link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+  	<link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+  	<!-- Include all compiled plugins (below), or include individual files as needed -->
+  	<script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/saferoad.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/custom.js"></script>
+
+    <!--zip code geojson -->
+    <script src="assets/data/nyc_zip_codes.js"></script>
+
+</body>
+
+</html>
