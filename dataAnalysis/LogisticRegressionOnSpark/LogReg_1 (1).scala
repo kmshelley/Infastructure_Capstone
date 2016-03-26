@@ -19,7 +19,7 @@ import com.github.fommil.netlib.BLAS._
 
 /*
 Execute below in this folder to run:
-sbt clean assembly && $SPARK_HOME/bin/spark-submit   --master spark://spark1:7077 $(find target -iname "*assembly*.jar") ESIP2:9200,ESIP2:9200 ESUsername ESpassword
+sbt clean assembly && $SPARK_HOME/bin/spark-submit   --master spark://spark1:7077 $(find target -iname "*assembly*.jar") 169.53.138.84:9200,169.53.138.92:9200 acccident Dav1dC0C0
 */
 
 //object Main extends App {
@@ -46,59 +46,48 @@ object Main {
 		
 		val zipcode = row._2("grid_zipcode").asInstanceOf[Long].toDouble
 		val dayOfMonth = row._2("grid_day").asInstanceOf[Long].toDouble
-                val dayOfWeek = row._2("grid_dayOfWeek").asInstanceOf[Long].toDouble
-                val hour = row._2("grid_hourOfDay").asInstanceOf[Long].toDouble
-                val month = row._2("grid_month").asInstanceOf[Long].toDouble
-                val label = row._2("grid_isAccident").asInstanceOf[Long].toDouble
+		val dayOfWeek = row._2("grid_dayOfWeek").asInstanceOf[Long].toDouble
+		val hour = row._2("grid_hourOfDay").asInstanceOf[Long].toDouble
+		val month = row._2("grid_month").asInstanceOf[Long].toDouble
+		val label = row._2("grid_isAccident").asInstanceOf[Long].toDouble
 
-                val dv: Vector = Vectors.dense(zipcode, dayOfMonth,dayOfWeek,hour,month)
+        val dv: Vector = Vectors.dense(zipcode,dayOfWeek,hour,month)
 
 		return LabeledPoint(label,dv)
 	}
 	
-	//println(esRDD.first()._2("grid_zipcode").asInstanceOf[Long].toDouble.getClass.getName)
-
-	//test mapping with small portion of the data 
-	//val smallData = sc.parallelize(esRDD.take(100)).map(d => resetZipcodeLabel(d))
-	//println(smallData.first())
-
 	val data = esRDD.map(d => resetZipcodeLabel(d))
-	//val data = sc.parallelize(esRDD.take(100)).map(d => resetZipcodeLabel(d))
+	
 
 	// Split data into training (60%) and test (40%).
 	val splits = data.randomSplit(Array(0.6, 0.4), seed = 11L)
 	val training = splits(0).cache()
 	val test = splits(1)
-	//println(training.first())
+	
 	// Run training algorithm to build the model
-	
-	val model =sc.broadcast(new LogisticRegressionWithLBFGS()
-  		.run(training))
+	val model =sc.broadcast(new LogisticRegressionWithLBFGS().run(training))
 
-	//println(model)
-	//println(model.getNumFeatures())
-	
-
-	/*val pt = test.first()
-	println(model.predict(pt.features))
-	println(pt)
-	*/
 	// Compute raw scores on the test set.
 	val predictionAndLabels =test.map { d =>
   		val prediction = model.value.predict(d.features)
   		(prediction, d.label)
-		//(d.label,d.features)
-		//model
 	}
+	var total_count = predictionAndLabels.count()
+	println("Total Count = " + total_count)
 	
-	//predictionAndLabels.foreach(println)
+	var pos_actual = predictionAndLabels.map(line => line._2).reduce( (a,b) => a+b)
+	println("Actual positive = " + pos_actual)
 	
+	var pos_prediction = predictionAndLabels.map(line => line._1).reduce( (a,b) => a+b)
+	println("Predicted positive = " + pos_prediction)
+	
+	/*
 	val total = predictionAndLabels.count()
 	println(total)
 	val correct = predictionAndLabels.filter(line => line._1 == line._2).count() 
 	println(correct/total.toFloat)
 	
-	/*
+	
 
 	// Get evaluation metrics.
 	val metrics = new MulticlassMetrics(predictionAndLabels)

@@ -85,6 +85,7 @@ def feature_grid(timestamp):
     for zipcode in broadcast_zip.value:
         g = {}
         g['grid_zipcode'] = zipcode
+        
         g['grid_id'] = dt.datetime.strftime(timestamp,'%Y%m%d%H%M') + '_' + zipcode
         
         g['grid_year'] = timestamp.year
@@ -101,10 +102,12 @@ def feature_grid(timestamp):
         g['grid_fullDate'] = dt.datetime.strftime(timestamp,'%Y-%m-%dT%H:%M:%S')
         
         
-        #add collisions and weather data
+        #add collisions, weather, 311, and liquor license data
         g = add_collisions(g)
         g = add_weather(g)
-    
+        g = add_current_311(g)
+        g = add_current_liquor(g)
+        g = add_zipcode_data(g)
         ### ADD ADDITIONAL FEATURE ENGINEERING FUNCTIONS HERE ###
         output.append((g['grid_id'],g))
     
@@ -140,11 +143,12 @@ def result_grid(timestamp):
         g['grid_fullDate'] = dt.datetime.strftime(timestamp,'%Y-%m-%dT%H:%M:%S')
         
         
-        #add collisions and weather data
+        #add weather, 311, and liquor license data
         g = add_weather_prediction(g)
         g = add_current_311(g)
         g = add_current_liquor(g)
-        g = predict_probabilities(g)
+        g = add_zipcode_data(g)
+        #g = predict_probabilities(g)
     
         ### ADD ADDITIONAL FEATURE ENGINEERING FUNCTIONS HERE ###
         output.append((g['grid_id'],g))
@@ -206,6 +210,49 @@ def add_collisions(g):
     
     return g
     
+
+def add_zipcode_data(g):
+    #adds zipcode level data to the grid
+    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    es = Elasticsearch(es_url)
+    update = deepcopy(g)
+
+    query = '''{
+                "fields":[  "area",
+                            "5mph",
+                            "15mph",
+                            "25mph",
+                            "35mph",
+                            "45mph",
+                            "55mph",
+                            "65mph",
+                            "85mph",
+                            "median_speed_limit",
+                            "total_road_length",
+                            "total_road_count",
+                            "bridges",
+                            "tunnels"
+                        ],
+                "query": {
+                        "regexp":{
+                            "zipcode": "%s*"
+                        }
+                    }
+                }
+            }''' % (g['grid_zipcode'])
+
+    area = 0
+    proj = Proj(init='epsg:2263') #NY/Long Island UTM projection
+    docs = list(helpers.scan(es,query=query,index='nyc_zip_codes',doc_type='zip_codes'))
+    for doc in docs:
+        for key in doc['fields']:
+            if key != 'area':
+                update[key]=doc['fields'][key][0]
+            else:
+                if key not in update: update['zip_area'] = 0.0
+                update['zip_area']+=doc['fields'][key][0] #add up area
+    
+    return update
 
 
 # #### Weather
@@ -442,6 +489,27 @@ def add_weather(g):
             
     return update
 
+def dummy_weather_fields(g):
+    #sets dummy weather fields
+    #weather fields
+    if g['weather_Fog']>0:
+        g['weather_Fog_Dummy'] = 1
+    else:
+        g['weather_Fog_Dummy'] = 0
+        
+    if g['weather_Rain'] > 0:
+        g['weather_Rain'] = 1
+    else:
+        g['weather_Rain'] = 0
+        
+    if g['weather_SnowHailIce']>0:
+        g['weather_SnowHailIce'] = 1
+    else:
+        g['weather_SnowHailIce'] = 0
+
+    return g
+    
+    
 def wunderground_predictions():
     #get WeatherUnderground 10 day hourly forecast
     output=[]
@@ -597,21 +665,112 @@ def add_weather_prediction(g):
 def add_current_311(g):
     #ADD CODE FOR CURRENT OPEN ROAD CONDITION COMPLAINTS
     update = deepcopy(g)
-    update['road_cond_requests']=0
+
+    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    es = Elasticsearch(es_url)
+    
+    time = parse(g['grid_fullDate']).replace(tzinfo=None)
+    #find all 311 requests that were opened before the grid time, and closed after or are not yet closed
+    hour_start =dt.datetime.strftime(time,'%m/%d/%Y %H:%M')
+    hour_end = dt.datetime.strftime(time + dt.timedelta(seconds=3600),'%m/%d/%Y %H:%M')
+    query = '''{
+                "fields": ["created_date","status","closed_date","resolution_action_updated_date","due_date","ZCTA_ZIP_NoSuffix"],
+                "query" : {
+                    "bool": {
+                        "must": { "term" : { "ZCTA_ZIP_NoSuffix" : "%s" } },
+                        "must" : {
+                            "range" : {
+                                "created_date" : {
+                                    "lte": "%s",
+                                    "format": "MM/dd/yyyy HH:mm"
+                                }
+                            }
+                        },
+                        "should" : [
+                            { "term" : { "status" : "Open" } },
+                            { "term" : { "status" : "Pending" } },
+                            { "bool":{
+                                    "must": [
+                                            { "term" : { "status" : "Closed" } },
+                                            { "bool": {
+                                                "should": [
+                                                    { "range" : {
+                                                                "closed_date" : {
+                                                                        "gt": "%s",
+                                                                        "format": "MM/dd/yyyy HH:mm"
+                                                                }
+                                                            }
+                                                        },
+                                                        { "range" : {
+                                                                "resolution_action_updated_date" : {
+                                                                    "gt": "%s",
+                                                                    "format": "MM/dd/yyyy HH:mm"
+                                                                }
+                                                            }
+                                                        },
+                                                        { "range" : {
+                                                            "due_date" : {
+                                                                "gt": "%s",
+                                                                "format": "MM/dd/yyyy HH:mm"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }							
+                                    ]	
+                                }
+                            }
+                        ]
+                    }	
+                }
+            }''' % (g['grid_zipcode'],hour_start,hour_end,hour_end,hour_end)
+
+
+    complaints = list(helpers.scan(es,query=query,index='311_requests',doc_type='requests')) #get the 311 road condition requests that were still open hour
+    update['road_cond_requests']=len(complaints)
         
     return update
 
 def add_current_liquor(g):
     #ADD CODE FOR CURRENT ACTIVE LIQUOR LICENSES
     update = deepcopy(g)
-    update['liquor_licenses']=0
     
-    return update
+    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    es = Elasticsearch(es_url)
+    
+    time = parse(g['grid_fullDate']).replace(tzinfo=None)
+    #find all 311 requests that were opened before the grid time, and closed after or are not yet closed
+    hour_start =dt.datetime.strftime(time,'%m/%d/%Y %H:%M')
+    hour_end = dt.datetime.strftime(time + dt.timedelta(seconds=3600),'%m/%d/%Y %H:%M')
+    query = '''{
+                "fields": ["license_original_issue_date","license_expiration_date","ZCTA_ZIP_NoSuffix"],
+                "query" : {
+                    "bool": {
+                        "must": { "term" : { "ZCTA_ZIP_NoSuffix" : "%s" } },
+                        "must" : {
+                            "range" : {
+                                "license_original_issue_date" : {
+                                    "lte": "%s",
+                                    "format": "MM/dd/yyyy HH:mm"
+                                }
+                            }
+                        },
+                        "must": { 
+                            "range" : {
+                                "license_expiration_date" : {
+                                    "gt": "%s",
+                                    "format": "MM/dd/yyyy HH:mm"
+                                }
+                            }
+                        }
+                    }	
+                }
+            }''' % (g['grid_zipcode'],hour_start,hour_end)
 
-def predict_probabilities(g):
-    #Runs trained model on prediciton grid
-    update = deepcopy(g)
-    update['probability']=0
+
+    licenses = list(helpers.scan(es,query=query,index='liquor_licenses',doc_type='lic')) #get the active liquor licenses by zip
+    update['liquor_licenses']=len(licenses)
     
     return update
 
@@ -639,6 +798,43 @@ def create_full_feature_grid(index="dataframe",doc_type="rows"):
     
     es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
     es = Elasticsearch(es_url)
+
+    #create the index, set the replicas so uploads will not err out
+    settings = {"settings": {"number_of_replicas" : 1} }
+    p = subprocess.Popen(['curl','-XPUT','%s/%s' % (es_url,index),'-d',json.dumps(settings)])
+    out, err = p.communicate()
+    if err: print '\n' + err + '\n\n'
+    
+    #make sure the mapping of the probability field is double
+    mapping = {'properties':
+               {
+                    "15mph": { "type": "double" },
+                    "25mph": { "type": "double" },
+                    "35mph": { "type": "double" },
+                    "45mph": { "type": "double" },
+                    "55mph": { "type": "double" },
+                    "5mph": { "type": "double" },
+                    "65mph": { "type": "double" },
+                    "85mph": { "type": "double" },
+                    "bridges": { "type": "double" },
+                    "grid_motoristFatalities": { "type": "double" },
+                    "grid_motoristInjuries": { "type": "double" },
+                    "grid_pedestrianFatalities": { "type": "double" },
+                    "grid_pedestrianInjuries": { "type": "double" },
+                    "grid_totalFatalities": { "type": "double" },
+                    "grid_totalInjuries": { "type": "double" },
+                    "liquor_licenses": { "type": "double" },
+                    "median_speed_limit": { "type": "double" },
+                    "road_cond_requests": { "type": "double" },
+                    "total_road_length": { "type": "double" },
+                    "tunnels": { "type": "double" },
+                    "zip_area": { "type": "double" }
+                 }
+              }
+    #use cURL to put the mapping
+    p = subprocess.Popen(['curl','%s/%s/_mapping/%s' % (es_url,index,doc_type),'-d','%s' % json.dumps(mapping)],stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    if err: print '\n' + err + '\n\n'
 
     first_coll = upload_to_Elasticsearch.get_first_record(index='saferoad',doc_type='collisions',datetime_field='collision_DATETIME_C')
     first_coll_time = parse(first_coll['collision_DATETIME_C']).replace(tzinfo=None) #get the date of the latest collision record
@@ -679,7 +875,32 @@ def create_results_grid(index="saferoad_results",doc_type="rows",offset=10):
     if err: print '\n' + err + '\n\n'
         
     #make sure the mapping of the probability field is double
-    mapping = {'properties': { 'probability': {'type':'double'} } }
+    mapping = {'properties':
+               {
+                    "probability": {"type":"double"},
+                    "15mph": { "type": "double" },
+                    "25mph": { "type": "double" },
+                    "35mph": { "type": "double" },
+                    "45mph": { "type": "double" },
+                    "55mph": { "type": "double" },
+                    "5mph": { "type": "double" },
+                    "65mph": { "type": "double" },
+                    "85mph": { "type": "double" },
+                    "bridges": { "type": "double" },
+                    "grid_motoristFatalities": { "type": "double" },
+                    "grid_motoristInjuries": { "type": "double" },
+                    "grid_pedestrianFatalities": { "type": "double" },
+                    "grid_pedestrianInjuries": { "type": "double" },
+                    "grid_totalFatalities": { "type": "double" },
+                    "grid_totalInjuries": { "type": "double" },
+                    "liquor_licenses": { "type": "double" },
+                    "median_speed_limit": { "type": "double" },
+                    "road_cond_requests": { "type": "double" },
+                    "total_road_length": { "type": "double" },
+                    "tunnels": { "type": "double" },
+                    "zip_area": { "type": "double" }
+                 }
+              }
     #use cURL to put the mapping
     p = subprocess.Popen(['curl','%s/%s/_mapping/%s' % (es,index,doc_type),'-d','%s' % json.dumps(mapping)],stderr=subprocess.PIPE)
     out, err = p.communicate()
@@ -747,13 +968,33 @@ def reset_grid_weather(rdd):
     #output: mapped RDD with new weather information
     return rdd.map(lambda (key,row): (key,add_weather(row)))
 
+def reset_grid_weather_Dummy(rdd):
+    #Input: Spark Elasticsearch RDD
+    #output: mapped RDD with new dummy weather information
+    return rdd.map(lambda (key,row): (key,dummy_weather_fields(row)))
+
+def reset_grid_311(rdd):
+    #input: Spark Elasticsearch RDD
+    #output: mapped RDD with new 311 information
+    return rdd.map(lambda (key,row): (key,add_current_311(row)))
+
+def reset_grid_liquor(rdd):
+    #input: Spark Elasticsearch RDD
+    #output: mapped RDD with new liquor license information
+    return rdd.map(lambda (key,row): (key,add_current_liquor(row)))
+
+def reset_zip_data(rdd):
+    #input: Spark Elasticsearch RDD
+    #output: mapped RDD with new liquor license information
+    return rdd.map(lambda (key,row): (key,add_zipcode_data(row)))
+
 # ### PySpark Elasticsearch Update Grid
 # 
 # The following cells read data from and write data to Elasticsearch.
 
 # In[8]:
 
-def add_fields_to_grid(grid_index,grid_doc,new_index=None,new_doc_type=None,functions=[]):
+def add_fields_to_grid(grid_index,grid_doc,new_index=False,new_doc_type=False,functions=[]):
     #input: grid index and doc type, OPTIONAL new index name, document type, a list of functions to perform on the grid RDD
     #output: updates the existing grid with new fields based on functions provided
     
@@ -761,6 +1002,8 @@ def add_fields_to_grid(grid_index,grid_doc,new_index=None,new_doc_type=None,func
         index,doc_type = new_index,new_doc_type
     else:
         index,doc_type=grid_index,grid_doc
+
+    print "Writing data to %s/%s" % (index,doc_type)
         
     #Configuration for reading and writing to ES
     es_read_conf = { 
@@ -858,9 +1101,7 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
 
 
 # ### Run Grid creation and update code here
-#create_new_grid_timestamps(index="nyc_dataframe",doc_type="rows")
-#add_fields_to_grid(grid_index='nyc_dataframe',grid_doc='rows',functions=['reset_grid_collisions'])
-    
-
-create_new_grid_timestamps(index="nyc_dataframe",doc_type="rows")
+#add_fields_to_grid(grid_index='nyc_dataframe',grid_doc='rows',functions=['reset_zip_data','reset_grid_weather','reset_grid_311','reset_grid_liquor'])
+#add_fields_to_grid(grid_index='saferoad_results',grid_doc='rows',functions=['reset_zip_data','reset_grid_311','reset_grid_liquor'])
+create_full_feature_grid(index="nyc_grid",doc_type="rows")
 create_results_grid(index="saferoad_results",doc_type="rows",offset=10)

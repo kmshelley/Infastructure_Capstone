@@ -19,7 +19,7 @@ import com.github.fommil.netlib.BLAS._
 
 /*
 Execute below in this folder to run:
-sbt clean assembly && $SPARK_HOME/bin/spark-submit   --master spark://spark1:7077 $(find target -iname "*assembly*.jar") ESIP2:9200,ESIP2:9200 ESUsername ESpassword
+sbt clean assembly && $SPARK_HOME/bin/spark-submit   --master spark://spark1:7077 $(find target -iname "*assembly*.jar") 169.53.138.92:9200,169.53.138.84:9200 accident Dav1dC0C0
 */
 
 //object Main extends App {
@@ -51,7 +51,8 @@ object Main {
                 val month = row._2("grid_month").asInstanceOf[Long].toDouble
                 val label = row._2("grid_isAccident").asInstanceOf[Long].toDouble
 
-                val dv: Vector = Vectors.dense(zipcode, dayOfMonth,dayOfWeek,hour,month)
+                //val dv: Vector = Vectors.dense(zipcode, dayOfMonth,dayOfWeek,hour,month)
+				val dv: Vector = Vectors.dense(zipcode,dayOfWeek,hour,month)
 
 		return LabeledPoint(label,dv)
 	}
