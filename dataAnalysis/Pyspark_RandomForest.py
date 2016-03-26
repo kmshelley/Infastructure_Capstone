@@ -44,7 +44,7 @@ start = dt.datetime.now()
 
 #Configuration for reading from and writing from/to Elasticsearch training data index
 es_read_conf = { 
-        "es.resource" : "nyc_dataframe/rows", 
+        "es.resource" : "nyc_grid/rows", 
         "es.nodes" : ES_url,
         "es.port" : "9200",
         "es.net.http.auth.user" : ES_username,

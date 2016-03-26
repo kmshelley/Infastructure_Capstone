@@ -432,7 +432,7 @@ def update_ES_records_curl(docs,**kwargs):
             _id = doc[id_field]
         else:
             _id=idx
-        actions.append('{ "update" : {"_id" : "%s", "_type" : "%s", "_index" : "%s"} }\n' % (_id,doc_type,index))
+        actions.append('{ "update" : {"_id" : "%s", "_type" : "%s", "_index" : "%s", "_retry_on_conflict" : 3} }\n' % (_id,doc_type,index))
         actions.append('{ "doc": %s, "doc_as_upsert" : true }\n' % json.dumps(doc))
 
         #upload 10k records at a time

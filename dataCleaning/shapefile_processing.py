@@ -51,9 +51,89 @@ def shapefile_to_geojson(shp_file,p=None):
 
     return geojson.FeatureCollection(features)
 
+def filter_shapefile(shp_file,poly,p=False,shapefile_proj=False):
+    #input: filename of shapefile, list of coordinates {(lng,lat) tuples} representing a polygon, a projection method
+    #output: geojson of filtered shapefile elements
+    #print poly
+    if p:
+        filter_poly = Polygon([p(lng,lat) for (lng,lat) in poly])
+    else:
+        filter_poly = Polygon([(x,y) for (x,y) in poly])
+    #print filter_poly.bounds
+    features = []
+    sf = shapefile.Reader(shp_file)
+    records = sf.iterRecords()
+    for shape in sf.iterShapes():
+        rec = records.next()
+        _type = shape.shapeType
 
+        if shapefile_proj: 
+            coords = [p(lng,lat) for lng,lat in shape.points] #get the lng,lat coords
+        else:
+            coords = shape.points
+                    
+        if len(shape.points) > 0:
+            if _type == 1:
+                shape2 = Point(coords)
+            if _type == 3:
+                shape2 = LineString(coords)
+            if _type == 5:
+                if len(shape.parts) == 1:
+                    shape2 = Polygon(coords)
+                else:
+                    idx=0
+                    parts = []
+                    for i in range(1,len(shape.parts)):
+                        part = coords[idx:shape.parts[i]]
+                        parts.append(Polygon(part))
+                        idx=shape.parts[i]
+                    part = coords[idx:]
+                    parts.append(Polygon(part))
+                    
+                    shape2 = MultiPolygon(parts)
 
-def filter_shapefile(shp_file,poly,p=None,complete=False):
+                
+            if filter_poly.contains(shape2.centroid):
+                fields = {k:v for k,v in zip([f[0] for f in sf.fields[1:]],rec)}
+                if p and not shapefile_proj:
+                    coords = [p(x,y,inverse=True) for x,y in shape.points]
+                else:
+                    coords = [(lng,lat) for lng,lat in shape.points]
+            
+                points = shape.points
+                if _type == 1:
+                    #shape2 = Point(points)
+                    try:
+                        features.append(geojson.Feature(geometry=geojson.Point(tuple(coords[0])),properties=fields))
+                    except Exception as e:
+                        #print shape.points
+                        print e
+                if _type == 3:
+                    
+                    try:
+                        features.append(geojson.Feature(geometry=geojson.LineString([(pt1,pt2) for pt1,pt2 in coords]),properties=fields))
+                    except Exception as e:
+                        #print coords
+                        print e
+                if _type == 5:
+                    if len(shape.parts) == 1:
+                        geom = geojson.Polygon([[(pt1,pt2) for pt1,pt2 in coords]])
+                        features.append(geojson.Feature(geometry=geom,properties=fields))
+                    else:
+                        for i in range(len(shape.parts)):                            
+                            if i < len(shape.parts)-1:
+                                part = coords[shape.parts[i]:shape.parts[i+1]]  
+                            else:
+                                part = coords[shape.parts[-1]:]
+                                
+                            geom = geojson.Polygon([[(pt1,pt2) for pt1,pt2 in part]])
+                            feat = geojson.Feature(geometry=geom,properties=fields)
+                            
+                            features.append(feat)
+    print "%s matching shapes found." % str(len(features))
+    return geojson.FeatureCollection(features)
+
+def filter_ZCTA_shapefile(shp_file,poly,p=None,complete=False):
     #input: filename of shapefile, list of coordinates {(lng,lat) tuples} representing a polygon, a projection method
     #output: geojson of filtered shapefile elements
     if p:
@@ -74,9 +154,9 @@ def filter_shapefile(shp_file,poly,p=None,complete=False):
                     
         if len(shape.points) > 0:
             if _type == 1:
-                parts = Point(coords)
+                shape2 = Point(coords)
             if _type == 3:
-                parts = LineString(coords)
+                shape2 = LineString(coords)
             if _type == 5:
                 if len(shape.parts) == 1:
                     shape2 = Polygon(coords)
@@ -175,19 +255,16 @@ def street_map_centers(geo,p):
 
 
 
-shp_file = 'C:/Users/Katherine/Desktop/GIS/ArcMap_Data/ny_counties/nyc_zipcodes/zcta_filtered.shp'
-
-##zips = shapefile_to_geojson(shp_file)
-##with open('E:/GoogleDrive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/nyc_zip_codes.json','w') as geo_file:
-##    geojson.dump(zips,geo_file)
+shp_file = 'C:/Users/Katherine/Google Drive/DataSciW210/Final/datasets/NYS_Streets/StreetSegmentPublic.shp'
+   
+with open('C:/Users/Katherine/Google Drive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/NYC_polygon.json','r') as geo_file:
+    poly = list(geojson.utils.coords(geojson.load(geo_file)['features'][0]))
     
-##with open('C:/Users/Katherine/Google Drive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/NYC_polygon.json','r') as geo_file:
-##    poly = list(geojson.utils.coords(geojson.load(geo_file)['features'][0]))
-##    
-##p = Proj(init='epsg:2263')
-##zips = filter_shapefile(shp_file,poly,p)
-geo = shapefile_to_geojson(shp_file)
-with open('C:/Users/Katherine/Google Drive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/nyc_zip_codes_filtered.json','w') as geo_file:
-    geojson.dump(geo,geo_file)
+#p = Proj(init='epsg:2263')
+p = Proj(init='epsg:26918') #NYS streets projection
+streets = filter_shapefile(shp_file,poly,p,shapefile_proj=False)
+#geo = shapefile_to_geojson(shp_file)
+with open('C:/Users/Katherine/Google Drive/DataSciW210/Final/Infrastructure_Capstone/flatDataFiles/nyc_streets.json','w') as geo_file:
+    geojson.dump(streets,geo_file)
     
 

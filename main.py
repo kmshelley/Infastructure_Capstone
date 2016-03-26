@@ -1,9 +1,12 @@
 __author__ = 'Katherine'
 from dataAcquisition import open_data_api, acquire_QCLCD_data, acquire_NYC_Collisions
 from dataStorage import upload_to_Elasticsearch
-from dataCleaning import find_closest_geo_record, collision_geoshape_update, add_ZCTA
+from dataCleaning import find_closest_geo_record, collision_geoshape_update, add_ZCTA, zip_code_features
 #from gridCreation import pysparkGrid
 from gridCreation.ResultsGrid import results_grid
+
+from elasticsearch import Elasticsearch
+
 import ConfigParser
 import time, datetime as dt
 from dateutil.parser import parse
@@ -22,7 +25,11 @@ config.read('./config/capstone_config.ini')
 SPARK_HOME = config.get('Spark','home')
 memory = config.get('Spark','memory_large')
 parallelism = config.get('Spark','parallelism_large')
-cores = config.get('Spark','cores_large')
+cores = config.get('Spark','cores_small')
+
+memory_sm = config.get('Spark','memory_small')
+parallelism_sm = config.get('Spark','parallelism_large')
+cores_sm = config.get('Spark','cores_small')
 
 #NYC Open Data portal
 api_key = config.get('Socrata','api_key')
@@ -35,7 +42,9 @@ ny_state_url = config.get('NY State Portal','url')
 registration_endpoint = config.get('NY State Portal','car_registration')
 liquor_endpoint = config.get('NY State Portal','liquor')
 
+#Elasticsearch conf
 ES_url = config.get('ElasticSearch','host')
+ES_hosts = config.get('ElasticSearch','hostlist')
 ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
@@ -95,6 +104,16 @@ def reload_all_collisions():
     #remove the csv file
     os.remove('rows.csv')
 
+def delete_bad_indexes():
+    for i in range(1,10000):
+        cmd = ['curl','-u','accident:Dav1dC0C0','-XDELETE','http://169.53.138.92:9200/%s' % i]
+        try:
+            subprocess.call(cmd)
+        except:
+            pass
+
+    print "Done cleaning index"
+
 def update_grid():
     cmd = ['%s/bin/spark-submit' % SPARK_HOME,
            '--master',
@@ -131,6 +150,21 @@ def run_predictions():
     
     subprocess.call(cmd)
 
+    #add latest prediction date to index 
+    es = Elasticsearch("http://%s:%s@%s/%s" % (es_username,es_password,es_url))
+    try:
+        es.indices.create("predictions_version")
+    except:
+        #do not try to recreate the index
+        pass
+    try:
+        mapping = {"created_date":{'properties':{'created':{'type':'strict_date_optional_time||epoch_millis'}}}}
+        es.indices.put_mapping(index='predictions_version', doc_type='created_date', body=mapping)
+    except:
+        pass
+
+    res = es.index(index='predictions_version', doc_type='created_date', id=1, body={'created':dt.datetime.strftime(dt.datetime.now(),"%Y-%m-%dT%H:%M:%S")},op_type='index')
+    
     print "Done creating grid!"
 
         
@@ -155,6 +189,7 @@ def daily_update():
             try:
                 collisions = open_data_api.get_open_data(nyc_url,vision_zero_endpoint,api_key,limit=5000,query=soql)
                 acquire_NYC_Collisions.upload_collision_data_from_socrata(collisions,index='saferoad',doc_type='collisions')
+                print "Finished updating collisions data.\n"
                 break
             except Exception as e:
                 #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
@@ -169,6 +204,7 @@ def daily_update():
             try:
                 upload = {'index':'311_requests','doc_type':'requests','id_field':'unique_key'}
                 open_data_api.upload_open_data_to_Elasticsearch(nyc_url,nyc_311_endpoint,api_key,soql,upload)
+                print "Finished updating 311 data.\n"
                 break
             except Exception as e:
                 #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
@@ -195,6 +231,7 @@ def daily_update():
             try:
                 upload = {'index':'liquor_licenses','doc_type':'lic','id_field':'license_serial_number'}
                 open_data_api.upload_open_data_to_Elasticsearch(ny_state_url,liquor_endpoint,api_key,query=soql,kwargs=upload)
+                print "Finished updating liquor license data.\n"
                 break
             except Exception as e:
                 #sometimes connection to Socrata doesn't work, wait 1 mintue and try again
@@ -205,7 +242,8 @@ def daily_update():
                 
         #   Update the grid  - Uses Spark  #
         update_grid()
-
+        print "Finished updating data grid.\n"
+        
         # Run the Model #
         run_predictions()
 
@@ -219,37 +257,3 @@ if __name__ == '__main__':
     '''Main Entry Point to the Program'''
 
     daily_update()
-##    collision_geoshape_update.fix_zcta_zip('saferoad','collisions')
-##    add_ZCTA.add_zcta_zip_to_index(index='311_requests',doc_type='requests',loc_field='location',id_field='unique_key')
-##    add_ZCTA.add_zcta_zip_to_index(index='liquor_licenses',doc_type='lic',loc_field='location',id_field='license_serial_number')
-##    from elasticsearch import Elasticsearch
-##    from elasticsearch import helpers
-##    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
-##    es = Elasticsearch(es_url)
-##    docs=[]
-##    idx=0
-##    for obs in helpers.scan(es,index='nyc_dataframe',doc_type='rows'):
-##        #condition fields
-##        idx+=1
-##        obs['_source']['weather_Rain_Dummy'] = 0
-##        if obs['_source']['weather_Rain']> 0:
-##            obs['_source']['weather_Rain_Dummy'] = 1
-##            
-##        obs['_source']['weather_Fog_Dummy'] = 0
-##        if obs['_source']['weather_Fog']> 0:
-##            obs['_source']['weather_Fog_Dummy'] = 1
-##            
-##        obs['_source']['weather_SnowHailIce_Dummy'] = 0
-##        if obs['_source']['weather_SnowHailIce']> 0:
-##            obs['_source']['weather_SnowHailIce_Dummy'] = 1
-##            
-##        docs.append(obs['_source'])
-##        if idx > 100000:
-##            upload_to_Elasticsearch.update_ES_records_curl(docs,index='nyc_dataframe',doc_type='rows',id_field='grid_id')
-##            idx=0
-##            docs=[]
-##    upload_to_Elasticsearch.update_ES_records_curl(docs,index='nyc_dataframe',doc_type='rows',id_field='grid_id')
-    #update_grid()
-
-
-
