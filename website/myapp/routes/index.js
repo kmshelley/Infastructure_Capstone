@@ -4,6 +4,9 @@ var http = require('http');
 
 
 var router = express.Router();
+var hostsIP = [
+                        'http://accident:Dav1dC0C0@169.53.138.92:9200'
+                ];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,18 +15,8 @@ router.get('/', function(req, res, next) {
 
 router.get('/predict', function (req, res) {
 
-var lineReader = require('readline').createInterface({
-  input: require('fs').createReadStream('temp.txt')
-});
-
-lineReader.on('line', function (line) {
-  console.log('Line from file:', line);
-});
 	var client = new elasticsearch.Client({
-		hosts: [
-    			'',
-    			''
-  		],
+		hosts: hostsIP,
   		apiVersion: '2.2'
 	});
 
@@ -75,6 +68,73 @@ client.search({
 });
 */
  
+});
+
+router.get('/tenDayTrend', function (req, res) {
+
+        var client = new elasticsearch.Client({
+                hosts: hostsIP,
+                apiVersion: '2.2'
+        });
+
+client.search({
+  index: 'saferoad_results',
+  type: 'rows',
+  body:
+{
+    "size" : 0,
+    "query" : {
+        "filtered": {
+            "filter": {
+               "and" : [
+                  {
+                   "range": {
+                     "grid_fullDate": {
+                         "gte": req.query.lower,
+                         "lte": req.query.upper
+                      }
+                    }
+                  },
+                  {
+                       "range": {
+                          "probability": {
+                             "gt": req.query.threshold
+                           }
+                        }
+                  } 
+                  
+                ]
+            }
+        }
+    },
+    "aggs" : {
+        "dateHour" : {
+            "date_histogram" : {
+                "field" : "grid_fullDate",
+                "interval" : "hour",
+                "min_doc_count" : 0,
+                "extended_bounds" : { 
+                    "min" : req.query.lower,
+                    "max" : req.query.upper
+                 }
+            }
+        }
+    }
+} 
+}).then(function (resp) {
+   //console.log(resp["aggregations"]["dateHour"]["buckets"])
+   res.setHeader('Content-Type', 'application/json');
+   //res.send(JSON.stringfy(resp));
+   var arr = new Array();
+
+   for (i = 0; i < resp["aggregations"]["dateHour"]["buckets"].length; i++) {
+        arr.push(resp["aggregations"]["dateHour"]["buckets"][i]);
+   }
+
+   res.send(JSON.stringify(arr));
+}, function (err) {
+    console.trace(err.message);
+});
 });
 
 module.exports = router;

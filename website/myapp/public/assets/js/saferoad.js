@@ -24,9 +24,16 @@ function convertDate(inputFormat,withSlash) {
  }
 }
 
+function convertDateTime(input) { //2016-03-23T00:00:00
+ return [input.getFullYear(),pad(input.getMonth()+1),pad(input.getDate())].join('-')
+            + "T"
+            + [pad(input.getHours()),pad(input.getMinutes()),pad(input.getSeconds())].join(':')
+}
+
 $(function() {
   //fill date and time dropdowns
-  var currentDay = new Date();
+  var today = new Date();
+  var currentDay = today;
   var currentHour = currentDay.getHours();
 
   var optionsStr = ""
@@ -37,9 +44,11 @@ $(function() {
      currentDay =  new Date(currentDay.getTime() + 86400000 * 1);
      selected = "";
   }
+
   $("#dateSelector").append(optionsStr);
 
   var optionsStrHours = "";
+
   for (var i = 0; i<24; i++){ //for next 10 days
      var selected = (currentHour == i) ? "selected" : "";
 
@@ -62,6 +71,22 @@ $(function() {
 
   updateData();
 
+  // now get stuff for 10 day forecast
+  today.setHours(0);
+  today.setMinutes(0);
+  today.setSeconds(0);
+
+  var lowerBound = convertDateTime(today);
+  //upper bound  - add 10 day and  minus 1 hour
+  after10Day = new Date(today.getTime() + 86400000 * 10 - 60*60*1000);
+  var upperBound = convertDateTime(after10Day);
+
+  updateData2(lowerBound,upperBound);
+
+  $("#updateThresholdButton").click(function() {
+    updateData2(lowerBound,upperBound);
+  });
+
 });
 
 //linechart starts here
@@ -74,7 +99,8 @@ var margin = {top: 20, right: 20, bottom: 50, left: 50},
 
 
 var x = d3.scale.linear()
-          .range([0,width])
+          .range([0,width]);
+          //.domain([0,210]);
 
 var y = d3.scale.linear()
               .range([height, 0])
@@ -109,27 +135,9 @@ var tooltip = d3.select("body").append("div")
 26-Apr-07	98.84
 */
 
-svg.append("g")
-  .attr("class", "x axis")
-  .attr("transform", "translate(0," + height + ")")
-  .call(xAxis)
-  .append("text")
-  .attr("y",30)
-  .attr("x",width/2+10)
-  .attr("dy", ".71em")
-  .style("text-anchor", "end")
-  .text("Ranking");
 
-svg.append("g")
-  .attr("class", "y axis")
-  .call(yAxis)
-  .append("text")
-  .attr("transform", "rotate(-90)")
-  .attr("y", 6)
-  .attr("dy", ".71em")
-  .style("text-anchor", "end")
-  .text("Probability(%)");
 
+/*
 var focus = svg.append("g")
       .attr("class", "focus")
       .style("display", "none");
@@ -140,8 +148,8 @@ focus.append("circle")
 focus.append("text")
       .attr("x", 9)
       .attr("dy", ".35em");
-
-bisectDate = d3.bisector(function(d) { return d.rank; }).left;
+*/
+//bisectDate = d3.bisector(function(d) { return d.rank; }).left;
 
 function updateData()
 {
@@ -154,18 +162,30 @@ function getOpacity(feature){
   for (var i = 0; i< data.length; i ++){
     var thisItem = data[i];
     if(feature.properties.zipcode == thisItem.grid_zipcode) {
-        return thisItem.probability
+        return getColor(thisItem.probability)
     }
   }
 }
+function getColor(d) {
+		return d > 0.9 ? '#d73027' :
+			   d > 0.8 ? '#f46d43' :
+			   d > 0.7 ? '#fdae61' :
+			   d > 0.6 ? '#fee090' :
+			   d > 0.5 ? '#ffffbf' :
+			   d > 0.4 ? '#e0f3f8' :
+			   d > 0.3 ? '#abd9e9' :
+         d > 0.2 ? '#74add1' :
+						  '#4575b4';
+	}
 
  function style(feature) {
     return {
-      fillColor: '#000000',//getColor(feature.properties.probability),
+      fillColor: getOpacity(feature),
       weight: 1,
-      opacity: 0.7,
-      color: 'black',
-      fillOpacity: getOpacity(feature) //feature.properties.probability //,
+      opacity: 1,
+      fillOpacity: 1,
+      color: 'black'//,
+      //fillOpacity: getOpacity(feature) //feature.properties.probability //,
       //fillColor: 'red'
     }
  };
@@ -176,15 +196,45 @@ function getOpacity(feature){
     geojsonLayer = L.geoJson(zip_codes, {
       style: 	style,
       onEachFeature: function(feature, layer) {
+              //layer.bindPopup('<strong>Science Hall</strong><br>Where the GISC was born.');
+              //layer.on('mouseover', function() { layer.openPopup();  }):
+
+
               //if (feature.properties && feature.properties.popupContent) {
-                  /*layer.bindPopup("placeholder", {closeButton: false, offset: L.point(0, -10)});
+                  layer.bindPopup("placeholder", {autoPan:false, closeButton: false, offset: L.point(0,0)});
                   layer.on('mouseover', function() { layer.openPopup();  });
-                  */
+
                   //layer.on('mouseout', function() { layer.closePopup(); });
               //}
       }
     })
     geojsonLayer.addTo(map);
+
+    //add legend
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+            grades = [.15, .25,.35,.45,.55,.65,.75,.85,.95],
+            labels = [];
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            var text = (i+1)/10 + '&ndash;' + (i+2)/10;
+            if (i == 0 ) text = "< .2";
+            if (i == (grades.length -1) ) text = "> .9";
+
+            div.innerHTML +=
+                '<i style="background:' + getColor(grades[i]) + '"></i> ' +text + '<br>';
+
+                //grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+    };
+
+    legend.addTo(map);
 } else { //just change color
   //update shading of the map
 
@@ -193,8 +243,7 @@ function getOpacity(feature){
     for (var i = 0; i< data.length; i ++){
       var thisItem = data[i];
       if(layer.feature.properties.zipcode == thisItem.grid_zipcode) {
-        layer.setStyle({fillColor :'#000000',
-                fillOpacity:  thisItem.probability})
+        layer.setStyle({fillColor :getColor(thisItem.probability)})
         }
     }
   });
@@ -202,9 +251,30 @@ function getOpacity(feature){
 
 }
 
-
-x.domain([0, d3.max(data, function(d) { return d.rank; })]);
       //y.domain(d3.extent(data, function(d) { return d.close; }));
+      x.domain(d3.extent(data, function(d) { return d.rank; }));
+
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .append("text")
+        .attr("y",30)
+        .attr("x",width/2+10)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Ranking");
+
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Probability(%)");
+
 
 function mousemove() {
     var x0 = x.invert(d3.mouse(this)[0]),
@@ -326,6 +396,167 @@ function mousemove() {
 //update currente datetime
 $("#currentDate").text($("#dateSelector option:selected").text());
 $("#currentHour").text($("#hourSelector option:selected").text());
+
+});
+
+}
+
+/**************
+10 day trend linechart start here
+**************/
+
+width2 = 1000 - margin.left - margin.right,
+height2 = 500 - margin.top - margin.bottom;
+
+var x2 =  d3.time.scale()
+          .range([0,width2])
+
+var y2 = d3.scale.linear()
+              .range([height2, 0])
+
+var xAxis2 = d3.svg.axis()
+                  .scale(x2)
+                  .orient("bottom");
+
+var yAxis2 = d3.svg.axis()
+                  .scale(y2)
+                  .orient("left");
+
+var line2 = d3.svg.line()
+  .x(function(d) { return x2(d.key_as_string); })
+  .y(function(d) { return y2(d.doc_count); });
+
+var svg2 = d3.select("#highProbCounChart").append("svg")
+  .attr("width", width2 + margin.left + margin.right)
+  .attr("height", height2 + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+/*var focus = svg.append("g")
+      .attr("class", "focus")
+      .style("display", "none");
+
+focus.append("circle")
+      .attr("r", 4.5);
+
+focus.append("text")
+      .attr("x", 9)
+      .attr("dy", ".35em");
+*/
+
+function updateData2(lower, upper)
+{
+
+  var threshold = $("#probThreshold").val()
+
+  d3.json("http://169.53.138.92:3000/tenDayTrend?lower="
+                      +  lower + "&upper=" + upper + "&threshold=" + threshold,
+                       function(error, data) {
+
+    var formatDate = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ");
+
+    for (var i = 0; i < data.length; i++) {
+       data[i].key_as_string = formatDate.parse(data[i].key_as_string);
+  }
+  y2.domain([0,211]);
+  x2.domain(d3.extent(data, function(d) {
+                    return d.key_as_string;
+                              }));
+
+      //y.domain(d3.extent(data, function(d) { return d.close; }));
+      svg2.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height2 + ")")
+        .call(xAxis2)
+        .append("text")
+        .attr("y",30)
+        .attr("x",width2/2+10)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Date and Time");
+
+      svg2.append("g")
+        .attr("class", "y axis")
+        .call(yAxis2)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("High Risk Count");
+/*
+function mousemove() {
+    var x0 = x.invert(d3.mouse(this)[0]),
+        i = bisectDate(data, x0, 1),
+        d0 = data[i - 1],
+        d1 = data[i],
+        d = x0 - d0.rank > d1.rank - x0 ? d1 : d0;
+
+    focus.attr("transform", "translate(" + x(d.rank) + "," + y(d.probability * 100) + ")");
+    //focus.select("text").text(d.zipcode);
+
+
+
+                /*
+                          tooltip.transition()
+                                 .duration(200)
+                                 .style("opacity", .9);
+                          tooltip.html("Zipcode:" + d.zipcode+ "<br/> Probability:" + d.prob)
+                                 .style("left", (d3.event.pageX + 5) + "px")
+                                 .style("top", (d3.event.pageY - 28) + "px");*/
+
+
+  //}
+
+
+/*
+  svg.append("rect")
+          .attr("class", "overlay")
+          .attr("width", width)
+          .attr("height", height)
+          .on("mouseover", function() {
+            focus.style("display", null);
+
+          })
+          .on("mouseout", function() { focus.style("display", "none");
+              geojsonLayer.eachLayer(function (layer) {
+
+
+            layer.setStyle({fillColor :'#000000',
+                          fillOpacity:  layer.feature.properties.probability})
+            });
+
+
+          })
+          .on("mousemove", mousemove);
+          */
+
+  svg2.selectAll("path").remove();
+
+  svg2.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", line2)
+      /*
+      .on("mouseover", function(d) {
+          /alert(d);
+          /*tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+          tooltip.html(d["Cereal Name"] + "<br/> (" + xValue(d)
+          + ", " + yValue(d) + ")")
+               .style("left", (d3.event.pageX + 5) + "px")
+               .style("top", (d3.event.pageY - 28) + "px");
+               */
+      //});
+
+
+
+
+
+<!-- line chart ends here-->
 
 });
 
