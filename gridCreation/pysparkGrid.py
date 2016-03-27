@@ -1103,5 +1103,5 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
 # ### Run Grid creation and update code here
 #add_fields_to_grid(grid_index='nyc_dataframe',grid_doc='rows',functions=['reset_zip_data','reset_grid_weather','reset_grid_311','reset_grid_liquor'])
 #add_fields_to_grid(grid_index='saferoad_results',grid_doc='rows',functions=['reset_zip_data','reset_grid_311','reset_grid_liquor'])
-create_full_feature_grid(index="nyc_grid",doc_type="rows")
+create_new_grid_timestamps(index="nyc_grid",doc_type="rows")
 create_results_grid(index="saferoad_results",doc_type="rows",offset=10)
