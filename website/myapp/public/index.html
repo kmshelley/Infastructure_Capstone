@@ -153,7 +153,10 @@
     </style>
 <!--styles used for saferoad -->
 <style>
-  #map { width: 400px; height: 500px; display:inline-block; }
+  #map { width: 400px; height: 500px;
+    display:inline-block;
+    margin-top:20px;
+  }
   .leaflet-popup-content-wrapper {
     background: rgb(111, 51, 51);
     box-shadow: 0 3px 14px rgba(0,0,0,0.4);
@@ -205,9 +208,15 @@
     padding: 6px 8px;
     font: 12px Arial, Helvetica, sans-serif;
     background: white;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255);
     box-shadow: 0 0 20px rgba(0,0,0,0.8);
     border-radius: 5px;
+    position:absolute;
+    width: 200;
+    width: 500px;
+    height: 450px;
+    margin-left:20px;
+    z-index:1000;
   }
 
   .overlay {
@@ -272,7 +281,7 @@
         <div class="container">
             <div class="navbar-header page-scroll">
                 <a class="navbar-brand" href="index.html">
-                    <h1>Saferoad</h1>
+                    <h1 style="margin: 0 0 30px;">Saferoad</h1>
                 </a>
             </div>
 
@@ -309,28 +318,40 @@
 	<section id="intro" class="text-center">
 		<!-- about code -->
 		<div id="predictions" class="container " style="margin-bottom: 25px;">
-			<h3>Hourly Collision Predictions for the next 10 days</h3>
+      <p style="font-size: 18px;margin-top: 20px;">SafeRoad predicts the probability of motor vehicle collisions by zip code and hour in the next 10 days. All times are local. The heatmap can by updated using the datetime dropdown menu. Click on the heatmap for more information about the prediction for a particular zipcode.</p>
+
       <Hr/>
-      <h4>Hourly Snapshot at Each Hour</h4>
+      <h4>Snapshot at Each Hour</h4><br/>
       Date:
-      <select id="dateSelector"></select>
+      <select id="dateSelector" class="selectpicker"></select>
       Hour:
-      <select id="hourSelector"></select>
+      <select id="hourSelector" class="selectpicker"></select>
 
-      <button id="updateButton">Update</button>
-
-      <a>Animate!</a>
+      <button id="updateButton" class="btn btn-default">Update</button><br/>
 
 
-      	<h4>As of <span id="currentDate"></span> at <span id="currentHour"></span>:</h4>
+      	<!--<h4>As of <span id="currentDate"></span> at <span id="currentHour"></span>:</h4>-->
 
-      	<div id="map"></div>
-        <div class="zipInfo" style="display:none;
-    width: 200;
-    width: 500px;
-    height: 500px;
-"><h4>Zipcode info</h4></div>
-      	<div id="lineChart" style="display:inline-block;"></div>
+      	<div id="map" style="border:1px solid #ccc"></div>
+        <div style="display:inline-block;">
+        <div class="zipInfo" style="display:none;"><h4>Zipcode: <span id="zipInfoPopupCode"></span></h4>
+<button type="button" class="btn btn-default" style="
+    float: right;
+">
+  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+  <div style="float:left"><h5>Weather</h5>
+  Conditon: Sunny (image)<br>
+  Temperature: -3<br>
+
+  <h5>Miscellaneous</h5>
+
+  Liquor Licenses: 10<br>
+  Road Repair Requests: 10<br>
+
+  </div>
+</div>
+      	<div id="lineChart"></div>
+      </div>
       <hr>
       <h4>Overall trend in the number of high-risk zipcodes in the next 10 days</h4>
       Threshold: <input type="text" id="probThreshold" value=".5" /><button id="updateThresholdButton">Update with threshold</button>
@@ -393,6 +414,7 @@
 			</div>
 		</div>
 
+<iframe src="http://169.53.138.92:5601/app/kibana#/dashboard/Katherine's-EDA-Dashboard?embed=true&_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:'2012-01-01T08:00:00.000Z',mode:absolute,to:'2016-03-14T21:27:06.926Z'))&_a=(filters:!(),options:(darkTheme:!f),panels:!((col:1,id:Collision_by_Rainfall,panelIndex:1,row:10,size_x:6,size_y:7,type:visualization),(col:8,id:Fatality_by_Hour,panelIndex:2,row:3,size_x:5,size_y:7,type:visualization),(col:1,id:Heatmap_2013-2014-2015,panelIndex:3,row:3,size_x:7,size_y:7,type:visualization),(col:1,id:Numbers-Sums,panelIndex:4,row:1,size_x:12,size_y:2,type:visualization),(col:7,id:collisions_by_Snowfall,panelIndex:5,row:10,size_x:6,size_y:7,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:'Katherine!'s%20EDA%20Dashboard',uiState:())" height="600" width="1000"></iframe>
     <!-- Section: data -->
 
 <div> image credit: http://www.cnn.com/2014/10/31/us/gallery/new-york-city-aerials/</div>

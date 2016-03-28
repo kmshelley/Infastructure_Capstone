@@ -137,4 +137,44 @@ client.search({
 });
 });
 
+
+router.get('/getZipcodeInfo', function (req, res) {
+        var client = new elasticsearch.Client({
+                hosts: hostsIP,
+                apiVersion: '2.2'
+        });
+
+client.search({
+  index: 'saferoad_results',
+  type: 'rows',
+  body: 
+{
+    "query" : {
+        "filtered": {
+            "filter": {
+               "and" : [
+                  {
+                   "term": {
+                     "grid_zipcode": req.query.zipcode
+                    }
+                  },
+                  {	
+                   "term": {
+                     "grid_dateHourStr": req.query.dateHourStr
+                    }
+                  }  
+                ]
+            }
+        }
+    }
+}
+}).then(function (resp) {
+   res.setHeader('Content-Type', 'application/json');
+   res.send(JSON.stringify(resp.hits.hits[0]["_source"]));
+}, function (err) {
+    console.trace(err.message);
+});
+
+});
+
 module.exports = router;

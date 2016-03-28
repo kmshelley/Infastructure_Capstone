@@ -86,6 +86,12 @@ $(function() {
     updateData();
   });
 
+  $(".zipInfo button").click(function() {
+    $(".zipInfo").hide();
+  });
+
+
+
   updateData();
 
   // now get stuff for 10 day forecast
@@ -208,15 +214,15 @@ function dotMouseOut(d) {
 }
 
 function getColor(d) {
-		return d > 0.9 ? '#d73027' :
-			   d > 0.8 ? '#f46d43' :
-			   d > 0.7 ? '#fdae61' :
-			   d > 0.6 ? '#fee090' :
-			   d > 0.5 ? '#ffffbf' :
-			   d > 0.4 ? '#e0f3f8' :
-			   d > 0.3 ? '#abd9e9' :
-         d > 0.2 ? '#74add1' :
-						  '#4575b4';
+		return d > 0.9 ? '#800026' :
+			   d > 0.8 ? '#bd0026' :
+			   d > 0.7 ? '#e31a1c' :
+			   d > 0.6 ? '#fc4e2a' :
+			   d > 0.5 ? '#fd8d3c' :
+			   d > 0.4 ? '#feb24c' :
+			   d > 0.3 ? '#fed976' :
+         d > 0.2 ? '#ffeda0' :
+						  '#ffffcc';
 	}
 
 
@@ -225,7 +231,7 @@ function updateData()
 
 var selectedDateHrString  =  "?dateHourStr=" + $("#dateSelector").val() + $("#hourSelector").val();
 
-d3.json("http://169.53.138.92:3000/predict" + selectedDateHrString , function(error, data) {
+d3.json("/predict" + selectedDateHrString , function(error, data) {
 
  function style(feature) {
     return {
@@ -262,25 +268,21 @@ d3.json("http://169.53.138.92:3000/predict" + selectedDateHrString , function(er
 
               layer.on('mouseover', function() {
                 $(".zipcode_" + feature.properties.zipcode).d3MouseOver();
-
-                /*for (var i = 0; i< data.length; i ++){
-                  var thisItem = probData[i];
-                  if(thisItem.grid_zipcode == feature.properties.zipcode) {
-
-                      //dotMouseOver(thisItem);
-                  }
-                }*/
               });
+
               layer.on('mouseout', function() {
                 $(".zipcode_" + feature.properties.zipcode).d3MouseOut();
+              });
 
-/*
-                for (var i = 0; i< data.length; i ++){
-                  var thisItem = probData[i];
-                  if(thisItem.grid_zipcode == feature.properties.zipcode) {
-                      dotMouseOut(thisItem);
-                  }
-                }*/
+              layer.on('click', function() {
+                $("#zipInfoPopupCode").text(feature.properties.zipcode);
+                $(".zipInfo").show();
+                $.getJSON( "/getZipcodeInfo?zipcode=" + feature.properties.zipcode + "&dateHourStr=" +  $("#dateSelector").val() + $("#hourSelector").val(),
+                    function( data ) {
+
+                        alert(data);
+                });
+
               });
 
       }
