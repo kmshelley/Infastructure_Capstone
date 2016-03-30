@@ -1067,7 +1067,7 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
     first_coll = upload_to_Elasticsearch.get_latest_record(index=index,doc_type=doc_type,datetime_field='grid_fullDate')
     if first_coll:
         #if there is a latest grid time
-        first_coll_time = parse(first_coll['grid_fullDate']).replace(tzinfo=None) #get the date of the latest collision record
+        first_coll_time = parse(first_coll['grid_fullDate']).replace(tzinfo=None) - dt.timedelta(days=3) #get the date of the latest collision record
         rnd_start = dt.datetime(first_coll_time.year,first_coll_time.month,first_coll_time.day,first_coll_time.hour,0,0)
     else:
         #otherwise start from the earliest collision
@@ -1104,4 +1104,4 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
 #add_fields_to_grid(grid_index='nyc_dataframe',grid_doc='rows',functions=['reset_zip_data','reset_grid_weather','reset_grid_311','reset_grid_liquor'])
 #add_fields_to_grid(grid_index='saferoad_results',grid_doc='rows',functions=['reset_zip_data','reset_grid_311','reset_grid_liquor'])
 create_new_grid_timestamps(index="nyc_grid",doc_type="rows")
-create_results_grid(index="saferoad_results",doc_type="rows",offset=10)
+create_results_grid(index="prediction_results",doc_type="rows",offset=10)
