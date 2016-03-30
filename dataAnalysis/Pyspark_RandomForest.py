@@ -45,33 +45,24 @@ start = dt.datetime.now()
 #Configuration for reading from and writing from/to Elasticsearch training data index
 es_read_conf = { 
         "es.resource" : "nyc_grid/rows", 
-        "es.nodes" : ES_url,
+        "es.nodes" : ES_hosts,
         "es.port" : "9200",
         "es.net.http.auth.user" : ES_username,
         "es.net.http.auth.pass" : ES_password
     }
 
-es_write_conf = {
-        "es.resource" : "saferoad_results/rows",
-        "es.nodes" : ES_url,
-        "es.port" : "9200",
-        "es.net.http.auth.user" : ES_username, 
-        "es.net.http.auth.pass" : ES_password,
-        "es.mapping.id" : "grid_id"
-    } 
-
 #Configuration for reading from and writing from/to Elasticsearch results index
 pred_read_conf = { 
-        "es.resource" : "saferoad_results/rows", 
-        "es.nodes" : ES_url,
+        "es.resource" : "prediction_results/rows", 
+        "es.nodes" : ES_hosts,
         "es.port" : "9200",
         "es.net.http.auth.user" : ES_username,
         "es.net.http.auth.pass" : ES_password
     }
 
 pred_write_conf = {
-        "es.resource" : "saferoad_results/rows",
-        "es.nodes" : ES_url,
+        "es.resource" : "prediction_results/rows",
+        "es.nodes" : ES_hosts,
         "es.port" : "9200",
         "es.net.http.auth.user" : ES_username, 
         "es.net.http.auth.pass" : ES_password,
@@ -96,21 +87,9 @@ def trainingLabeledPoint(row):
     month = long(row.grid_month)
     
     #weather fields
-    if row.weather_Fog>0:
-        fog = 1
-    else:
-        fog = 0
-        
-    if row.weather_Rain>0:
-        rain = 1
-    else:
-        rain = 0
-        
-    if row.weather_SnowHailIce>0:
-        snow = 1
-    else:
-        snow = 0
-    
+    fog = row.weather_Fog_Dummy
+    rain= row.weather_Rain_Dummy
+    snow = row.weather_SnowHailIce_Dummy
     temp = row.weather_WetBulbFarenheit 
     precip = row.weather_HourlyPrecip  
     #vis = row.weather_Visibility  ## NOT AVAILABLE IN WEATHER FORECAST
@@ -162,7 +141,7 @@ def predict_proba(rf_model, data):
     # For each decision tree, apply its prediction to the entire dataset and
     # accumulate the results using 'zip'.
     featsAndPredictions = sc.parallelize([]) #empty RDD
-    for i in range(1,ntrees):
+    for i in range(ntrees):
         dtm = DecisionTreeModel(trees[i])
         predictions = dtm.predict(data.map(lambda x: x.features))
         featsAndPredictions=featsAndPredictions.union(data.map(lambda lp: lp.features).zip(predictions))

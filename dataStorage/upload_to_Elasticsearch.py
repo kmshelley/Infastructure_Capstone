@@ -22,9 +22,19 @@ ES_username= config.get('ElasticSearch','username')
 
 temp_data_dir = config.get('MISC','temp_data_dir')
 
-def create_es_index_and_mapping_cURL(index,doc_type,time_field=False,time_type=False,date_field=False,date_type=False,datetime_field=False,datetime_type=False,geopoint=False,geoshape=False,delete_index=False):
+def create_es_index_and_mapping_cURL(index,doc_type,**kwargs):
     #input: an index name, document type, and optional field names to map.
     #creates ElasticSearch index using subprocess and cURL
+    time_field = kwargs.get('time_field', False)
+    time_type = kwargs.get('time_type', False)
+    date_field = kwargs.get('time_field', False)
+    date_type = kwargs.get('time_type', False)
+    datetime_field = kwargs.get('time_field', False)
+    datetime_type = kwargs.get('time_type', False)
+    geopoint = kwargs.get('geopoint', False)
+    geoshape = kwargs.get('geoshape', False)
+    delete_index = kwargs.get('delete_index', False)
+    
     es = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
 
     if delete_index:
@@ -432,7 +442,7 @@ def update_ES_records_curl(docs,**kwargs):
             _id = doc[id_field]
         else:
             _id=idx
-        actions.append('{ "update" : {"_id" : "%s", "_type" : "%s", "_index" : "%s", "_retry_on_conflict" : 3} }\n' % (_id,doc_type,index))
+        actions.append('{ "update" : {"_id" : "%s", "_type" : "%s", "_index" : "%s"} }\n' % (_id,doc_type,index))
         actions.append('{ "doc": %s, "doc_as_upsert" : true }\n' % json.dumps(doc))
 
         #upload 10k records at a time
