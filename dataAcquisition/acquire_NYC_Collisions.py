@@ -39,8 +39,11 @@ def upload_collision_data_from_socrata(docs,index,doc_type,new_mapping=False):
 
             #add ZCTA zip code fields
             newrow = add_ZCTA.add_zcta_zip_to_collision_rec(newrow)
-            newrow['collision_ZCTA_ZIP_NoSuffix'] =  newrow['collision_ZCTA_ZIP'].split('-')[0]
-                    
+
+            #add injured/killed binary variable
+            newrow['collision_injured_or_killed']=0
+            if float(newrow['collision_NUMBER OF PERSONS INJURED'])>0 or float(newrow['collision_NUMBER OF PERSONS KILLED'])>0: newrow['collision_injured_or_killed']=0
+            
             records.append(newrow)	
 
     if new_mapping:
@@ -68,9 +71,6 @@ def upload_collision_data_from_flatfile(docs,index,doc_type,new_mapping=False):
             coll_date = parse(row['DATE']).replace(tzinfo=None)
             coll_time = parse(row['TIME']).replace(tzinfo=None)
             row["DATETIME_C"] = dt.datetime.strftime(coll_date + dt.timedelta(hours=coll_time.hour,seconds=coll_time.minute*60), "%Y-%m-%dT%H:%M:%S")
-            #row["DATETIME_C"] = dt.datetime.strptime(row["DATE"] + " " + row["TIME"]+ ':00', "%m/%d/%Y %H:%M:%S")
-            #assign a unique id based on date, time, and location
-            #row["ID"] = hashlib.sha224(row["DATE"] + row["TIME"] + row["LATITUDE"] + row["LONGITUDE"]).hexdigest()
 
             # append "collision_" in front of each column
             #print row
@@ -80,7 +80,10 @@ def upload_collision_data_from_flatfile(docs,index,doc_type,new_mapping=False):
 
             #add ZCTA zip code fields
             newrow = add_ZCTA.add_zcta_zip_to_collision_rec(newrow)
-            #newrow['collision_ZCTA_ZIP_NoSuffix'] =  newrow['collision_ZCTA_ZIP'].split('-')[0]
+
+            #add injured/killed binary variable
+            newrow['collision_injured_or_killed']=0
+            if float(newrow['collision_NUMBER OF PERSONS INJURED'])>0 or float(newrow['collision_NUMBER OF PERSONS KILLED'])>0: newrow['collision_injured_or_killed']=0
             
             records.append(newrow)	
 
