@@ -21,7 +21,7 @@ router.get('/predict', function (req, res) {
 	});
 
 client.search({
-  index: 'saferoad_results',
+  index: 'prediction_results',
   type: 'rows',
   from: 0,
   size: 250,
@@ -78,7 +78,7 @@ router.get('/tenDayTrend', function (req, res) {
         });
 
 client.search({
-  index: 'saferoad_results',
+  index: 'prediction_results', //'saferoad_results',
   type: 'rows',
   body:
 {
@@ -128,7 +128,7 @@ client.search({
    var arr = new Array();
 
    for (i = 0; i < resp["aggregations"]["dateHour"]["buckets"].length; i++) {
-        arr.push(resp["aggregations"]["dateHour"]["buckets"][i]);
+        arr.push(new Array(resp["aggregations"]["dateHour"]["buckets"][i][1],resp["aggregations"]["dateHour"]["buckets"][i][0]));
    }
 
    res.send(JSON.stringify(arr));
@@ -145,7 +145,7 @@ router.get('/getZipcodeInfo', function (req, res) {
         });
 
 client.search({
-  index: 'saferoad_results',
+  index: 'prediction_results', //'saferoad_results',
   type: 'rows',
   body: 
 {
@@ -175,6 +175,72 @@ client.search({
     console.trace(err.message);
 });
 
+});
+
+router.get('/collisionsByZipcode', function (req, res) {
+
+        var client = new elasticsearch.Client({
+                hosts: hostsIP,
+                apiVersion: '2.2'
+        });
+
+var allTitles = [];
+
+// first we do a search, and specify a scroll timeout
+client.search({
+  index: 'saferoad',
+  type: 'collisions',
+  // Set to 30 seconds because we are calling right back
+  scroll: '30s',
+  search_type: 'scan',
+  body: {
+  	size: 10000,
+  	"_source": ["collision_GEOSHAPE_C"],
+  	"query" : {
+        "filtered": {
+            "filter": {
+               "and" : [
+                  {
+                     "range": {
+                          "collision_injured_or_killed": {
+                             "gt": 0
+                           }
+                        }
+                  },
+                  {
+                     "term": {
+                          collision_ZCTA_ZIP_NoSuffix: req.query.zipcode //"11101"
+                       }
+                  }
+
+
+                ]
+            }
+        }
+    }}
+}, function getMoreUntilDone(error, response) {
+  // collect the title from each response
+  response.hits.hits.forEach(function (hit) {
+    //allTitles.push({ "type": "Point", "coordinates": hit["_source"]["collision_GEOSHAPE_C"]["coordinates"]});
+   //allTitles.push(hit["_source"]["collision_GEOSHAPE_C"]["coordinates"]);
+       allTitles.push([hit["_source"]["collision_GEOSHAPE_C"]["coordinates"][1],hit["_source"]["collision_GEOSHAPE_C"]["coordinates"][0]]);
+//console.log(hit);
+  });
+  //console.log(response.hits.total)
+  //console.log(allTitles.length)
+  if (response.hits.total !== allTitles.length) {
+    // now we can call scroll over and over
+    client.scroll({
+      scrollId: response._scroll_id,
+      scroll: '30s'
+    }, getMoreUntilDone);
+  } else {
+res.setHeader('Content-Type', 'application/json');
+ res.send(JSON.stringify(allTitles));
+  }
+});
+}, function (err) {
+    console.trace(err.message);
 });
 
 module.exports = router;

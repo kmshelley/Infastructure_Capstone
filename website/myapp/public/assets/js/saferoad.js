@@ -27,7 +27,22 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(map);
 
 var geojsonLayer = null;
+
+var map2 = L.map('smallMap').setView([40.66391877278807,-73.93834608174572], 10);
+
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+  maxZoom: 18,
+  id: 'mapbox.light',
+  accessToken: 'pk.eyJ1Ijoia21zaGVsbGV5IiwiYSI6ImNpbDh2Nmg3NTBmZ2N1a20wNjR0c2pka3oifQ.Z7q1QzUQYFKFXN9JSALt9w'
+}).addTo(map2);
+
+var focusedZip = null;
+var collisionsInZip = null;
+var heatLayer = null;
+
 var probData = [];
+
 
 function pad(s) { return (s < 10) ? '0' + s : s; }
 
@@ -109,6 +124,8 @@ $(function() {
   $("#updateThresholdButton").click(function() {
     updateData2(lowerBound,upperBound);
   });
+
+
 
 });
 
@@ -277,10 +294,87 @@ d3.json("/predict" + selectedDateHrString , function(error, data) {
               layer.on('click', function() {
                 $("#zipInfoPopupCode").text(feature.properties.zipcode);
                 $(".zipInfo").show();
+                map2.invalidateSize()
+
+                /*var polygon = L.polygon([
+                    [51.509, -0.08],
+                    [51.503, -0.06],
+                    [51.51, -0.047]
+                ]).addTo(map2);
+                map2.fitBounds([
+                    [51.509, -0.08],
+                    [51.503, -0.06],
+                    [51.51, -0.047]
+                ]);*/
+
+                if (focusedZip != null) //remove existing
+                {
+                    map2.removeLayer(focusedZip);
+                }
+
+                if (heatLayer != null) //remove existing
+                {
+                    map2.removeLayer(heatLayer);
+                }
+
+                for (var i = 0; i< zip_codes.features.length; i++)
+                {
+                    var currentItem = zip_codes.features[i];
+                    if (currentItem.properties.zipcode  == feature.properties.zipcode) {
+
+                        focusedZip = L.geoJson(currentItem,{
+                          style: 	{
+                            fillColor: 'white',
+                            weight: 1,
+                            opacity: 1,
+                            fillOpacity: 1,
+                            color: 'black',
+                            fillOpacity:.2//,
+                            //fillOpacity: getOpacity(feature) //feature.properties.probability //,
+                            //fillColor: 'red'
+                          }}
+                        ).addTo(map2);
+                        map2.fitBounds(focusedZip.getBounds());
+
+                        /*var myIcon = L.divIcon({
+                            html: 'X'
+                        });*/
+
+                        $.getJSON( "/collisionsByZipcode?zipcode=" + feature.properties.zipcode, function( data ) {
+                          //collisionsInZip  = L.geoJson(data,{icon: myIcon}).addTo(map2);
+                          heatLayer = L.heatLayer(data, {radius: 10}).addTo(map2);
+                          //collisionsInZip.setIcon(myIcon);
+                        });
+
+
+
+                        //http://169.53.138.92:3000/collisionsByZipcode?zipcode=11101
+                    }
+
+                }
+                /*
+                map2.whenReady(function () {
+                  window.setTimeout(function () {
+                    var polygon = L.polygon([
+                        [51.509, -0.08],
+                        [51.503, -0.06],
+                        [51.51, -0.047]
+                    ]).addTo(map2);
+                    map2.fitBounds([
+                        [51.509, -0.08],
+                        [51.503, -0.06],
+                        [51.51, -0.047]
+                    ]);
+                  }.bind(this), 1000);
+
+
+                }, this);
+*/
+
                 $.getJSON( "/getZipcodeInfo?zipcode=" + feature.properties.zipcode + "&dateHourStr=" +  $("#dateSelector").val() + $("#hourSelector").val(),
                     function( data ) {
 
-                        alert(data);
+                        //alert(data);
                 });
 
               });

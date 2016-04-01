@@ -157,6 +157,12 @@
     display:inline-block;
     margin-top:20px;
   }
+
+  #smallMap { width: 200px; height: 200px;
+    display:inline-block;
+    margin-top:20px;
+  }
+
   .leaflet-popup-content-wrapper {
     background: rgb(111, 51, 51);
     box-shadow: 0 3px 14px rgba(0,0,0,0.4);
@@ -349,6 +355,8 @@
   Road Repair Requests: 10<br>
 
   </div>
+  <div id="smallMap" style="border:1px solid #ccc"></div>
+
 </div>
       	<div id="lineChart"></div>
       </div>
@@ -442,7 +450,7 @@
 
     <!--zip code geojson -->
     <script src="assets/data/nyc_zip_codes.js"></script>
-
+    <script src="assets/js/leaflet-heat.js"></script>
 </body>
 
 </html>
