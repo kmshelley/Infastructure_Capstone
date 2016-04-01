@@ -42,7 +42,14 @@ def upload_collision_data_from_socrata(docs,index,doc_type,new_mapping=False):
 
             #add injured/killed binary variable
             newrow['collision_injured_or_killed']=0
-            if float(newrow['collision_NUMBER OF PERSONS INJURED'])>0 or float(newrow['collision_NUMBER OF PERSONS KILLED'])>0: newrow['collision_injured_or_killed']=0
+            inj_fatalities = (float(newrow['collision_NUMBER OF CYCLIST INJURED'])+
+                             float(newrow['collision_NUMBER OF CYCLIST KILLED'])+
+                             float(newrow['collision_NUMBER OF PEDESTRIANS INJURED'])+
+                             float(newrow['collision_NUMBER OF PEDESTRIANS KILLED'])+
+                             float(newrow['collision_NUMBER OF MOTORIST INJURED'])+
+                             float(newrow['collision_NUMBER OF MOTORIST KILLED']))
+            if inj_fatalities>0:
+                    newrow['collision_injured_or_killed']=1
             
             records.append(newrow)	
 
@@ -79,11 +86,18 @@ def upload_collision_data_from_flatfile(docs,index,doc_type,new_mapping=False):
                     newrow["collision_" + key] = value
 
             #add ZCTA zip code fields
-            newrow = add_ZCTA.add_zcta_zip_to_collision_rec(newrow)
+            #newrow = add_ZCTA.add_zcta_zip_to_collision_rec(newrow)
 
             #add injured/killed binary variable
             newrow['collision_injured_or_killed']=0
-            if float(newrow['collision_NUMBER OF PERSONS INJURED'])>0 or float(newrow['collision_NUMBER OF PERSONS KILLED'])>0: newrow['collision_injured_or_killed']=0
+            inj_fatalities = (float(newrow['collision_NUMBER OF CYCLIST INJURED'])+
+                             float(newrow['collision_NUMBER OF CYCLIST KILLED'])+
+                             float(newrow['collision_NUMBER OF PEDESTRIANS INJURED'])+
+                             float(newrow['collision_NUMBER OF PEDESTRIANS KILLED'])+
+                             float(newrow['collision_NUMBER OF MOTORIST INJURED'])+
+                             float(newrow['collision_NUMBER OF MOTORIST KILLED']))
+            if inj_fatalities>0:
+                    newrow['collision_injured_or_killed']=1
             
             records.append(newrow)	
 
