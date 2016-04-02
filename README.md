@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 # SafeRoad
 *Making the streets safer one city at a time.*
 
@@ -16,9 +19,9 @@ Katrina Adams, Katherine Shelley, Kasane Utsumi
 ### The "Data Grid"
 *Describe our data grid and define each engineered feature*
 Data Grid Dictionary
+
 | Field Name | Definition     |
-| :-------------: | :-------------: |
-| Item One       | Item Two       |-------------------------------------------------- |
+| :------------- | :------------- |
 | 5mph | Percent of roads with a 5mph speed limit.|
 | 15mph | Percent of roads with a 15mph speed limit.|
 | 25mph | Percent of roads with a 25mph speed limit.|
@@ -72,7 +75,7 @@ Data Grid Dictionary
 | weather_WeatherType | tring representing inclement weather conditions. |
 | weather_WetBulbFarenheit | Temperature, in degrees farenheit. |
 | weather_WindSpeed | Windspeed in miles per hour. |
-| zip_area | Area of this zip code in square miles. |
+| zip_area | Area of this zip code in square miles. ||
 
 
 ## Section 3: SafeRoad Architecture
