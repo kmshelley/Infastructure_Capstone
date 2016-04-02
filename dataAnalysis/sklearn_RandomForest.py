@@ -76,11 +76,16 @@ pred_write_conf = {
         "es.mapping.id" : "grid_id"
     } 
 
+feat_write_conf = {
+        "es.resource" : "prediction_features/importance",
+        "es.nodes" : ES_hosts,
+        "es.port" : "9200",
+        "es.net.http.auth.user" : ES_username, 
+        "es.net.http.auth.pass" : ES_password,
+        "es.mapping.id" : "Rank"
+    }
 
-# ### Labeled Points
-# 
-# Spark MLLib algorithms are run on RDD's of LabeledPoints, tuples of (label, [features]) 
-
+# The following functions perform feature engineering and data preparation for reading and writing to/from the model
 
 def trainingDict(row):
     #returns a dict of label and features for an ML algorithm
@@ -199,6 +204,14 @@ def update_probability(row):
     d['probability'] = prob
     return (_id,dict(d))
 
+def conv_feat_rank(f):
+    #converts the feature importance rating from a numpy float to a python native float
+    try:
+        f['Rating'] = f['Rating'].item()
+    except:
+        pass
+    return f
+
 
 # ### Get Evenly Distributed Training Data
 # 
@@ -303,6 +316,29 @@ print Y.shape
 rf = RandomForestClassifier(n_estimators=25,min_samples_split=20,max_features=None)#,class_weight={0:0.98,1:0.02})
 rf.fit(X,Y)
 print 'Average accuracy: %s' % (np.mean(cross_val_score(rf,X,Y,cv=5))*100)
+
+# Get the feature importance ratings from the RF model
+importances = rf.feature_importances_
+indices = np.argsort(importances)[::-1]
+
+features = df.drop(['id','label'],1).columns.values
+
+feature_idx = []
+for f in range(X.shape[1]):
+    feature_idx.append({
+            'Rank': f+1,
+            'Feature': df.columns.values[f],
+            'Rating': importances[indices[f]]
+        })
+
+#Write the feature importance ratings to Elasticsearch
+feature_ranks = sc.parallelize(feature_idx).map(lambda feat: (feat['Rank'],conv_feat_rank(feat)))
+feature_ranks.saveAsNewAPIHadoopFile(
+        path='-', 
+        outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
+        keyClass="org.apache.hadoop.io.NullWritable", 
+        valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
+        conf=feat_write_conf)
 
 
 # ## Generate Future Predictions
