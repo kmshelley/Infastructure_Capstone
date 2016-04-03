@@ -5,7 +5,10 @@ var http = require('http');
 
 var router = express.Router();
 var hostsIP = [
-                        'http://accident:Dav1dC0C0@169.53.138.92:9200'
+                        'http://accident:Dav1dC0C0@158.85.176.154:9200',
+                         'http://accident:Dav1dC0C0@198.11.204.130:9200',
+		'http://accident:Dav1dC0C0@169.53.138.85:9200'	
+
                 ];
 
 /* GET home page. */

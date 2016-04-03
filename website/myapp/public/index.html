@@ -296,6 +296,7 @@
                 <ul class="nav navbar-nav">
 					<li class="active"><a href="#intro">Home</a></li>
 					<li><a href="#predictions">Predictions</a></li>
+          <li><a href="#exploreYourOwn">Explore On Your Own</a></li>
 					<li><a href="#about">About</a></li>
 					<!--<li><a href="#about">About Us</a></li>
                     li class="dropdown">
@@ -366,6 +367,13 @@
       <div id="highProbCounChart"></div>
 
 		</div>
+
+    <div id="exploreYourOwn" class="container " style="margin-top: 50px; margin-bottom: 25px;">
+			<hr><h4>Explore On Your Own</h4>
+			<div class="container"><a href="&#10;https://50.97.217.204:9999/notebooks/Infrastructure_Capstone/notebook/NYC_Collision_Analysis_with_Pyspark.ipynb">Click here to go to ipython notebook to  explore on your own</a>
+      </div>
+    </div>
+
 
 		<div id="about" class="container " style="margin-top: 50px; margin-bottom: 25px;">
 			<hr><h4>About Us</h4>
@@ -449,7 +457,8 @@
     <script src="js/custom.js"></script>
 
     <!--zip code geojson -->
-    <script src="assets/data/nyc_zip_codes.js"></script>
+    <script src="assets/data/nyc_zip_codes_multipolygon_filtered.js"></script>
+    <!--Taken from here: https://github.com/Leaflet/Leaflet.heat-->
     <script src="assets/js/leaflet-heat.js"></script>
 </body>
 

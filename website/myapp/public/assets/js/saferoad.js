@@ -202,7 +202,7 @@ function dotMouseOver(d)
 {
   tip.show(d);
   geojsonLayer.eachLayer(function (layer) {
-    if(layer.feature.properties.zipcode == d.grid_zipcode) {
+    if(layer.feature.properties.ZCTA5CE10 == d.grid_zipcode) {
       layer.setStyle({fillColor :'#00000'});
     }
   });
@@ -218,13 +218,13 @@ function getProbability(zipcode){
 }
 
 function getOpacity(feature){
-  return getColor(getProbability(feature.properties.zipcode));
+  return getColor(getProbability(feature.properties.ZCTA5CE10));
 }
 
 function dotMouseOut(d) {
   tip.hide(d);
   geojsonLayer.eachLayer(function (layer) {
-    if(layer.feature.properties.zipcode == d.grid_zipcode) {
+    if(layer.feature.properties.ZCTA5CE10 == d.grid_zipcode) {
       layer.setStyle({fillColor : getOpacity(layer.feature)});
     }
   });
@@ -284,15 +284,15 @@ d3.json("/predict" + selectedDateHrString , function(error, data) {
               //}
 
               layer.on('mouseover', function() {
-                $(".zipcode_" + feature.properties.zipcode).d3MouseOver();
+                $(".zipcode_" + feature.properties.ZCTA5CE10).d3MouseOver();
               });
 
               layer.on('mouseout', function() {
-                $(".zipcode_" + feature.properties.zipcode).d3MouseOut();
+                $(".zipcode_" + feature.properties.ZCTA5CE10).d3MouseOut();
               });
 
               layer.on('click', function() {
-                $("#zipInfoPopupCode").text(feature.properties.zipcode);
+                $("#zipInfoPopupCode").text(feature.properties.ZCTA5CE10);
                 $(".zipInfo").show();
                 map2.invalidateSize()
 
@@ -320,7 +320,7 @@ d3.json("/predict" + selectedDateHrString , function(error, data) {
                 for (var i = 0; i< zip_codes.features.length; i++)
                 {
                     var currentItem = zip_codes.features[i];
-                    if (currentItem.properties.zipcode  == feature.properties.zipcode) {
+                    if (currentItem.properties.ZCTA5CE10  == feature.properties.ZCTA5CE10) {
 
                         focusedZip = L.geoJson(currentItem,{
                           style: 	{
@@ -340,7 +340,7 @@ d3.json("/predict" + selectedDateHrString , function(error, data) {
                             html: 'X'
                         });*/
 
-                        $.getJSON( "/collisionsByZipcode?zipcode=" + feature.properties.zipcode, function( data ) {
+                        $.getJSON( "/collisionsByZipcode?zipcode=" + feature.properties.ZCTA5CE10, function( data ) {
                           //collisionsInZip  = L.geoJson(data,{icon: myIcon}).addTo(map2);
                           heatLayer = L.heatLayer(data, {radius: 10}).addTo(map2);
                           //collisionsInZip.setIcon(myIcon);
@@ -371,7 +371,7 @@ d3.json("/predict" + selectedDateHrString , function(error, data) {
                 }, this);
 */
 
-                $.getJSON( "/getZipcodeInfo?zipcode=" + feature.properties.zipcode + "&dateHourStr=" +  $("#dateSelector").val() + $("#hourSelector").val(),
+                $.getJSON( "/getZipcodeInfo?zipcode=" + feature.properties.ZCTA5CE10 + "&dateHourStr=" +  $("#dateSelector").val() + $("#hourSelector").val(),
                     function( data ) {
 
                         //alert(data);
@@ -415,7 +415,7 @@ d3.json("/predict" + selectedDateHrString , function(error, data) {
 
     for (var i = 0; i< data.length; i ++){
       var thisItem = data[i];
-      if(layer.feature.properties.zipcode == thisItem.grid_zipcode) {
+      if(layer.feature.properties.ZCTA5CE10 == thisItem.grid_zipcode) {
         layer.setStyle({fillColor :getColor(thisItem.probability)})
         }
     }
