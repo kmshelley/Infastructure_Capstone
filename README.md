@@ -9,12 +9,41 @@ Katrina Adams, Katherine Shelley, Kasane Utsumi
 
 ## Section 1: Background [Adams]
 
-### NYC Open Data and Vision Zero
+### Problem Definition and Context
+All traffic accidents are avoidable; which means no traffic fatality is acceptable.
+* Vision Zero is a traffic collision reduction program launched in Sweden in 1997 (1).
+* Several US cities have since launched their own Vision Zero projects with the goal of eliminating traffic fatalities and major injuries.
+* Vision Zero projects focus on long-term strategies for reducing traffic fatalities.
+* Our tool fills a tactical gap, providing near-real-time prediction of traffic collisions.
+* We have focused our end-user to public policy makers and the scope of our tool to a tactical decision support system to support Vision Zero initiatives.
+* Final Product: SafeRoad
+* SafeRoad is a Big Data system for large-scale collision data mining and prediction.
+* SafeRoad will allow public leaders to respond tactically with a near-real-time predictive model that shows where accidents are more likely to occur.
+* Our model will identify what road and other conditions are important causal factors for fatal and serious injury collisions to develop long-term, city-specific strategies to meet the goal of zero traffic fatalities.
+
+
+### NYC Open Data and [Vision Zero](http://www.visionzeroinitiative.com/)
 *Background on Vision Zero and the NYC open data sets*
 
 ## Section 2: Data Sources [Shelley]
 ### Data collection process
 *Discuss each data source and our data collection process*
+
+* Data sets:
+	* NYC Collisions
+	* NOAA hourly weather observations
+	* NYC Street segments
+	* Historical traffic counts
+	* US Census Zip Code Areas
+	* FDNY and EMS stations
+	* Trauma Centers
+	* Professional Baseball schedule
+	* 311 road condition reports
+	* New York State auto registration
+	* New York State active liquor licenses
+* Each data set is stored in a separate Elasticsearch index.
+* Locational fields are mapped as geo-point and/or geo-shape types for fast geospatial query.
+
 
 ### The "Data Grid"
 *Describe our data grid and define each engineered feature*
@@ -93,6 +122,20 @@ Data Grid Dictionary
 
 ### Machine Learning Model [Adams]
 *Describe our model (currently Random Forest), background about how it works, and why we chose it.*
+
+* Spark MLLib
+  * Initial Baseline – Logistic Regression
+  * 90% accuracy (What?!)
+  * 50-50 randomly sampled training/test data
+  * New baseline – Random Forest
+  * High accuracy with low variance
+  * Defines “important” features
+  * Currently manipulating model to output probabilities instead of labels
+  * Collisions + Weather ~ 70% accuracy against 50-50 data; 73% accuracy against randomly sampled data
+* SciKit-Learn
+  * Initial Baseline – Linear Regression on borough-level collision counts
+  * Large influence from fat tails
+
 
 ## Section 5: User Interface
 
