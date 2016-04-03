@@ -39,6 +39,11 @@ ES_url = config.get('ElasticSearch','host')
 ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
+data_grid = config.get('indexes','grid')
+results = config.get('indexes','results')
+update = config.get('indexes','pred_update')
+features = config.get('indexes','features')
+
 zip_codes = config.get('zip codes','zip_codes').split(',')
 
     
@@ -126,11 +131,13 @@ def run_predictions():
            'spark.cores.max=%s' % str(cores),
            '--jars',
            '/usr/local/spark/jars/elasticsearch-hadoop-2.2.0.jar',
-           './dataAnalysis/sklearn_RandomForest.py']
+           './dataAnalysis/sklearn_RF_serious_collision_prediction.py']
            
 
+    index = update.split('/')[0]
+    doc_type = update.split('/')[1]
     try:
-        upload_to_Elasticsearch.create_es_index_and_mapping_cURL(index='saferoad_update',doc_type='update_date')
+        upload_to_Elasticsearch.create_es_index_and_mapping_cURL(index=index,doc_type=doc_type)
     except:
         pass
     
@@ -138,12 +145,12 @@ def run_predictions():
         subprocess.check_output(cmd)
         timestamp = dt.datetime.strftime(dt.datetime.now(),'%Y-%m-%dT%H:%M:%S')
         doc = { 'Model_Update_FullDate' : timestamp, 'Model_Errors': 'None', 'update_id' : '1' }
-        upload_to_Elasticsearch.update_ES_records_curl([doc],index='saferoad_update',doc_type='update_date',id_field='update_id')
+        upload_to_Elasticsearch.update_ES_records_curl([doc],index=index,doc_type=doc_type,id_field='update_id')
         
     except subprocess.CalledProcessError as e:
         timestamp = dt.datetime.strftime(dt.datetime.now(),'%Y-%m-%dT%H:%M:%S')
         doc = { 'Model_Update_FullDate' : timestamp, 'Model_Errors': e.output, 'update_id' : '1' }
-        upload_to_Elasticsearch.update_ES_records_curl([doc],index='saferoad_update',doc_type='update_date',id_field='update_id')
+        upload_to_Elasticsearch.update_ES_records_curl([doc],index=index,doc_type=doc_type,id_field='update_id')
         
     print "Finished prediction."
 
@@ -231,7 +238,6 @@ def daily_update():
     
 if __name__ == '__main__':
     '''Main Entry Point to the Program'''
-    #run_predictions()
     daily_update()
 
 
