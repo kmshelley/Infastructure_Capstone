@@ -55,6 +55,9 @@ ES_hosts = config.get('ElasticSearch','hostlist')
 ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
+data_grid = config.get('indexes','grid')
+results = config.get('indexes','results')
+
 zip_codes = config.get('zip codes','zip_codes').split(',')
 broadcast_zip = sc.broadcast(zip_codes)
 
@@ -127,7 +130,10 @@ def result_grid(timestamp):
         g['grid_dateHourStr'] = dt.datetime.strftime(timestamp,'%m%d%H')
         g['grid_jsDateTime'] = dt.datetime.strftime(timestamp,'%Y/%m/%d')
 
-        g['probability'] = float(0)
+        g['all_probability'] = float(0)
+        g['pedestrian_probability'] = float(0)
+        g['cyclist_probability'] = float(0)
+        g['motorist_probability'] = float(0)
         
         g['grid_year'] = timestamp.year
         g['grid_month'] = timestamp.month
@@ -877,7 +883,6 @@ def create_results_grid(index="saferoad_results",doc_type="rows",offset=10):
     #make sure the mapping of the probability field is double
     mapping = {'properties':
                {
-                    "probability": {"type":"double"},
                     "15mph": { "type": "double" },
                     "25mph": { "type": "double" },
                     "35mph": { "type": "double" },
@@ -898,7 +903,11 @@ def create_results_grid(index="saferoad_results",doc_type="rows",offset=10):
                     "road_cond_requests": { "type": "double" },
                     "total_road_length": { "type": "double" },
                     "tunnels": { "type": "double" },
-                    "zip_area": { "type": "double" }
+                    "zip_area": { "type": "double" },
+                    "all_probability": { "type": "double" },
+                    "pedestrian_probability": { "type": "double" },
+                    "cyclist_probability": { "type": "double" },
+                    "motorist_probability": { "type": "double" }
                  }
               }
     #use cURL to put the mapping
@@ -1098,10 +1107,42 @@ def create_new_grid_timestamps(index="dataframe",doc_type="rows"):
             valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
             conf=es_write_conf)
     
+def create_grid_timestamps_from_start_end(start,end,index="dataframe",doc_type="rows"):
+    #input: start time, end time, index name, document type
+    #output: creates a new grid based on start and end timestamps
+    
+    es_write_conf = {
+        "es.nodes" : ES_hosts,
+        "es.port" : "9200",
+        "es.net.http.auth.user" : ES_username, 
+        "es.net.http.auth.pass" : ES_password,
+        "es.resource" : "%s/%s" % (index,doc_type),
+        "es.mapping.id" : "grid_id"
+    } 
+    
+    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    es = Elasticsearch(es_url)
+
+    t_delta = dt.timedelta(seconds=3600) #one hour
+    next_time = start
+    times = []
+    while next_time <= end:
+        times.append(next_time)
+        next_time+=t_delta
+    #print len(times)
+    #grid = sc.parallelize(combination_iter(grid_fullDate=times,grid_zipcode=zip_codes)).map(feature_grid)
+    grid = sc.parallelize(times).flatMap(feature_grid)
+    
+        
+    grid.saveAsNewAPIHadoopFile(
+            path='-', 
+            outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
+            keyClass="org.apache.hadoop.io.NullWritable", 
+            valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
+            conf=es_write_conf)
+    
 
 
 # ### Run Grid creation and update code here
-#add_fields_to_grid(grid_index='nyc_dataframe',grid_doc='rows',functions=['reset_zip_data','reset_grid_weather','reset_grid_311','reset_grid_liquor'])
-#add_fields_to_grid(grid_index='saferoad_results',grid_doc='rows',functions=['reset_zip_data','reset_grid_311','reset_grid_liquor'])
-create_new_grid_timestamps(index="nyc_grid",doc_type="rows")
-create_results_grid(index="prediction_results",doc_type="rows",offset=10)
+create_new_grid_timestamps(index=data_grid.split('/')[0],doc_type=data_grid.split('/')[1])
+create_results_grid(index=results.split('/')[0],doc_type=results.split('/')[1],offset=10)
