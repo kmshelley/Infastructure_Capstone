@@ -1,0 +1,2722 @@
+
+> myapp@0.0.0 start /root/myapp
+> node ./bin/www
+
+[0mGET / [32m200 [0m13.155 ms - 26098[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m449.393 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m4.916 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m5.622 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m5.641 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m5.600 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m5.732 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.613 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m1.297 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.541 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.497 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.775 ms - 53148[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m1.435 ms - 121260[0m
+[0mGET /assets/js/moment.js [32m200 [0m1.387 ms - 134906[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.490 ms - 151665[0m
+[0mGET /js/custom.js [32m200 [0m0.508 ms - 1021[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.502 ms - 70433[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.679 ms - 5158[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.525 ms - 284394[0m
+[0mGET /timer.png [32m200 [0m0.918 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m1.040 ms - 12854[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.835 ms - 219303[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m1.539 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.649 ms - 54416[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.580 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m1.097 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.609 ms - 33891[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.523 ms - 955391[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.568 ms - 1884488[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.526 ms - 3497428[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.842 ms - 3599848[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.967 ms - 4093655[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m73.221 ms - 21[0m
+[0mGET /predict?dateStr=0420&accidentType=ALL [32m200 [0m77.994 ms - 10863[0m
+[0mGET /tenDayTrend?lower=2016-04-20T00:00:00&upper=2016-04-29T23:00:00&threshold=.5 [32m200 [0m78.231 ms - 18961[0m
+[0mGET /importance [32m200 [0m40.985 ms - 23749[0m
+[0mGET /diag [32m200 [0m498.551 ms - 6020267[0m
+[0mGET /getCurrentStats?uc=2016-04-21T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-21T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m538.387 ms - 468[0m
+[0mGET / [32m200 [0m1.730 ms - 26098[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m53.897 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m4.427 ms - 5885[0m
+[0mGET /css/style.css [32m200 [0m4.745 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m4.327 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m4.013 ms - 652[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m4.269 ms - 17780[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.482 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m1.148 ms - 20249[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.000 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m1.123 ms - 6745[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.100 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.611 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.440 ms - 53148[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.653 ms - 134906[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.493 ms - 121260[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m1.110 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m2.562 ms - 1021[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.672 ms - 955391[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m1.186 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.860 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.535 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.657 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m1.699 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.768 ms - 11264[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.896 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.608 ms - 54416[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.625 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.946 ms - 3497428[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.738 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.631 ms - 3599848[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.713 ms - 3497428[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m8.196 ms - 21[0m
+[0mGET /predict?dateStr=0420&accidentType=ALL [32m200 [0m10.387 ms - 10863[0m
+[0mGET /tenDayTrend?lower=2016-04-20T00:00:00&upper=2016-04-29T23:00:00&threshold=.5 [32m200 [0m8.856 ms - 18961[0m
+[0mGET /importance [32m200 [0m7.312 ms - 23749[0m
+[0mGET /diag [32m200 [0m472.229 ms - 6020267[0m
+[0mGET /getCurrentStats?uc=2016-04-21T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-21T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m472.949 ms - 468[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.783 ms - 3599848[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.680 ms - 1884488[0m
+[0mGET / [36m304 [0m2.755 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m50.040 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m1.928 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m1.881 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m1.759 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.668 ms - -[0m
+[0mGET /color/default.css [36m304 [0m1.632 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.258 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.231 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.237 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.218 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.210 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.227 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.222 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.358 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.238 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.213 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.222 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.273 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.274 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.313 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m19.288 ms - 925[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.415 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.262 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.284 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.605 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.253 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.254 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.312 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.294 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.310 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.275 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.301 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.425 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.950 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.414 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.283 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.364 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.339 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m1.126 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.481 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.375 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.661 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m8.706 ms - -[0m
+[0mGET /predict?dateStr=0420&accidentType=ALL [36m304 [0m14.000 ms - -[0m
+[0mGET /tenDayTrend?lower=2016-04-20T00:00:00&upper=2016-04-29T23:00:00&threshold=.5 [36m304 [0m13.364 ms - -[0m
+[0mGET /importance [36m304 [0m8.926 ms - -[0m
+[0mGET /diag [36m304 [0m446.831 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-21T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-21T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m451.451 ms - -[0m
+[0mGET / [36m304 [0m0.727 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m22.671 ms - 925[0m
+[0mGET /css/animate.css [36m304 [0m1.131 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.397 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m2.640 ms - -[0m
+[0mGET /color/default.css [36m304 [0m3.008 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m2.841 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.389 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.635 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.361 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.538 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.368 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.235 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.293 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.237 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.379 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.237 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.363 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.368 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.469 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.240 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.363 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.230 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.361 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.221 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.434 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.468 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m1.313 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.250 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.343 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.263 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.377 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.361 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.376 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.392 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.407 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.531 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.242 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.982 ms - -[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m45.088 ms - 19256[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m52.168 ms - 14020[0m
+[0mGET /importance [32m200 [0m21.099 ms - 23755[0m
+[0mGET /diag [32m200 [0m454.655 ms - 5722319[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m578.112 ms - 468[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11236 [32m200 [0m77.905 ms - 1557[0m
+[0mGET /collisionsByZipcode?zipcode=11236&accidentType=ALL [36m304 [0m143.219 ms - -[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11375 [32m200 [0m15.339 ms - 1548[0m
+[0mGET /collisionsByZipcode?zipcode=11375&accidentType=ALL [32m200 [0m35.715 ms - 24619[0m
+[0mGET / [36m304 [0m0.465 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m19.300 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.762 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.596 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.262 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.265 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.257 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.264 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.266 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.268 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.254 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.273 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.260 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.264 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.266 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.538 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.287 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.233 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.291 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.359 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.275 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.268 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.262 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.255 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.260 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.255 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.261 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.269 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.272 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.769 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.467 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.325 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m17.312 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m14.950 ms - 19298[0m
+[0mGET /diag [32m200 [0m432.661 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m481.459 ms - -[0m
+[0mGET /importance [32m200 [0m397.356 ms - 23723[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11234 [32m200 [0m12.294 ms - 1557[0m
+[0mGET /collisionsByZipcode?zipcode=11234&accidentType=ALL [32m200 [0m52.305 ms - 40724[0m
+[0mGET / [32m200 [0m0.962 ms - 26098[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m15.161 ms - 925[0m
+[0mGET /css/style.css [36m304 [0m2.086 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m2.016 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m1.947 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m1.898 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.232 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.585 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.477 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.503 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.226 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.595 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.465 ms - -[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.619 ms - 53148[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.259 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.256 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.235 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.231 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.916 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.750 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.342 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.222 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.315 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.261 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.356 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.243 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.658 ms - -[0m
+[0mGET /img/github-mark.png [32m200 [0m1.420 ms - 11264[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.609 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.310 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.234 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.101 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m14.371 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m13.193 ms - 19298[0m
+[0mGET /importance [32m200 [0m9.401 ms - 23723[0m
+[0mGET /diag [32m200 [0m464.638 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m460.399 ms - 468[0m
+[0mGET /predict?dateStr=0421&accidentType=CYC [32m200 [0m11.244 ms - 14144[0m
+[0mGET /predict?dateStr=0421&accidentType=MOTO [32m200 [0m9.429 ms - 14010[0m
+[0mGET /predict?dateStr=0421&accidentType=PEDS [32m200 [0m10.788 ms - 14145[0m
+[0mGET / [36m304 [0m0.602 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m21.470 ms - 925[0m
+[0mGET /color/default.css [36m304 [0m4.081 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m4.032 ms - -[0m
+[0mGET /css/style.css [36m304 [0m3.669 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m1.919 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m1.859 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.292 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m2.142 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m1.155 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.576 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.719 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.283 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m10.522 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.848 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.263 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.235 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.252 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.253 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.511 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.484 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m14.087 ms - 925[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.529 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.509 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.262 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.234 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.240 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.238 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.491 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.476 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.505 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.446 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.306 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.517 ms - -[0m
+[0mGET /importance [36m304 [0m14.977 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m19.082 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m20.912 ms - -[0m
+[0mGET /diag [36m304 [0m421.391 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m420.181 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T20:00:00&toHour=2016-04-22T01:00:00 [32m200 [0m18.863 ms - 14049[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T20:00:00&toHour=2016-04-22T01:00:00&zipcode=11234 [32m200 [0m15.655 ms - 1565[0m
+[0mGET /collisionsByZipcode?zipcode=11234&accidentType=ALL [32m200 [0m51.590 ms - 40724[0m
+[0mGET /predict?dateStr=0421&accidentType=PEDS&fromHour=2016-04-21T20:00:00&toHour=2016-04-22T01:00:00 [32m200 [0m9.735 ms - 14097[0m
+[0mGET / [32m200 [0m0.840 ms - 26098[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m19.922 ms - 925[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m21.437 ms - 17780[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m22.098 ms - 5885[0m
+[0mGET /color/default.css [32m200 [0m2.283 ms - 652[0m
+[0mGET /css/style.css [32m200 [0m3.370 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m3.505 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.443 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.993 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.920 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.945 ms - 36868[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m1.026 ms - 121260[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.441 ms - 151665[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.431 ms - 53148[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.444 ms - 284394[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.768 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m1.180 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.902 ms - 134906[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.565 ms - 955391[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.591 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.586 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.976 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.581 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.803 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.449 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.748 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.466 ms - 3599848[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.424 ms - 1884488[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m1.255 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.689 ms - 54416[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.456 ms - 3497428[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.473 ms - 4093655[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.511 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m16.131 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m17.359 ms - 19298[0m
+[0mGET /importance [32m200 [0m6.097 ms - 23723[0m
+[0mGET /diag [32m200 [0m487.542 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m488.698 ms - 468[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11234 [32m200 [0m10.079 ms - 1557[0m
+[0mGET /collisionsByZipcode?zipcode=11234&accidentType=ALL [32m200 [0m43.718 ms - 40724[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.1 [32m200 [0m14.691 ms - 19441[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.9 [32m200 [0m7.770 ms - 18961[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.7 [32m200 [0m15.730 ms - 19111[0m
+[0mGET /predictundefined [33m404 [0m12.568 ms - 925[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00 [32m200 [0m9.940 ms - 13959[0m
+[0mGET /predict?dateStr=0421&accidentType=CYC&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00 [32m200 [0m8.439 ms - 14158[0m
+{ or: [ { range: [Object] }, { range: [Object] } ] }
+[0mGET /collisionsByZipcode?zipcode=10473&accidentType=CYC [32m200 [0m13.260 ms - 796[0m
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=CYC&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00&zipcode=10473 [32m200 [0m8.042 ms - 1554[0m
+[0mGET /predict?dateStr=0421&accidentType=PEDS&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00 [32m200 [0m7.969 ms - 13973[0m
+{ or: [ { range: [Object] }, { range: [Object] } ] }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=PEDS&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00&zipcode=11368 [32m200 [0m8.544 ms - 1550[0m
+[0mGET /collisionsByZipcode?zipcode=11368&accidentType=PEDS [32m200 [0m127.742 ms - 9190[0m
+{ or: [ { range: [Object] }, { range: [Object] } ] }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=PEDS&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00&zipcode=11236 [32m200 [0m8.186 ms - 1556[0m
+[0mGET /collisionsByZipcode?zipcode=11236&accidentType=PEDS [32m200 [0m256.338 ms - 10755[0m
+{ or: [ { range: [Object] }, { range: [Object] } ] }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=PEDS&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00&zipcode=11203 [32m200 [0m8.498 ms - 1440[0m
+[0mGET /collisionsByZipcode?zipcode=11203&accidentType=PEDS [32m200 [0m20.317 ms - 12726[0m
+[0mGET /predict?dateStr=0421&accidentType=MOTO&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00 [32m200 [0m8.185 ms - 13956[0m
+[0mGET /predict?dateStr=0421&accidentType=PEDS&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00 [36m304 [0m7.851 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=CYC&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00 [36m304 [0m9.413 ms - -[0m
+{ or: [ { range: [Object] }, { range: [Object] } ] }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=CYC&fromHour=2016-04-21T07:00:00&toHour=2016-04-21T09:00:00&zipcode=11377 [32m200 [0m8.614 ms - 1536[0m
+[0mGET /collisionsByZipcode?zipcode=11377&accidentType=CYC [32m200 [0m17.100 ms - 5335[0m
+[0mGET / [36m304 [0m1.058 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m28.608 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m1.284 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m1.195 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m1.176 ms - -[0m
+[0mGET /color/default.css [36m304 [0m1.150 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.137 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.214 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.437 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.430 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.223 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.198 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.211 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.204 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.219 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.232 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.234 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.227 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.199 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.233 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.215 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.199 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.462 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.217 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.209 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.201 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.200 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.211 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.214 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.594 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.235 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m17.438 ms - -[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m9.731 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m18.103 ms - 14050[0m
+[0mGET /importance [36m304 [0m5.396 ms - -[0m
+[0mGET /diag [36m304 [0m415.401 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m424.028 ms - -[0m
+[0mGET / [36m304 [0m0.527 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m17.873 ms - 925[0m
+[0mGET /css/animate.css [36m304 [0m17.976 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m16.794 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m16.965 ms - -[0m
+[0mGET /css/style.css [36m304 [0m17.017 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.252 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.368 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.478 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.583 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.232 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.566 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.483 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.348 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.215 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m1.179 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m1.017 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.990 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.978 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.874 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.225 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.218 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.224 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.211 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.297 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.484 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.270 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.218 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m1.180 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.466 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.242 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.369 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.235 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.247 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.229 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.233 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.233 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.224 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.035 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m13.066 ms - 14050[0m
+[0mGET /importance [36m304 [0m12.945 ms - -[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m13.460 ms - -[0m
+[0mGET /diag [36m304 [0m410.499 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m411.305 ms - -[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11101 [32m200 [0m11.078 ms - 1560[0m
+[0mGET /collisionsByZipcode?zipcode=11101&accidentType=ALL [32m200 [0m40.500 ms - 39627[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11236 [32m200 [0m13.321 ms - 1556[0m
+[0mGET /collisionsByZipcode?zipcode=11236&accidentType=ALL [32m200 [0m57.746 ms - 46661[0m
+[0mGET /predictundefined [33m404 [0m11.856 ms - 925[0m
+[0mGET /predict?dateStr=0430&accidentType=ALL [32m200 [0m9.580 ms - 14049[0m
+[0mGET /predict?dateStr=0423&accidentType=ALL [32m200 [0m9.022 ms - 14031[0m
+[0mGET /predict?dateStr=0427&accidentType=ALL [32m200 [0m10.366 ms - 14060[0m
+[0mGET /predict?dateStr=0427&accidentType=PEDS [32m200 [0m9.651 ms - 14145[0m
+[0mGET /predict?dateStr=0421&accidentType=PEDS [32m200 [0m10.943 ms - 14146[0m
+[0mGET /predict?dateStr=0421&accidentType=CYC [32m200 [0m9.354 ms - 14141[0m
+[0mGET / [36m304 [0m0.428 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m12.499 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m1.747 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m1.693 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m1.081 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.035 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.236 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.620 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.450 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.468 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.235 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.345 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.209 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.342 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.472 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.443 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.433 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.417 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.209 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.222 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.470 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.442 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.458 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.427 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.321 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.210 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.289 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.211 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.223 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.828 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.279 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.444 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.232 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.281 ms - -[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m10.477 ms - -[0m
+[0mGET /importance [36m304 [0m23.754 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m27.397 ms - 14050[0m
+[0mGET /diag [36m304 [0m454.441 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m456.207 ms - -[0m
+[0mGET / [36m304 [0m0.527 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.287 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.890 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.771 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.732 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m13.490 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.242 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.234 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.235 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.229 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.211 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.214 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.211 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.216 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.758 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.752 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.636 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.331 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.431 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.526 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.219 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m1.052 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.678 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.744 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.213 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.214 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.752 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.248 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.785 ms - 121260[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.404 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.285 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m8.254 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m16.510 ms - 14048[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m15.414 ms - -[0m
+[0mGET /importance [36m304 [0m16.419 ms - -[0m
+[0mGET /diag [36m304 [0m424.630 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m426.568 ms - -[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11229 [32m200 [0m8.902 ms - 1567[0m
+[0mGET /collisionsByZipcode?zipcode=11229&accidentType=ALL [32m200 [0m31.916 ms - 26318[0m
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11235 [32m200 [0m12.833 ms - 1567[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /collisionsByZipcode?zipcode=11235&accidentType=ALL [32m200 [0m29.157 ms - 27594[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=10305 [32m200 [0m10.365 ms - 1516[0m
+[0mGET /collisionsByZipcode?zipcode=10305&accidentType=ALL [32m200 [0m26.325 ms - 15049[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=10314 [32m200 [0m8.158 ms - 1546[0m
+[0mGET /collisionsByZipcode?zipcode=10314&accidentType=ALL [32m200 [0m25.796 ms - 20102[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=10303 [32m200 [0m69.812 ms - 1559[0m
+[0mGET /collisionsByZipcode?zipcode=10303&accidentType=ALL [32m200 [0m71.358 ms - 3576[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=10470 [32m200 [0m8.664 ms - 1522[0m
+[0mGET /collisionsByZipcode?zipcode=10470&accidentType=ALL [32m200 [0m18.253 ms - 4279[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=10464 [32m200 [0m14.183 ms - 1516[0m
+[0mGET /collisionsByZipcode?zipcode=10464&accidentType=ALL [32m200 [0m20.862 ms - 4685[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /collisionsByZipcode?zipcode=11360&accidentType=ALL [32m200 [0m23.244 ms - 4284[0m
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11360 [32m200 [0m23.064 ms - 1561[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11434 [32m200 [0m9.014 ms - 1510[0m
+[0mGET /collisionsByZipcode?zipcode=11434&accidentType=ALL [32m200 [0m44.627 ms - 38811[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11234 [32m200 [0m11.129 ms - 1557[0m
+[0mGET /collisionsByZipcode?zipcode=11234&accidentType=ALL [36m304 [0m46.435 ms - -[0m
+[0mGET / [36m304 [0m0.442 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m21.422 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m3.001 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m2.629 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m2.590 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.652 ms - -[0m
+[0mGET /color/default.css [36m304 [0m1.588 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.264 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.647 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m15.887 ms - 925[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m2.776 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m2.845 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m2.814 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.242 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.248 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.241 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m1.180 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.535 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.609 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.484 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.360 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.252 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.614 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.468 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.615 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.477 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.230 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.487 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.450 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.498 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.469 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.325 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.395 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m7.480 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.525 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m12.957 ms - -[0m
+[0mGET /importance [36m304 [0m7.182 ms - -[0m
+[0mGET /diag [36m304 [0m399.568 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m400.405 ms - -[0m
+[0mGET / [32m200 [0m1.080 ms - 26023[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m10.202 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.861 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.697 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.688 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.224 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.206 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.441 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.455 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.459 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.438 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.213 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.225 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.313 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.441 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.527 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.214 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.833 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.435 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.321 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.442 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.427 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.451 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.430 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.225 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.538 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.537 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.551 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.544 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.217 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.344 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.328 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m8.176 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.019 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m9.540 ms - -[0m
+[0mGET /importance [36m304 [0m4.590 ms - -[0m
+[0mGET /diag [36m304 [0m425.710 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m426.673 ms - -[0m
+[0mGET / [32m200 [0m1.081 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m12.790 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m1.110 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m1.048 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.951 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m1.034 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.233 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.619 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.443 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.510 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.434 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.502 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.493 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.502 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.490 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.643 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.488 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.637 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.621 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.647 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.602 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.639 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.598 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.269 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.663 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.252 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.366 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.238 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.372 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.255 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.365 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.862 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m11.225 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m12.171 ms - -[0m
+[0mGET /importance [36m304 [0m7.225 ms - -[0m
+[0mGET /diag [36m304 [0m454.195 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m461.002 ms - -[0m
+[0mGET / [36m304 [0m0.459 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m14.604 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m15.357 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m1.766 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m1.720 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.688 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.796 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.478 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.612 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.462 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.443 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.438 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.426 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.440 ms - -[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.805 ms - 53592[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.480 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.431 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.445 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.434 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.217 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.557 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.536 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.240 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.469 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.448 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.208 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.206 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.526 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.426 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.991 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.235 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.378 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.002 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m8.656 ms - 14048[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m9.241 ms - -[0m
+[0mGET /importance [36m304 [0m5.187 ms - -[0m
+[0mGET /diag [36m304 [0m431.848 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m433.396 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m11.332 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m1.270 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m1.263 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.739 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.001 ms - -[0m
+[0mGET /color/default.css [36m304 [0m1.006 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.374 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.221 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m1.288 ms - 54416[0m
+[0mGET / [32m200 [0m0.607 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m10.091 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.270 ms - 5885[0m
+[0mGET /css/style.css [32m200 [0m1.856 ms - 14223[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.385 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m1.750 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m0.396 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.425 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m2.427 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.382 ms - 6745[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m2.494 ms - 284394[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.562 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.418 ms - 36868[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.754 ms - 121260[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.522 ms - 53592[0m
+[0mGET /js/custom.js [32m200 [0m0.900 ms - 1021[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.805 ms - 70433[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.409 ms - 134906[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m1.089 ms - 5158[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.447 ms - 955391[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.598 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m1.512 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.548 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.535 ms - 22360[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.427 ms - 4093655[0m
+[0mGET /img/github-mark.png [32m200 [0m0.558 ms - 11264[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m1.554 ms - 18028[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m1.260 ms - 3497428[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.431 ms - 3599848[0m
+[0mGET /img/team/2b.jpg [32m200 [0m1.086 ms - 1884488[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.702 ms - 54416[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.459 ms - 33891[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m7.955 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.091 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m10.157 ms - 19298[0m
+[0mGET /importance [32m200 [0m5.910 ms - 23723[0m
+[0mGET /diag [32m200 [0m424.494 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m426.403 ms - 468[0m
+[0mGET / [32m200 [0m1.061 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m25.157 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.082 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.097 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m2.145 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m2.162 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m1.658 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.342 ms - 1022[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.361 ms - 121260[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.360 ms - 20249[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.357 ms - 284394[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.351 ms - 151665[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.375 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.401 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.406 ms - 53593[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.375 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.383 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.380 ms - 1021[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.392 ms - 955391[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.403 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.581 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.507 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.481 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.535 ms - 22360[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.432 ms - 3599848[0m
+[0mGET /img/github-mark.png [32m200 [0m0.441 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.574 ms - 33891[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.395 ms - 4093655[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.545 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.900 ms - 54416[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.850 ms - 1884488[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.424 ms - 3497428[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m9.719 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m8.453 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m11.752 ms - 19298[0m
+[0mGET /importance [32m200 [0m5.842 ms - 23723[0m
+[0mGET /diag [32m200 [0m446.006 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m448.515 ms - 468[0m
+[0mGET / [32m200 [0m0.911 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m24.862 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m1.982 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.997 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m2.022 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m2.080 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m2.046 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.354 ms - 1022[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.347 ms - 121260[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.358 ms - 20249[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.581 ms - 151665[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.646 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.372 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.381 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.391 ms - 53593[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.756 ms - 70433[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.703 ms - 134906[0m
+[0mGET /js/custom.js [32m200 [0m0.778 ms - 1021[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.781 ms - 955391[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.449 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.479 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.506 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.586 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.412 ms - 22360[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.530 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.675 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.459 ms - 3497428[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.952 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.880 ms - 54416[0m
+[0mGET /img/github-mark.png [32m200 [0m0.540 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m1.603 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.810 ms - 3599848[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m7.028 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m8.058 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m9.436 ms - 19298[0m
+[0mGET /importance [32m200 [0m7.999 ms - 23723[0m
+[0mGET /diag [32m200 [0m436.381 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m445.846 ms - 468[0m
+[0mGET / [32m200 [0m0.900 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m25.261 ms - 925[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.048 ms - 17780[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.056 ms - 5885[0m
+[0mGET /color/default.css [32m200 [0m1.777 ms - 652[0m
+[0mGET /css/style.css [32m200 [0m2.169 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m2.054 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.362 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.353 ms - 20249[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.375 ms - 121260[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.357 ms - 6745[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.362 ms - 284394[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.374 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.413 ms - 53858[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.358 ms - 151665[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.724 ms - 70433[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.751 ms - 134906[0m
+[0mGET /js/custom.js [32m200 [0m0.445 ms - 1021[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.388 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.457 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.579 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.491 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.557 ms - 22360[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.428 ms - 3497428[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.556 ms - 18028[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.437 ms - 4093655[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.565 ms - 54416[0m
+[0mGET /img/github-mark.png [32m200 [0m0.557 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.743 ms - 33891[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.431 ms - 955391[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.424 ms - 3599848[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.620 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.733 ms - 4093655[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.628 ms - 3599848[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m7.408 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m11.396 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m9.011 ms - 19298[0m
+[0mGET /importance [32m200 [0m9.275 ms - 23723[0m
+[0mGET /diag [32m200 [0m435.740 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m438.327 ms - 468[0m
+[0mGET / [32m200 [0m0.863 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m23.759 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.984 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.038 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m0.373 ms - 57095[0m
+[0mGET /css/style.css [32m200 [0m0.341 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m1.687 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.347 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.580 ms - 20249[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.639 ms - 121260[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.346 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.349 ms - 6745[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.520 ms - 151665[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.673 ms - 53858[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.743 ms - 36868[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.362 ms - 134906[0m
+[0mGET /js/custom.js [32m200 [0m0.646 ms - 1021[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.764 ms - 70433[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.404 ms - 955391[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.924 ms - 18028[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.907 ms - 5158[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.407 ms - 54416[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.581 ms - 3497428[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.768 ms - 3599848[0m
+[0mGET /timer.png [32m200 [0m0.549 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.487 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.625 ms - 22360[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.440 ms - 219303[0m
+[0mGET /img/github-mark.png [32m200 [0m0.494 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.638 ms - 33891[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.681 ms - 4093655[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.410 ms - 1884488[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.455 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m12.971 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m15.954 ms - 19298[0m
+[0mGET /importance [32m200 [0m6.282 ms - 23723[0m
+[0mGET /diag [32m200 [0m446.451 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m450.014 ms - 468[0m
+[0mGET / [32m200 [0m0.837 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m23.106 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m1.915 ms - 5885[0m
+[0mGET /css/style.css [32m200 [0m1.861 ms - 14223[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.876 ms - 17780[0m
+[0mGET /color/default.css [32m200 [0m1.912 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m1.891 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.337 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.599 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.379 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.386 ms - 36868[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.665 ms - 284394[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.416 ms - 121260[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.804 ms - 151665[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.550 ms - 53876[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.756 ms - 70433[0m
+[0mGET /assets/js/moment.js [32m200 [0m1.018 ms - 134906[0m
+[0mGET /js/custom.js [32m200 [0m0.401 ms - 1021[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.385 ms - 5158[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.426 ms - 955391[0m
+[0mGET /timer.png [32m200 [0m0.580 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.499 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.477 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.521 ms - 11264[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.522 ms - 1884488[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.496 ms - 33891[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.536 ms - 219303[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.460 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.442 ms - 54416[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.411 ms - 3497428[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.809 ms - 4093655[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.757 ms - 3599848[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.895 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.304 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m12.256 ms - 19298[0m
+[0mGET /importance [32m200 [0m7.028 ms - 23723[0m
+[0mGET /diag [32m200 [0m419.047 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m421.114 ms - 468[0m
+[0mGET / [32m200 [0m1.144 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m24.318 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m1.629 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.678 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m1.689 ms - 57095[0m
+[0mGET /css/style.css [32m200 [0m1.722 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m0.340 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m1.049 ms - 1022[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.372 ms - 121260[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.337 ms - 20249[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.349 ms - 284394[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.337 ms - 151665[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.320 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m1.537 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.376 ms - 53876[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.432 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.398 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.359 ms - 1021[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.385 ms - 955391[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.445 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.524 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.405 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.558 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.853 ms - 11264[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.888 ms - 1884488[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.516 ms - 33891[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.428 ms - 4093655[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.581 ms - 219303[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.441 ms - 3497428[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.540 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.433 ms - 54416[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.575 ms - 3599848[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m14.319 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m13.357 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m14.991 ms - 19298[0m
+[0mGET /importance [32m200 [0m13.867 ms - 23723[0m
+[0mGET /diag [32m200 [0m423.514 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m434.460 ms - 468[0m
+[0mGET / [32m200 [0m0.886 ms - 26024[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m23.471 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m1.657 ms - 5885[0m
+[0mGET /css/style.css [32m200 [0m1.642 ms - 14223[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.702 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m1.696 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m0.337 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.343 ms - 1022[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.352 ms - 121260[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.356 ms - 20249[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.612 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.717 ms - 6745[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.748 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.403 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.417 ms - 53876[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.409 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.401 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.364 ms - 1021[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.389 ms - 955391[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.432 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.549 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.503 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m1.936 ms - 22360[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.401 ms - 4093655[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.405 ms - 3599848[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.419 ms - 3497428[0m
+[0mGET /img/github-mark.png [32m200 [0m1.212 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.401 ms - 33891[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.489 ms - 1884488[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.817 ms - 18028[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.611 ms - 219303[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.443 ms - 54416[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.753 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m8.377 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m11.062 ms - 19298[0m
+[0mGET /importance [32m200 [0m7.849 ms - 23723[0m
+[0mGET /diag [32m200 [0m430.503 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m432.992 ms - 468[0m
+[0mGET / [32m200 [0m1.128 ms - 26060[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m24.865 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m1.954 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.001 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m2.040 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m2.096 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m2.046 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.358 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.617 ms - 20249[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.365 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m2.019 ms - 6745[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m2.027 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.676 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.594 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.398 ms - 53876[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.388 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.451 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.846 ms - 1021[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.759 ms - 955391[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m1.103 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.521 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.535 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.410 ms - 22360[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.902 ms - 3497428[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.552 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.420 ms - 54416[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.775 ms - 4093655[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.594 ms - 219303[0m
+[0mGET /img/github-mark.png [32m200 [0m0.540 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.639 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.694 ms - 3599848[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m7.580 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.395 ms - 14048[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m12.315 ms - 19298[0m
+[0mGET /importance [32m200 [0m7.546 ms - 23723[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m87.415 ms - 468[0m
+[0mGET /diag [32m200 [0m431.663 ms - 6019838[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.561 ms - 1884488[0m
+[0mGET / [32m200 [0m0.976 ms - 26060[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m26.010 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m3.128 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m3.717 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m3.797 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m3.875 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m3.401 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.369 ms - 1022[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.350 ms - 121260[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.342 ms - 20249[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.704 ms - 151665[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.654 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.382 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.379 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.389 ms - 53846[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.387 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.403 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.391 ms - 1021[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.580 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.523 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.496 ms - 12854[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.403 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.409 ms - 3497428[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.414 ms - 3599848[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.537 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m1.837 ms - 54416[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.615 ms - 219303[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.809 ms - 22360[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.468 ms - 1884488[0m
+[0mGET /img/github-mark.png [32m200 [0m0.540 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.414 ms - 33891[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.392 ms - 955391[0m
+{ took: 3,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m9.337 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.676 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m11.716 ms - 19298[0m
+[0mGET /importance [32m200 [0m7.353 ms - 23723[0m
+[0mGET /diag [32m200 [0m423.068 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m426.476 ms - 468[0m
+[0mGET / [32m200 [0m1.333 ms - 26060[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m25.282 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m27.470 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.903 ms - 17780[0m
+[0mGET /color/default.css [32m200 [0m1.753 ms - 652[0m
+[0mGET /css/style.css [32m200 [0m1.764 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m1.837 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.705 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.395 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.375 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.354 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.368 ms - 53846[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.328 ms - 134906[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.766 ms - 121260[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.383 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.462 ms - 1021[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.635 ms - 284394[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.616 ms - 151665[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.922 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.928 ms - 4014[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.384 ms - 219303[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.362 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.407 ms - 22360[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.813 ms - 33891[0m
+[0mGET /img/github-mark.png [32m200 [0m0.850 ms - 11264[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.356 ms - 955391[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.eot? [32m200 [0m0.507 ms - 20127[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.428 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.652 ms - 4093655[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.648 ms - 3599848[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.529 ms - 3497428[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.634 ms - 21[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m7.870 ms - 19298[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m15.759 ms - 14050[0m
+[0mGET /importance [32m200 [0m6.669 ms - 23723[0m
+[0mGET /favicon.ico [33m404 [0m8.589 ms - 925[0m
+[0mGET /diag [32m200 [0m386.635 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m395.828 ms - 468[0m
+[0mGET / [32m200 [0m0.889 ms - 26060[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m11.261 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.157 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.903 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m1.728 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m1.794 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m0.421 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.369 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m1.153 ms - 20249[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m1.330 ms - 121260[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m1.011 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.926 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.412 ms - 53845[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.596 ms - 151665[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.612 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.409 ms - 70433[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.316 ms - 284394[0m
+[0mGET /js/custom.js [32m200 [0m0.445 ms - 1021[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.597 ms - 5158[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.669 ms - 18028[0m
+[0mGET /timer.png [32m200 [0m0.396 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.539 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.422 ms - 22360[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.418 ms - 219303[0m
+[0mGET /img/github-mark.png [32m200 [0m0.666 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.543 ms - 33891[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.546 ms - 955391[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.412 ms - 1884488[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.465 ms - 3599848[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.451 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.416 ms - 3497428[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m8.870 ms - 21[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m11.833 ms - 19298[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m15.536 ms - 14048[0m
+[0mGET /importance [32m200 [0m10.763 ms - 23723[0m
+[0mGET /diag [32m200 [0m445.521 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m447.417 ms - 468[0m
+[0mGET /favicon.ico [33m404 [0m11.101 ms - 925[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11236 [32m200 [0m12.657 ms - 1556[0m
+[0mGET /collisionsByZipcode?zipcode=11236&accidentType=ALL [32m200 [0m49.026 ms - 46661[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11385 [32m200 [0m10.127 ms - 1542[0m
+[0mGET /collisionsByZipcode?zipcode=11385&accidentType=ALL [32m200 [0m34.530 ms - 32745[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /collisionsByZipcode?zipcode=11430&accidentType=ALL [32m200 [0m14.796 ms - 8176[0m
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11430 [32m200 [0m8.054 ms - 1531[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=10312 [32m200 [0m58.880 ms - 1565[0m
+[0mGET /collisionsByZipcode?zipcode=10312&accidentType=ALL [32m200 [0m73.792 ms - 17082[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=10306 [32m200 [0m9.853 ms - 1484[0m
+[0mGET /collisionsByZipcode?zipcode=10306&accidentType=ALL [32m200 [0m28.422 ms - 21480[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11364 [32m200 [0m8.739 ms - 1559[0m
+[0mGET /collisionsByZipcode?zipcode=11364&accidentType=ALL [32m200 [0m22.300 ms - 11714[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11362 [32m200 [0m7.716 ms - 1509[0m
+[0mGET /collisionsByZipcode?zipcode=11362&accidentType=ALL [32m200 [0m24.525 ms - 17297[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11004 [32m200 [0m7.570 ms - 1525[0m
+[0mGET /collisionsByZipcode?zipcode=11004&accidentType=ALL [32m200 [0m12.127 ms - 5094[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11427 [32m200 [0m7.535 ms - 1557[0m
+[0mGET /collisionsByZipcode?zipcode=11427&accidentType=ALL [32m200 [0m18.037 ms - 13457[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11370 [32m200 [0m11.403 ms - 1574[0m
+[0mGET /collisionsByZipcode?zipcode=11370&accidentType=ALL [32m200 [0m31.571 ms - 12884[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11369 [32m200 [0m19.728 ms - 1566[0m
+[0mGET /collisionsByZipcode?zipcode=11369&accidentType=ALL [32m200 [0m34.144 ms - 17703[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11371 [32m200 [0m12.055 ms - 1231[0m
+[0mGET /collisionsByZipcode?zipcode=11371&accidentType=ALL [32m200 [0m16.999 ms - 2190[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=10307 [32m200 [0m10.224 ms - 1513[0m
+[0mGET /collisionsByZipcode?zipcode=10307&accidentType=ALL [32m200 [0m14.276 ms - 1959[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&zipcode=11234 [32m200 [0m12.056 ms - 1557[0m
+[0mGET /collisionsByZipcode?zipcode=11234&accidentType=ALL [32m200 [0m44.741 ms - 40724[0m
+[0mGET / [32m200 [0m0.931 ms - 26060[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m10.689 ms - 925[0m
+[0mGET /css/animate.css [36m304 [0m0.300 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.309 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.231 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.363 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.241 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.301 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.245 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.229 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.241 ms - -[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.479 ms - 53845[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.244 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.223 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.224 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.238 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.220 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.230 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.321 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.234 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.311 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m1.412 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m7.155 ms - 925[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.278 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.231 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.286 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.225 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.426 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.237 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.376 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.233 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.967 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.368 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.421 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.259 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.277 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.260 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m11.747 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.416 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.211 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.224 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.236 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m5.897 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.759 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m9.895 ms - -[0m
+[0mGET /importance [36m304 [0m7.040 ms - -[0m
+[0mGET /diag [36m304 [0m420.294 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m435.190 ms - -[0m
+[0mGET / [32m200 [0m0.821 ms - 26060[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m9.752 ms - 925[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.275 ms - 17780[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.283 ms - 5885[0m
+[0mGET /color/default.css [32m200 [0m2.371 ms - 652[0m
+[0mGET /css/style.css [32m200 [0m1.879 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m1.826 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.372 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.993 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.825 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.371 ms - 36868[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.148 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.859 ms - 121260[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.150 ms - 284394[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.359 ms - 53845[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.673 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.351 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.822 ms - 134906[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.416 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.409 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.519 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.489 ms - 22360[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.363 ms - 955391[0m
+[0mGET /img/github-mark.png [32m200 [0m0.599 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.582 ms - 33891[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.428 ms - 3497428[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.562 ms - 219303[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.643 ms - 3599848[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.772 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.475 ms - 54416[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.499 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.381 ms - 4093655[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m7.253 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.172 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m8.161 ms - 19298[0m
+[0mGET /importance [32m200 [0m7.455 ms - 23723[0m
+[0mGET /diag [32m200 [0m432.087 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m441.330 ms - 468[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T02:00:00&toHour=2016-04-21T05:00:00 [32m200 [0m8.743 ms - 14059[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /collisionsByZipcode?zipcode=11368&accidentType=ALL [32m200 [0m41.910 ms - 36845[0m
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T02:00:00&toHour=2016-04-21T05:00:00&zipcode=11368 [32m200 [0m8.343 ms - 1553[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.9 [32m200 [0m9.869 ms - 18961[0m
+[0mGET / [32m200 [0m0.794 ms - 26060[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m11.400 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m13.477 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m13.487 ms - 17780[0m
+[0mGET /color/default.css [32m200 [0m2.064 ms - 652[0m
+[0mGET /css/style.css [32m200 [0m1.915 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m1.982 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.405 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m1.284 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.886 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.433 ms - 36868[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.200 ms - 284394[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.959 ms - 121260[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.398 ms - 53881[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.272 ms - 151665[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.403 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.372 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.426 ms - 134906[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.410 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.613 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.630 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.528 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.591 ms - 22360[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.958 ms - 3599848[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.410 ms - 955391[0m
+[0mGET /img/github-mark.png [32m200 [0m0.645 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.581 ms - 33891[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.548 ms - 18028[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m1.329 ms - 3497428[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.437 ms - 54416[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.450 ms - 4093655[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.571 ms - 1884488[0m
+{ took: 3,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.616 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m8.496 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m10.878 ms - 19298[0m
+[0mGET /importance [32m200 [0m4.487 ms - 23723[0m
+[0mGET /diag [32m200 [0m423.158 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m424.200 ms - 468[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.7 [32m200 [0m9.759 ms - 19111[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T03:00:00&toHour=2016-04-21T05:00:00 [32m200 [0m7.565 ms - 14068[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /collisionsByZipcode?zipcode=11378&accidentType=ALL [32m200 [0m23.118 ms - 17182[0m
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T03:00:00&toHour=2016-04-21T05:00:00&zipcode=11378 [32m200 [0m9.560 ms - 1542[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m23.061 ms - 19298[0m
+[0mGET / [32m200 [0m0.758 ms - 26060[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m11.479 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.128 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.842 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m1.756 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m1.826 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m0.430 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.499 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.396 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m1.200 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.572 ms - 36868[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.418 ms - 121260[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m2.621 ms - 151665[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.602 ms - 53881[0m
+[0mGET /js/custom.js [32m200 [0m0.399 ms - 1021[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.231 ms - 284394[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.540 ms - 70433[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.530 ms - 134906[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.588 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.583 ms - 219303[0m
+[0mGET / [32m200 [0m0.534 ms - 26060[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.547 ms - 955391[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m10.273 ms - 925[0m
+[0mGET /css/d3.slider.css [32m200 [0m2.730 ms - 1022[0m
+[0mGET /css/animate.css [32m200 [0m2.589 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m2.608 ms - 652[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.578 ms - 5885[0m
+[0mGET /css/style.css [32m200 [0m2.295 ms - 14223[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.450 ms - 17780[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m1.541 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m1.569 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.463 ms - 36868[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.596 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.421 ms - 121260[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.488 ms - 53881[0m
+[0mGET /js/custom.js [32m200 [0m0.375 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.403 ms - 134906[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.776 ms - 284394[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.388 ms - 70433[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.406 ms - 5158[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.433 ms - 54416[0m
+[0mGET /timer.png [32m200 [0m0.384 ms - 4014[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.461 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.527 ms - 22360[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.541 ms - 219303[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.440 ms - 4093655[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.819 ms - 955391[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.455 ms - 18028[0m
+[0mGET /img/github-mark.png [32m200 [0m0.425 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.543 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.553 ms - 3599848[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.431 ms - 3497428[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.438 ms - 1884488[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.437 ms - 3599848[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.441 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.522 ms - 3497428[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m5.960 ms - 21[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m12.536 ms - 19298[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m14.450 ms - 14048[0m
+[0mGET /importance [32m200 [0m11.461 ms - 23723[0m
+[0mGET /diag [32m200 [0m441.714 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m443.937 ms - 468[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T02:00:00&toHour=2016-04-21T04:00:00 [32m200 [0m8.830 ms - 14049[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T02:00:00&toHour=2016-04-21T04:00:00&zipcode=11385 [32m200 [0m7.440 ms - 1551[0m
+[0mGET /collisionsByZipcode?zipcode=11385&accidentType=ALL [32m200 [0m35.163 ms - 32745[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.75 [32m200 [0m7.824 ms - 19075[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.781 ms - 18667[0m
+[0mGET / [32m200 [0m0.771 ms - 26191[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m11.526 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m12.739 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.010 ms - 17780[0m
+[0mGET /color/default.css [32m200 [0m1.945 ms - 652[0m
+[0mGET /css/style.css [32m200 [0m1.792 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m1.898 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.465 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.934 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.389 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.407 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.408 ms - 53881[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.422 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.697 ms - 121260[0m
+[0mGET /js/custom.js [32m200 [0m0.378 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.413 ms - 134906[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.512 ms - 284394[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.409 ms - 70433[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.528 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.413 ms - 4014[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.572 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.398 ms - 12854[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.523 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.790 ms - 54416[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.497 ms - 955391[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.574 ms - 219303[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.677 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.485 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.430 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.452 ms - 3599848[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.447 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.524 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.569 ms - 3497428[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.279 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m10.465 ms - 14048[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m13.109 ms - 19298[0m
+[0mGET /importance [32m200 [0m9.476 ms - 23723[0m
+[0mGET /diag [32m200 [0m417.807 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m425.895 ms - 468[0m
+[0mGET / [32m200 [0m0.884 ms - 26173[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m11.737 ms - 925[0m
+[0mGET /css/style.css [32m200 [0m12.631 ms - 14223[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m12.736 ms - 17780[0m
+[0mGET /color/default.css [32m200 [0m12.671 ms - 652[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m12.679 ms - 5885[0m
+[0mGET /css/animate.css [32m200 [0m12.681 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.376 ms - 1022[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.468 ms - 121260[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m1.178 ms - 20249[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.211 ms - 151665[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.182 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.350 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.679 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.812 ms - 53881[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.358 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.485 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.343 ms - 1021[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.366 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.423 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.410 ms - 4014[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.517 ms - 18667[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.387 ms - 3497428[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.625 ms - 12854[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.389 ms - 3599848[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.630 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.704 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.536 ms - 33891[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.390 ms - 4093655[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.437 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.539 ms - 54416[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.429 ms - 1884488[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.459 ms - 955391[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.537 ms - 4093655[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.811 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m16.698 ms - 14048[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m30.011 ms - 19298[0m
+[0mGET /importance [32m200 [0m23.045 ms - 23723[0m
+[0mGET /diag [32m200 [0m427.766 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m439.806 ms - 468[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.739 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m10.377 ms - 925[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m10.247 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.416 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.476 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.573 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.282 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.239 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.623 ms - 54416[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.637 ms - 1963[0m
+[0mGET / [32m200 [0m0.771 ms - 26586[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m8.590 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m8.695 ms - 5885[0m
+[0mGET /css/style.css [32m200 [0m2.479 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m1.968 ms - 652[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.750 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m1.895 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.415 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.913 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.405 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.527 ms - 36868[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.432 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.555 ms - 121260[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.386 ms - 53881[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.402 ms - 134906[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.964 ms - 284394[0m
+[0mGET /js/custom.js [32m200 [0m0.393 ms - 1021[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.538 ms - 70433[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.863 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.420 ms - 4014[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.564 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.453 ms - 12854[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.440 ms - 18028[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.443 ms - 219303[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.765 ms - 1963[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.725 ms - 54416[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.579 ms - 22360[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.401 ms - 955391[0m
+[0mGET /img/github-mark.png [32m200 [0m0.421 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.444 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.441 ms - 3599848[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.883 ms - 3497428[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.441 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.523 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.652 ms - 3497428[0m
+{ took: 3,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m7.162 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m12.606 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m16.169 ms - 19298[0m
+[0mGET /importance [32m200 [0m15.625 ms - 23723[0m
+[0mGET /diag [32m200 [0m431.071 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m440.014 ms - 468[0m
+[0mGET / [32m200 [0m0.891 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m9.510 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m11.200 ms - 5885[0m
+[0mGET /color/default.css [32m200 [0m1.900 ms - 652[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.800 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m1.693 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m1.882 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.431 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.818 ms - 20249[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.857 ms - 121260[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.811 ms - 151665[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.773 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.464 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.356 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.367 ms - 53881[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.579 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.427 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.503 ms - 1021[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.399 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.439 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.426 ms - 4014[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.676 ms - 18028[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.391 ms - 955391[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.394 ms - 3497428[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.543 ms - 54416[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.415 ms - 4093655[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.390 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.382 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.404 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.394 ms - 22360[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.370 ms - 1884488[0m
+[0mGET /img/github-mark.png [32m200 [0m0.344 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.418 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.406 ms - 3599848[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m7.671 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.571 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m12.364 ms - 19298[0m
+[0mGET /importance [32m200 [0m11.693 ms - 23723[0m
+[0mGET /diag [32m200 [0m396.394 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m404.028 ms - 468[0m
+[0mGET / [32m200 [0m1.646 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m10.871 ms - 925[0m
+[0mGET /css/animate.css [36m304 [0m1.001 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.830 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.743 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.235 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.237 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.231 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.241 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.278 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.822 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.246 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.241 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.348 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.238 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.376 ms - -[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.546 ms - 53881[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.269 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.257 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.386 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.250 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.389 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.236 ms - -[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.473 ms - 18667[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.270 ms - -[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.454 ms - 1963[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.386 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.257 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.273 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.294 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.561 ms - 121260[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.254 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.276 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.392 ms - -[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m11.910 ms - -[0m
+[0mGET /importance [36m304 [0m13.521 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m16.015 ms - 14048[0m
+[0mGET /diag [36m304 [0m455.566 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m452.023 ms - -[0m
+[0mGET / [32m200 [0m0.874 ms - 26684[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m1.128 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.295 ms - 17780[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m33.297 ms - 925[0m
+[0mGET /css/style.css [32m200 [0m0.418 ms - 14223[0m
+[0mGET /css/animate.css [32m200 [0m0.656 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m0.386 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m1.153 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.371 ms - 20249[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.361 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.517 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.525 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.399 ms - 36868[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.545 ms - 151665[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.818 ms - 53881[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.824 ms - 134906[0m
+[0mGET /js/custom.js [32m200 [0m1.792 ms - 1021[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.449 ms - 70433[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.558 ms - 5158[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.770 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.492 ms - 54416[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.667 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.578 ms - 4014[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.428 ms - 955391[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.795 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.615 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.604 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.808 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.465 ms - 33891[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.577 ms - 18667[0m
+[0mGET /img/team/2b.jpg [32m200 [0m1.903 ms - 1884488[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.488 ms - 3497428[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.622 ms - 3599848[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m1.811 ms - 4093655[0m
+[0mGET /importance [32m200 [0m5.754 ms - 23723[0m
+{ took: 94,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m99.225 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m63.183 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m59.279 ms - 19298[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m135.466 ms - 468[0m
+[0mGET /diag [32m200 [0m499.543 ms - 6019838[0m
+[0mGET / [36m304 [0m0.554 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m26.231 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.447 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.212 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.207 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.196 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.190 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.181 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.181 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.189 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.184 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.179 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.243 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.222 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.209 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.233 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.243 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.224 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m5.941 ms - 925[0m
+[0mGET /timer.png [36m304 [0m1.450 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.326 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.222 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.226 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.242 ms - -[0m
+[0mGET /img/kibana-new-logo.png [36m304 [0m0.230 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.211 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.211 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.207 ms - -[0m
+[0mGET /img/linkedin_logo_small1.jpg [36m304 [0m0.221 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.224 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.222 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.224 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.222 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.215 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.233 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.266 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.737 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.352 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.308 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.329 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.250 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.221 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.248 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.227 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.226 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m8.140 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m11.259 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m15.724 ms - -[0m
+[0mGET /importance [36m304 [0m7.195 ms - -[0m
+[0mGET /diag [36m304 [0m411.233 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m412.191 ms - -[0m
+[0mGET / [36m304 [0m0.564 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.513 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.249 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m25.371 ms - 925[0m
+[0mGET /css/animate.css [36m304 [0m1.514 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.421 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.882 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m1.192 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.222 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.204 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.199 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.180 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.192 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m1.261 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.211 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.209 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.215 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.231 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.445 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m1.122 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.225 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.241 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.230 ms - -[0m
+[0mGET /img/kibana-new-logo.png [36m304 [0m0.225 ms - -[0m
+[0mGET /img/linkedin_logo_small1.jpg [36m304 [0m0.225 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.209 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.204 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.240 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.207 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.219 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m2.163 ms - 121260[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.256 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.233 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.229 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.399 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m13.858 ms - 14050[0m
+[0mGET /importance [36m304 [0m9.084 ms - -[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m14.298 ms - -[0m
+[0mGET /diag [36m304 [0m391.328 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m398.926 ms - -[0m
+[0mGET / [32m200 [0m1.001 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m11.186 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m13.184 ms - 5885[0m
+[0mGET /css/style.css [32m200 [0m2.303 ms - 14223[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.219 ms - 17780[0m
+[0mGET /color/default.css [32m200 [0m2.207 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m2.393 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m1.222 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m1.271 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m1.222 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m1.341 ms - 121260[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.460 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.539 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.409 ms - 53881[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.290 ms - 284394[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.440 ms - 70433[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.381 ms - 134906[0m
+[0mGET /js/custom.js [32m200 [0m0.847 ms - 1021[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.669 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.397 ms - 4014[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.431 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.491 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.973 ms - 1963[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.864 ms - 219303[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.412 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.955 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.610 ms - 33891[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.921 ms - 955391[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.441 ms - 18028[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css.map [32m200 [0m0.538 ms - 54416[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.882 ms - 1884488[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.434 ms - 3497428[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.434 ms - 4093655[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.639 ms - 3599848[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.740 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m13.505 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m14.653 ms - 19298[0m
+[0mGET /importance [32m200 [0m17.670 ms - 23723[0m
+[0mGET /diag [32m200 [0m452.025 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m453.488 ms - 468[0m
+[0mGET / [32m200 [0m1.175 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m29.699 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.620 ms - 5885[0m
+[0mGET /css/d3.slider.css [32m200 [0m1.757 ms - 1022[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.812 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m1.634 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m1.658 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m1.661 ms - 57095[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m2.144 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.395 ms - 6745[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m2.258 ms - 284394[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m2.253 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.441 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m2.143 ms - 53881[0m
+[0mGET /assets/js/moment.js [32m200 [0m2.073 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.422 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.374 ms - 1021[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.989 ms - 121260[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m1.016 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.849 ms - 4014[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.758 ms - 955391[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.945 ms - 219303[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.474 ms - 18667[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.751 ms - 18028[0m
+[0mGET /img/team/1b.jpg [32m200 [0m2.707 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m1.357 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.648 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.761 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.540 ms - 33891[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.742 ms - 3599848[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.690 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m1.131 ms - 3497428[0m
+{ took: 5,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m20.214 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m24.233 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m25.329 ms - 19298[0m
+[0mGET /diag [32m200 [0m430.754 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m432.749 ms - 468[0m
+[0mGET /importance [32m200 [0m8.614 ms - 23723[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.811 ms - 1884488[0m
+[0mGET /favicon.ico [33m404 [0m19.078 ms - 925[0m
+[0mGET /favicon.ico [33m404 [0m5.603 ms - 925[0m
+[0mGET / [36m304 [0m0.453 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m6.379 ms - 925[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.658 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.615 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.603 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.184 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.182 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.203 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.204 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.193 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.183 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.175 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.223 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.193 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.184 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.176 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.364 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.359 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.208 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.187 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.201 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.373 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.365 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.300 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.230 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.196 ms - -[0m
+[0mGET /img/linkedin_logo_small1.jpg [36m304 [0m0.392 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.384 ms - -[0m
+[0mGET /img/kibana-new-logo.png [36m304 [0m0.391 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.373 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.189 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.187 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.200 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.679 ms - -[0m
+[0mGET /importance [36m304 [0m16.426 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m21.078 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m22.079 ms - -[0m
+[0mGET /diag [36m304 [0m403.009 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m413.749 ms - -[0m
+[0mGET / [32m200 [0m0.911 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m10.638 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.691 ms - 5885[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.518 ms - 1022[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.707 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m1.727 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m1.837 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m1.773 ms - 57095[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.828 ms - 20249[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.951 ms - 121260[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m1.783 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m1.702 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.454 ms - 53881[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.560 ms - 134906[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.863 ms - 284394[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.749 ms - 151665[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.446 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.783 ms - 1021[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.497 ms - 219303[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.679 ms - 5158[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.469 ms - 18028[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.950 ms - 955391[0m
+[0mGET /timer.png [32m200 [0m0.431 ms - 4014[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.576 ms - 18667[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m1.003 ms - 1963[0m
+[0mGET /img/team/1b.jpg [32m200 [0m1.054 ms - 12854[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.851 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.562 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.718 ms - 33891[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.551 ms - 4093655[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.694 ms - 3599848[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.990 ms - 3497428[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.948 ms - 1884488[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m8.284 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m11.274 ms - 14048[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m15.108 ms - 19298[0m
+[0mGET /importance [32m200 [0m13.617 ms - 23723[0m
+[0mGET /diag [32m200 [0m447.585 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m450.650 ms - 468[0m
+[0mGET /favicon.ico [33m404 [0m22.725 ms - 925[0m
+[0mGET / [36m304 [0m0.472 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.795 ms - -[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m0.545 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m7.310 ms - 925[0m
+[0mGET /color/default.css [36m304 [0m0.748 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.731 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.617 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.595 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.469 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.202 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.198 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.190 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.210 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.515 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.514 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.202 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.281 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.202 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.327 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.203 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.201 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.198 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.210 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.194 ms - -[0m
+[0mGET /img/kibana-new-logo.png [36m304 [0m0.416 ms - -[0m
+[0mGET /img/linkedin_logo_small1.jpg [36m304 [0m0.403 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.192 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.191 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.199 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.225 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.629 ms - 121260[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.235 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.323 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.293 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.563 ms - -[0m
+[0mGET /importance [36m304 [0m7.977 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [36m304 [0m12.952 ms - -[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m11.455 ms - -[0m
+[0mGET /diag [36m304 [0m432.567 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m442.709 ms - -[0m
+[0mGET / [36m304 [0m0.632 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.409 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m11.042 ms - 925[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m10.960 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.317 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.463 ms - -[0m
+[0mGET /css/animate.css [36m304 [0m0.499 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.474 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.278 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.383 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.611 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.671 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.528 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.482 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.242 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.510 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.469 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.247 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.798 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.707 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.646 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.702 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.656 ms - -[0m
+[0mGET /img/grid-image.jpg [36m304 [0m0.238 ms - -[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.215 ms - -[0m
+[0mGET /timer.png [36m304 [0m0.221 ms - -[0m
+[0mGET /img/kibana-new-logo.png [36m304 [0m0.304 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.229 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.387 ms - -[0m
+[0mGET /img/linkedin_logo_small1.jpg [36m304 [0m0.241 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.415 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.244 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.238 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.240 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.238 ms - -[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.222 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.250 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.347 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.242 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.327 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.243 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.358 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.246 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.239 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.243 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [36m304 [0m6.345 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m13.157 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m13.947 ms - -[0m
+[0mGET /importance [36m304 [0m10.505 ms - -[0m
+[0mGET /diag [36m304 [0m396.185 ms - -[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [36m304 [0m391.885 ms - -[0m
+[0mGET / [32m200 [0m1.122 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m38.279 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.541 ms - 5885[0m
+[0mGET /color/default.css [32m200 [0m2.550 ms - 652[0m
+[0mGET /css/style.css [32m200 [0m2.556 ms - 14223[0m
+[0mGET /css/d3.slider.css [32m200 [0m2.627 ms - 1022[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m2.627 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m2.559 ms - 57095[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.372 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m2.057 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.402 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.397 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.400 ms - 53881[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.678 ms - 151665[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.427 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.370 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.462 ms - 134906[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.375 ms - 284394[0m
+[0mGET /timer.png [32m200 [0m0.566 ms - 4014[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.397 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.436 ms - 219303[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.546 ms - 18667[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.472 ms - 18028[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.569 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.519 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.418 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.519 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.572 ms - 33891[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.548 ms - 955391[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.706 ms - 1884488[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.438 ms - 3599848[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.419 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.429 ms - 3497428[0m
+{ took: 3,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.985 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m8.109 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m8.667 ms - 19298[0m
+[0mGET /importance [32m200 [0m5.568 ms - 23723[0m
+[0mGET /diag [32m200 [0m437.902 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m450.359 ms - 468[0m
+[0mGET /favicon.ico [33m404 [0m9.641 ms - 925[0m
+[0mGET / [32m200 [0m2.060 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m6.733 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.472 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m0.600 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m0.393 ms - 57095[0m
+[0mGET /color/default.css [32m200 [0m0.605 ms - 652[0m
+[0mGET /css/style.css [32m200 [0m0.631 ms - 14223[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.358 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.426 ms - 20249[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.437 ms - 121260[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.536 ms - 151665[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.412 ms - 284394[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.393 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.431 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.545 ms - 53881[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.406 ms - 134906[0m
+[0mGET /js/custom.js [32m200 [0m0.700 ms - 1021[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.905 ms - 70433[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.429 ms - 5158[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.428 ms - 3599848[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.428 ms - 219303[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.427 ms - 955391[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.472 ms - -[0m
+[0mGET /timer.png [32m200 [0m0.429 ms - 4014[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.529 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.810 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.440 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.538 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.616 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.965 ms - 33891[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.534 ms - 1884488[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.436 ms - 18028[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.556 ms - 3497428[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.435 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.440 ms - 4093655[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.343 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.230 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.467 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.313 ms - -[0m
+[0mGET / [32m200 [0m0.553 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m7.319 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m2.006 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m0.425 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m0.384 ms - 57095[0m
+[0mGET /css/style.css [32m200 [0m0.385 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m0.365 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.377 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.396 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.374 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.380 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.413 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.398 ms - 53881[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.395 ms - 284394[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.398 ms - 151665[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.406 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.366 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.395 ms - 134906[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.405 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.447 ms - 219303[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.275 ms - -[0m
+[0mGET /timer.png [32m200 [0m0.460 ms - 4014[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.404 ms - 955391[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.543 ms - 18028[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.407 ms - -[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.446 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.512 ms - 12854[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.256 ms - -[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.435 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.400 ms - 22360[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.500 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.239 ms - -[0m
+[0mGET /img/github-mark.png [32m200 [0m0.451 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.449 ms - 33891[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.270 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.463 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.454 ms - 3497428[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.424 ms - 1884488[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.498 ms - -[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m7.957 ms - 21[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.419 ms - 3599848[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m9.337 ms - 14048[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m10.553 ms - 19298[0m
+[0mGET /importance [32m200 [0m6.888 ms - 23723[0m
+[0mGET /diag [32m200 [0m421.773 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m425.314 ms - 468[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.569 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m15.954 ms - 21[0m
+[0mGET /predict?dateStr=0422&accidentType=ALL [32m200 [0m10.265 ms - 14057[0m
+[0mGET /tenDayTrend?lower=2016-04-22T00:00:00&upper=2016-05-01T23:00:00&threshold=.5 [32m200 [0m22.750 ms - 19265[0m
+[0mGET /importance [32m200 [0m17.720 ms - 23723[0m
+[0mGET /diag [32m200 [0m342.009 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-23T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-23T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m346.245 ms - 468[0m
+[0mGET /favicon.ico [33m404 [0m20.148 ms - 925[0m
+[0mGET /favicon.ico [33m404 [0m4.880 ms - 925[0m
+[0mGET / [32m200 [0m0.683 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m5.222 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.489 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m0.387 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m0.368 ms - 57095[0m
+[0mGET /css/style.css [32m200 [0m0.355 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m0.334 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m2.409 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.455 ms - 20249[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.476 ms - 121260[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.337 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.363 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.370 ms - 53881[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.444 ms - 151665[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.354 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.370 ms - 70433[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.390 ms - 284394[0m
+[0mGET /js/custom.js [32m200 [0m0.329 ms - 1021[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.542 ms - 219303[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.586 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.387 ms - 4014[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff [32m200 [0m0.496 ms - 23424[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.609 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.398 ms - 12854[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.387 ms - 3599848[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.641 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.455 ms - 22360[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.394 ms - 955391[0m
+[0mGET /img/github-mark.png [32m200 [0m0.647 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.486 ms - 33891[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.359 ms - 3497428[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.385 ms - 4093655[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.764 ms - 1884488[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m5.698 ms - 21[0m
+[0mGET /favicon.ico [33m404 [0m10.843 ms - 925[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m12.778 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m14.593 ms - 19298[0m
+[0mGET /importance [32m200 [0m5.939 ms - 23723[0m
+[0mGET /diag [32m200 [0m406.672 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m440.195 ms - 468[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T01:00:00&toHour=2016-04-21T03:00:00 [32m200 [0m8.928 ms - 14040[0m
+[0mGET / [32m200 [0m0.894 ms - 26684[0m
+[0mGET /css/animate.css [32m200 [0m1.879 ms - 57095[0m
+[0mGET /css/style.css [32m200 [0m1.601 ms - 14223[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m1.610 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.864 ms - 17780[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m8.754 ms - 925[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0421&accidentType=ALL&fromHour=2016-04-21T01:00:00&toHour=2016-04-21T03:00:00&zipcode=11203 [32m200 [0m11.923 ms - 1444[0m
+[0mGET /collisionsByZipcode?zipcode=11203&accidentType=ALL [32m200 [0m47.655 ms - 50856[0m
+[0mGET /color/default.css [32m200 [0m0.461 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.434 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.921 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.664 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.400 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.350 ms - 53881[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.963 ms - 121260[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.912 ms - 151665[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.378 ms - 284394[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.567 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.347 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.376 ms - 134906[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.621 ms - 5158[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.387 ms - 955391[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.516 ms - 18028[0m
+[0mGET /timer.png [32m200 [0m0.448 ms - 4014[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.427 ms - 219303[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.371 ms - 18667[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.496 ms - 4093655[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.695 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.392 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.513 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.603 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.490 ms - 33891[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.501 ms - 3497428[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.446 ms - 3599848[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.576 ms - 1884488[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m5.727 ms - 21[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m12.193 ms - 19298[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m14.829 ms - 14049[0m
+[0mGET /diag [32m200 [0m445.437 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m455.312 ms - 468[0m
+[0mGET /importance [32m200 [0m389.494 ms - 23723[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.75 [32m200 [0m8.961 ms - 19075[0m
+[0mGET / [32m200 [0m0.772 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m8.156 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.474 ms - 5885[0m
+[0mGET /css/animate.css [32m200 [0m0.405 ms - 57095[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m0.403 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m0.417 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m0.705 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.698 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.695 ms - 20249[0m
+[0mGET /css/animate.css [36m304 [0m0.448 ms - -[0m
+[0mGET /css/bootstrap-select.min.css [36m304 [0m0.453 ms - -[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m7.381 ms - 925[0m
+[0mGET /font-awesome/css/font-awesome.min.css [36m304 [0m7.622 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.742 ms - 121260[0m
+[0mGET /css/style.css [36m304 [0m0.270 ms - -[0m
+[0mGET /color/default.css [36m304 [0m0.592 ms - -[0m
+[0mGET /css/d3.slider.css [36m304 [0m0.461 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m1.671 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m1.613 ms - 53881[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m1.700 ms - 6745[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.416 ms - 134906[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.708 ms - 151665[0m
+[0mGET /js/custom.js [32m200 [0m0.689 ms - 1021[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.439 ms - 284394[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.426 ms - 70433[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.897 ms - 955391[0m
+[0mGET /timer.png [32m200 [0m0.384 ms - 4014[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.453 ms - 18667[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m1.238 ms - 5158[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.851 ms - 12854[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m1.277 ms - 3599848[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.427 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.387 ms - 22360[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.820 ms - 4093655[0m
+[0mGET /img/linkedin_logo_small1.jpg [36m304 [0m0.263 ms - -[0m
+[0mGET /assets/js/colorbrewer.js [36m304 [0m0.352 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m1.444 ms - 3497428[0m
+[0mGET /img/linkedin_logo_small1.jpg [36m304 [0m0.567 ms - -[0m
+[0mGET /img/github-mark.png [32m200 [0m0.739 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.500 ms - 33891[0m
+[0mGET /timer.png [36m304 [0m0.350 ms - -[0m
+[0mGET /img/kibana-new-logo.png [36m304 [0m0.248 ms - -[0m
+[0mGET /img/team/1b.jpg [36m304 [0m0.232 ms - -[0m
+[0mGET /img/linkedin_logo_small1.jpg [36m304 [0m0.669 ms - -[0m
+[0mGET /img/team/4b.jpg [36m304 [0m0.558 ms - -[0m
+[0mGET /assets/js/jquery-1.11.3.js [36m304 [0m0.238 ms - -[0m
+[0mGET /img/wundergroundLogo.jpg [36m304 [0m0.505 ms - -[0m
+[0mGET /img/github-mark.png [36m304 [0m0.627 ms - -[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.479 ms - 219303[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.787 ms - 1884488[0m
+[0mGET /assets/js/d3.min.js [36m304 [0m0.352 ms - -[0m
+[0mGET /img/team/2b.jpg [36m304 [0m0.229 ms - -[0m
+[0mGET /assets/js/d3-tip.js [36m304 [0m0.256 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [36m304 [0m0.648 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [36m304 [0m0.603 ms - -[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.474 ms - 18028[0m
+[0mGET /assets/js/saferoad.js [36m304 [0m0.258 ms - -[0m
+[0mGET /assets/js/moment.js [36m304 [0m0.302 ms - -[0m
+[0mGET /js/bootstrap-select.js [36m304 [0m0.401 ms - -[0m
+[0mGET /js/custom.js [36m304 [0m0.221 ms - -[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [36m304 [0m0.388 ms - -[0m
+[0mGET /assets/data/PolicePrecincts.js [36m304 [0m0.366 ms - -[0m
+[0mGET /assets/data/CityCouncilDistricts.js [36m304 [0m0.498 ms - -[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.314 ms - -[0m
+[0mGET /assets/js/leaflet-heat.js [36m304 [0m0.313 ms - -[0m
+{ took: 1,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m5.623 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m8.364 ms - 14049[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m14.116 ms - 19298[0m
+[0mGET /importance [32m200 [0m15.670 ms - 23723[0m
+[0mGET /diag [32m200 [0m403.837 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m407.240 ms - 468[0m
+[0mGET /favicon.ico [33m404 [0m8.012 ms - 925[0m
+[0mGET / [32m200 [0m0.742 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m7.409 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.504 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m0.502 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m0.399 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m0.379 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.372 ms - 1022[0m
+[0mGET /css/animate.css [32m200 [0m0.502 ms - 57095[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.524 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.379 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.430 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.427 ms - 36868[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.534 ms - 151665[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.521 ms - 70433[0m
+[0mGET /js/custom.js [32m200 [0m0.383 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.459 ms - 134906[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.402 ms - 53881[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.505 ms - 5158[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.417 ms - 284394[0m
+[0mGET /timer.png [32m200 [0m0.417 ms - 4014[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.417 ms - 18028[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.573 ms - 219303[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.510 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.512 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.433 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.406 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.447 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.483 ms - 33891[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.798 ms - 955391[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.553 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.619 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.678 ms - 3497428[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.604 ms - 3599848[0m
+{ took: 3,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.902 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m10.187 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m8.446 ms - 19298[0m
+[0mGET /importance [32m200 [0m4.954 ms - 23723[0m
+[0mGET /diag [32m200 [0m410.399 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m414.355 ms - 468[0m
+[0mGET /favicon.ico [33m404 [0m9.784 ms - 925[0m
+[0mGET / [32m200 [0m0.755 ms - 26684[0m
+[0mGET /color/default.css [32m200 [0m0.557 ms - 652[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.413 ms - 5885[0m
+[0mGET /css/animate.css [32m200 [0m0.416 ms - 57095[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m7.045 ms - 925[0m
+[0mGET /css/style.css [32m200 [0m8.301 ms - 14223[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m8.026 ms - 17780[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.471 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.593 ms - 20249[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.421 ms - 121260[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.400 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.602 ms - 36868[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.416 ms - 151665[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.552 ms - 53881[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.495 ms - 70433[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.418 ms - 134906[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.450 ms - 284394[0m
+[0mGET /js/custom.js [32m200 [0m0.503 ms - 1021[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.439 ms - 5158[0m
+[0mGET /timer.png [32m200 [0m0.551 ms - 4014[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff [32m200 [0m0.453 ms - 23424[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.506 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.519 ms - 12854[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.422 ms - 955391[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.515 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.602 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.493 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.601 ms - 33891[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.653 ms - 219303[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.455 ms - 3599848[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.434 ms - 3497428[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.477 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.538 ms - 4093655[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m6.150 ms - 21[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m11.346 ms - 19298[0m
+[0mGET /importance [32m200 [0m13.468 ms - 23723[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m15.669 ms - 14049[0m
+[0mGET /diag [32m200 [0m429.120 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m431.219 ms - 468[0m
+[0mGET /favicon.ico [33m404 [0m7.275 ms - 925[0m
+[0mGET / [32m200 [0m0.731 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m6.379 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.980 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m1.002 ms - 17780[0m
+[0mGET /css/style.css [32m200 [0m1.374 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m1.384 ms - 652[0m
+[0mGET /css/animate.css [32m200 [0m1.355 ms - 57095[0m
+[0mGET /css/d3.slider.css [32m200 [0m0.511 ms - 1022[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m0.795 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.874 ms - 6745[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.446 ms - 36868[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.810 ms - 121260[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m0.417 ms - 284394[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.549 ms - 53881[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m0.877 ms - 151665[0m
+[0mGET /js/custom.js [32m200 [0m0.380 ms - 1021[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.465 ms - 134906[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.423 ms - 70433[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.621 ms - 5158[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.530 ms - 18028[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.461 ms - 219303[0m
+[0mGET /timer.png [32m200 [0m0.660 ms - 4014[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.628 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.642 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.841 ms - 1963[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.902 ms - 22360[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.951 ms - 955391[0m
+[0mGET /img/github-mark.png [32m200 [0m0.436 ms - 11264[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.498 ms - 33891[0m
+[0mGET /img/team/2b.jpg [32m200 [0m0.583 ms - 1884488[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.552 ms - 4093655[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.501 ms - 3497428[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.438 ms - 3599848[0m
+[0mGET /assets/data/SchoolDistricts.js [36m304 [0m0.500 ms - -[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m124.910 ms - 14050[0m
+[0mGET /importance [32m200 [0m121.527 ms - 23723[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m129.471 ms - 19298[0m
+{ took: 6,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m162.808 ms - 21[0m
+[0mGET /diag [32m200 [0m559.668 ms - 6019838[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m569.033 ms - 468[0m
+[0mGET /favicon.ico [33m404 [0m10.390 ms - 925[0m
+[0mGET /predict?dateStr=0430&accidentType=MOTO [32m200 [0m10.332 ms - 13992[0m
+[0mGET / [32m200 [0m0.979 ms - 26684[0m
+[0mGET /bootstrap/css/bootstrap.min.css [33m404 [0m7.279 ms - 925[0m
+[0mGET /css/bootstrap-select.min.css [32m200 [0m0.473 ms - 5885[0m
+[0mGET /font-awesome/css/font-awesome.min.css [32m200 [0m0.395 ms - 17780[0m
+[0mGET /css/animate.css [32m200 [0m0.515 ms - 57095[0m
+[0mGET /css/style.css [32m200 [0m0.387 ms - 14223[0m
+[0mGET /color/default.css [32m200 [0m1.828 ms - 652[0m
+[0mGET /css/d3.slider.css [32m200 [0m2.502 ms - 1022[0m
+[0mGET /timer.png [32m200 [0m1.192 ms - 4014[0m
+[0mGET /assets/js/colorbrewer.js [32m200 [0m1.670 ms - 20249[0m
+[0mGET /assets/js/d3-tip.js [32m200 [0m0.696 ms - 6745[0m
+[0mGET /assets/js/d3.min.js [32m200 [0m1.111 ms - 151665[0m
+[0mGET /bootstrap-3.3.6-dist/css/bootstrap.min.css [32m200 [0m0.729 ms - 121260[0m
+[0mGET /bootstrap-3.3.6-dist/js/bootstrap.min.js [32m200 [0m0.824 ms - 36868[0m
+[0mGET /assets/js/saferoad.js [32m200 [0m0.875 ms - 53881[0m
+[0mGET /assets/js/jquery-1.11.3.js [32m200 [0m1.499 ms - 284394[0m
+[0mGET /js/bootstrap-select.js [32m200 [0m0.597 ms - 70433[0m
+[0mGET /assets/js/moment.js [32m200 [0m0.390 ms - 134906[0m
+[0mGET /js/custom.js [32m200 [0m0.473 ms - 1021[0m
+[0mGET /assets/data/nyc_zip_codes_multipolygon_filtered.js [32m200 [0m0.362 ms - 955391[0m
+[0mGET /assets/js/leaflet-heat.js [32m200 [0m0.360 ms - 5158[0m
+[0mGET /img/grid-image.jpg [32m200 [0m0.516 ms - 219303[0m
+[0mGET /img/kibana-new-logo.png [32m200 [0m0.443 ms - 18667[0m
+[0mGET /img/team/1b.jpg [32m200 [0m0.502 ms - 12854[0m
+[0mGET /img/linkedin_logo_small1.jpg [32m200 [0m0.385 ms - 1963[0m
+[0mGET /assets/data/CityCouncilDistricts.js [32m200 [0m0.836 ms - 3599848[0m
+[0mGET /img/team/4b.jpg [32m200 [0m0.957 ms - 22360[0m
+[0mGET /img/github-mark.png [32m200 [0m0.400 ms - 11264[0m
+[0mGET /img/team/2b.jpg [32m200 [0m1.008 ms - 1884488[0m
+[0mGET /img/wundergroundLogo.jpg [32m200 [0m0.703 ms - 33891[0m
+[0mGET /assets/data/SchoolDistricts.js [32m200 [0m0.674 ms - 3497428[0m
+[0mGET /bootstrap-3.3.6-dist/fonts/glyphicons-halflings-regular.woff2 [32m200 [0m0.496 ms - 18028[0m
+[0mGET /assets/data/PolicePrecincts.js [32m200 [0m0.516 ms - 4093655[0m
+{ took: 2,
+  timed_out: false,
+  _shards: { total: 5, successful: 5, failed: 0 },
+  hits: { total: 1, max_score: 1, hits: [ [Object] ] } }
+[0mGET /getUpdateDate [32m200 [0m5.544 ms - 21[0m
+[0mGET /predict?dateStr=0421&accidentType=ALL [32m200 [0m12.336 ms - 14050[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [32m200 [0m14.585 ms - 19298[0m
+[0mGET /importance [32m200 [0m9.363 ms - 23723[0m
+[0mGET /getCurrentStats?uc=2016-04-22T00:00:00&lc=2016-01-01T00:00:00&ul=2015-04-22T00:00:00&ll=2015-01-01T00:00:00 [32m200 [0m66.719 ms - 468[0m
+[0mGET /diag [32m200 [0m429.724 ms - 6019838[0m
+[0mGET /favicon.ico [33m404 [0m7.342 ms - 925[0m
+[0mGET /predict?dateStr=0430&accidentType=ALL [32m200 [0m10.634 ms - 14051[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /collisionsByZipcode?zipcode=11220&accidentType=ALL [32m200 [0m36.750 ms - 33618[0m
+[0mGET /getInfoForZipcode?dateStr=0430&accidentType=ALL&zipcode=11220 [32m200 [0m22.513 ms - 1571[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0430&accidentType=ALL&zipcode=11418 [32m200 [0m11.126 ms - 1552[0m
+[0mGET /collisionsByZipcode?zipcode=11418&accidentType=ALL [32m200 [0m21.946 ms - 16217[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0430&accidentType=ALL&zipcode=11430 [32m200 [0m10.044 ms - 1529[0m
+[0mGET /collisionsByZipcode?zipcode=11430&accidentType=ALL [32m200 [0m16.001 ms - 8176[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0430&accidentType=ALL&zipcode=11212 [32m200 [0m7.474 ms - 1433[0m
+[0mGET /collisionsByZipcode?zipcode=11212&accidentType=ALL [32m200 [0m38.556 ms - 35475[0m
+{ range: { collision_injured_or_killed: { gt: 0 } } }
+[0mGET /getInfoForZipcode?dateStr=0430&accidentType=ALL&zipcode=11234 [32m200 [0m9.245 ms - 1564[0m
+[0mGET /collisionsByZipcode?zipcode=11234&accidentType=ALL [32m200 [0m41.015 ms - 40724[0m
+[0mGET /tenDayTrend?lower=2016-04-21T00:00:00&upper=2016-04-30T23:00:00&threshold=.5 [36m304 [0m8.368 ms - -[0m
+[0mGET / [32m200 [0m0.712 ms - 26684[0m
+[0mGET /favicon.ico [33m404 [0m16.422 ms - 925[0m
+[0mGET /favicon.ico [33m404 [0m7.284 ms - 925[0m
