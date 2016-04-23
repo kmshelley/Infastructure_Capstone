@@ -11,6 +11,7 @@ import ConfigParser
 from pprint import pprint
 from copy import deepcopy
 from dataStorage import upload_to_Elasticsearch
+from glob import glob
 
 #read in the config file
 config = ConfigParser.ConfigParser()
@@ -34,11 +35,30 @@ def dump_index_to_json(index,doc_type,dump_loc,q={}):
     with open(os.path.join(dump_loc,'%s_MAPPING.json' % index),'w') as outfile:
         json.dump(r.json(),outfile)
 
-    #export the index data
-    gz_f = os.path.join(dump_loc,'%s_%s_DUMP.gz' % (index,doc_type))
+    #export the index data in 1M line chunks
+    bulk=0
+    counter=0
+    docs = []
+    #iterate through the documents, write to gz files
+    for doc in helpers.scan(es,index=index,doc_type=doc_type,query=q):
+        bulk+=1
+        docs.append(doc['_source'])
+        #outfile.write(json.dumps(doc['_source']) + '\n')
+
+        if bulk >=1000000:
+            print 'Writing to %s_%s_DUMP_%s.gz' % (index,doc_type,str(counter))
+            gz_f = os.path.join(dump_loc,'%s_%s_DUMP_%s.gz' % (index,doc_type,str(counter)))
+            with gzip.open(gz_f, 'wb') as outfile:
+                outfile.write(json.dumps(docs))
+            #reset the counter
+            bulk=0
+            counter+=1
+            docs=[]
+    #write out any remaining documents.
+    print 'Writing to %s_%s_DUMP_%s.gz' % (index,doc_type,str(counter))
+    gz_f = os.path.join(dump_loc,'%s_%s_DUMP_%s.gz' % (index,doc_type,str(counter)))
     with gzip.open(gz_f, 'wb') as outfile:
-        for doc in helpers.scan(es,index=index,doc_type=doc_type,query=q):
-            outfile.write(json.dumps(doc['_source']) + '\n')
+        outfile.write(json.dumps(docs))
 
     print "Completed data dump. Took %s" % str(dt.datetime.now()-start)
 
@@ -64,22 +84,26 @@ def restore_index_from_json(index,doc_type,dump_loc,**kwargs):
             data=json.dumps(json.load(mapping_file)[index]['mappings'][doc_type])
             r = requests.post('%s/%s/_mapping/%s' % (es_full_url,index,doc_type),data=data)
             
-    #check to see if the file is gzipped
-    f = os.path.join(dump_loc,'%s_%s_DUMP.gz' % (index,doc_type))
-    ext = os.path.basename(f).split('.')[-1]
-    
-    with gzip.open(f,'rb') as upload:
-        docs=[]
-        bulk=0    
-        for line in upload:
-            bulk+=1
-            docs.append(json.loads(line.strip()))
-            #upload 10k records at a time
-            if bulk == 10000:
-                upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(docs,index=index,doc_type=doc_type,id_field=id_field,delete_index=delete_index)
-                bulk=0
-                docs=[]
-        #upload the remaining records        
-        upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(docs,index=index,doc_type=doc_type,id_field=id_field,delete_index=delete_index)     
+    #iterate through data files, upload to elasticsearch
+    for f in glob(os.path.join(dump_loc,'%s_%s_DUMP_*.gz' % (index,doc_type))):
+        
+        ext = os.path.basename(f).split('.')[-1]
+        with gzip.open(f,'rb') as upload:
+            docs = json.loads(upload.read())
+            '''
+            docs=[]
+            bulk=0    
+            for line in upload:
+                bulk+=1
+                docs.append(json.loads(line.strip()))
+                #upload 10k records at a time
+                if bulk == 10000:
+                    upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(docs,index=index,doc_type=doc_type,id_field=id_field,delete_index=delete_index)
+                    bulk=0
+                    docs=[]
+            #upload the remaining records
+            '''
+            upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(docs,index=index,doc_type=doc_type,id_field=id_field,delete_index=delete_index)
+            
 
 
