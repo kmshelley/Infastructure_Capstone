@@ -1,9 +1,7 @@
 __author__ = 'Katherine'
 from dataAcquisition import open_data_api, acquire_QCLCD_data, acquire_NYC_Collisions
 from dataStorage import upload_to_Elasticsearch, download_from_Elasticsearch, elasticsearch_backup_restore
-from dataCleaning import find_closest_geo_record, collision_geoshape_update, add_ZCTA, zip_code_features, grid_cleaning
-#from gridCreation import pysparkGrid
-from gridCreation.ResultsGrid import results_grid
+from dataCleaning import find_closest_geo_record, collision_geoshape_update, add_ZCTA, zip_code_features
 import ConfigParser
 import time, datetime as dt
 from dateutil.parser import parse
