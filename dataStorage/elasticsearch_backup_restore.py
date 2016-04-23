@@ -22,7 +22,7 @@ ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
 
-def dump_index_to_json(index,doc_type,dump_loc,q={}):
+def dump_index_to_json(index,doc_type,dump_loc,chunksize=100000,q={}):
     #input: Index name, document type, location to store the data dump, OPTIONAL query
     #output: dumps the index to a zipped json file stored in dump_loc
     es_full_url = 'http://' + ES_username + ':' + ES_password + '@' + ES_url + ':9200'
@@ -45,7 +45,7 @@ def dump_index_to_json(index,doc_type,dump_loc,q={}):
         docs.append(doc['_source'])
         #outfile.write(json.dumps(doc['_source']) + '\n')
 
-        if bulk >=1000000:
+        if bulk >=chunksize:
             print 'Writing to %s_%s_DUMP_%s.gz' % (index,doc_type,str(counter))
             gz_f = os.path.join(dump_loc,'%s_%s_DUMP_%s.gz' % (index,doc_type,str(counter)))
             with gzip.open(gz_f, 'wb') as outfile:
