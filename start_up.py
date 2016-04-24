@@ -45,7 +45,51 @@ diag = config.get('indexes','diagnostics')
 
 zip_codes = config.get('zip codes','zip_codes').split(',')
 
- 
+def reload_geojson(f,index,doc_type,**kwargs):
+    ## RELOAD GEOJSON FILE TO ES
+    with open(f, 'r') as geofile:
+        geo = geojson.load(geofile)['features']
+        
+    #replace zip code definitions
+    upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(geo,index='index',doc_type='doc_type',**kwargs)
+
+    
+def reload_geo_indices():
+    ## RELOAD ZIP CODES, WEATHER STATIONS, TRAUMA CENTERS, AND EMS STATIONS
+    reload_geojson('./flatDataFiles/nyc_zip_codes.json',index='nyc_zip_codes',doc_type='zip_codes',id_field='zipcode',geoshape='coords',delete_index=True)
+    reload_geojson('./flatDataFiles/NY_Area_WBAN_Stations.json',index='weather_stations',doc_type='wban',id_field='WBAN',geopoint='loc')
+    reload_geojson('./flatDataFiles/FDNY_FireStations.json',index='emergency_stations',doc_type='ems',geopoint='loc')
+    reload_geojson('./flatDataFiles/NYC_Trauma_Centers.json',index='emergency_stations',doc_type='trauma_centers',geopoint='loc')
+
+    
+    #add closest WBAN to zip codes
+    find_closest_geo_record.find_closest(index1='nyc_zip_codes',
+                                         doc_type1='zip_codes',
+                                         geo_field1='coords',
+                                         id_field1='zipcode',
+                                         index2='weather_stations',
+                                         doc_type2='wban',
+                                         geo_field2='loc',
+                                         proj=Proj(init='epsg:2263'))
+    #add closest EMS to zip codes
+    find_closest_geo_record.find_closest(index1='nyc_zip_codes',
+                                         doc_type1='zip_codes',
+                                         geo_field1='coords',
+                                         id_field1='zipcode',
+                                         index2='emergency_stations',
+                                         doc_type2='ems',
+                                         geo_field2='loc',
+                                         proj=Proj(init='epsg:2263'))
+    #add closest Trauma Center to zip codes
+    find_closest_geo_record.find_closest(index1='nyc_zip_codes',
+                                         doc_type1='zip_codes',
+                                         geo_field1='coords',
+                                         id_field1='zipcode',
+                                         index2='emergency_stations',
+                                         doc_type2='trauma_centers',
+                                         geo_field2='loc',
+                                         proj=Proj(init='epsg:2263'))
+
 def reload_all_collisions():
     #add all collisions
     p = subprocess.Popen(['wget','https://nycopendata.socrata.com/api/views/h9gi-nx95/rows.csv'])
@@ -203,5 +247,12 @@ def daily_update():
     
 if __name__ == '__main__':
     '''Main Entry Point to the Program'''
+    #Reloads data from flat files, then runs daily update and prediction.
+    #Will take a couple of hours to complete!
+    elasticsearch_backup_restore.restore_index_from_json(index="nyc_grid",doc_type="rows",dump_loc="./flatDataFiles/backup/nyc_grid",id_field='grid_id')
+    elasticsearch_backup_restore.restore_index_from_json(index="saferoad_results",doc_type="rows",dump_loc="./flatDataFiles/backup/saferoad_results",id_field='grid_id')
+    reload_geo_indices()
+    reload_all_collisions()
     daily_update()
 
+    
