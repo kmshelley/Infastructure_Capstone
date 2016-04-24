@@ -139,19 +139,38 @@ A Random Forest is a machine learning algorithm that builds a series of decision
 
 ##### Prediction Map
 
-![Prediction Map](predictionMap.png?raw=true "Prediction Map") 
+For the SafeRoad front-end we created an interactive webpage built with NodeJS, Leaflet, and D3. The User Interface displays the SafeRoad model predictions in an interactive heat map and various charts. We also display the model diagnostics via Reciever Operator Curves (ROC) for each prediction.
+
+![Prediction Map](./images/predictionMap.png?raw=true "Prediction Map") 
 
 ##### Prediction Map - Zipcode View
 
-![Prediction Map with Zipcode](predictionWithZip.png?raw=true "Prediction Map with Zipcode") 
+![Prediction Map with Zipcode](./images/predictionWithZip.png?raw=true "Prediction Map with Zipcode") 
 
 ##### Prediction for 10 days
 
-![Prediction Map for 10 days](prediction10Days.png?raw=true "Prediction for 10 days") 
+![Prediction Map for 10 days](./images/prediction10Days.png?raw=true "Prediction for 10 days") 
 
 
-### Exploratory Analysis and Diagnostics [Shelley]
-*Images and description of the EDA notebook.*
+### Exploratory Analysis and Diagnostics
+
+SafeRoad provides additional flexibility for end-users to perform exploratory analysis and model tuning and testing through two Jupyter notebooks with a Spark kernel. The notebooks can be accessed through `notebook\NYC_Collision_Analysis_with_Pyspark.ipynb` and `notebook\SafeRoad_Model_Tuning_and_Diagnostics.ipynb`. Below are examples of exploratory analysis done with Pyspark using various data visualization and model tuning techniques.
+
+![Fatalities by Cause](./images/Fatality_by_Cause.png?raw=true "Fatalities by Cause") 
+
+##### Total Fatalities by Listed Cause
+
+![Injuries and Fatalities by Victim](./images/Inj+Fatality_by_Victim.png?raw=true "Injuries and Fatalities by Victim") 
+
+##### Total Injuries and Fatalities by Victim Type
+
+![Fatalities Density Maps](./images/Fatality_by_Location.png?raw=true "Fatalities by Year and Victim") 
+
+##### Fatalities by Year and Victim
+
+![Injury Heatmap](./images/Injury_by_Month_and_Hour.png?raw=true "Injuries by Month and Hour") 
+
+##### Injuries by Month and Hour
 
 ## Section 6: Conclusion
 
