@@ -196,12 +196,25 @@ pip install -r requirements.txt
 
 Modify the configuration file with the definitions for the Elasticsearch cluster, Spark, and any API keys necessary to access Open Data API's:
 ```
-vi config/saferoad_config.ini
+vi config/capstone_config.ini
+```
+
+API keys can be obtained here:
+
+* Socrata Open Data API: https://dev.socrata.com/
+* Weather Underground API: https://www.wunderground.com/weather/api/
+
+
+We have made our original NYC collision feature grid and predictions results grid as well and other miscellaneous data files available as JSON files in the directory `flatDataFiles`. To reload the data run:
+
+```
+python start_up.py
 ```
 
 Finally, run the main program:
+
 ```
 python main.py
 ```
 
-Enjoy!
+We hope you enjoy our tool. Drive safe!
