@@ -21,7 +21,6 @@ ES_url = config.get('ElasticSearch','host')
 ES_password = config.get('ElasticSearch','password')
 ES_username= config.get('ElasticSearch','username')
 
-
 def dump_index_to_json(index,doc_type,dump_loc,chunksize=100000,q={}):
     #input: Index name, document type, location to store the data dump, OPTIONAL query
     #output: dumps the index to a zipped json file stored in dump_loc
@@ -90,19 +89,6 @@ def restore_index_from_json(index,doc_type,dump_loc,**kwargs):
         ext = os.path.basename(f).split('.')[-1]
         with gzip.open(f,'rb') as upload:
             docs = json.loads(upload.read())
-            '''
-            docs=[]
-            bulk=0    
-            for line in upload:
-                bulk+=1
-                docs.append(json.loads(line.strip()))
-                #upload 10k records at a time
-                if bulk == 10000:
-                    upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(docs,index=index,doc_type=doc_type,id_field=id_field,delete_index=delete_index)
-                    bulk=0
-                    docs=[]
-            #upload the remaining records
-            '''
             upload_to_Elasticsearch.bulk_upload_docs_to_ES_cURL(docs,index=index,doc_type=doc_type,id_field=id_field,delete_index=delete_index)
             
 
