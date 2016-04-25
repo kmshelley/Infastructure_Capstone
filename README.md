@@ -108,8 +108,8 @@ Data Grid Dictionary
 
 ## Section 3: SafeRoad Architecture
 
-### Elasticsearch 
-We chose ElasticSearch as a data storage because of its fast search performance, the wide array support for advanced queries such as geo queries and aggregations, and the ease of scaling up/down the cluster. Kibana has been integral to our fast-paced product and feature development as we were able to quickly explore the data using "Discover" and data visualization features. 
+### Elasticsearch
+We chose ElasticSearch as a data storage because of its fast search performance, the wide array support for advanced queries such as geo queries and aggregations, and the ease of scaling up/down the cluster. Kibana has been integral to our fast-paced product and feature development as we were able to quickly explore the data using "Discover" and data visualization features.
 
 ### Spark
 We chose to build our data processing and analysis layer on top of a [Spark](http://spark.apache.org/) cluster. Spark is a cluster computing system where data are processed entirely in memory with MapReduce-style transformations through a data abstraction known as a Resilient Distributed Dataset (RDD). We chose Spark because of it's speed, flexibility, built-in machine learning library, MLLib, and existing Elasticsearch plugins.
@@ -141,39 +141,43 @@ A Random Forest is a machine learning algorithm that builds a series of decision
 
 For the SafeRoad front-end we created an interactive webpage built with NodeJS, Leaflet, and D3. The User Interface displays the SafeRoad model predictions in an interactive heat map and various charts. We also display the model diagnostics via Reciever Operator Curves (ROC) for each prediction.
 
-![Prediction Map](./images/predictionMap.png?raw=true "Prediction Map") 
+![Prediction Map](./images/predictionMap.png?raw=true "Prediction Map")
 
 ##### Prediction Map - Zipcode View
 
-![Prediction Map with Zipcode](./images/predictionWithZip.png?raw=true "Prediction Map with Zipcode") 
+![Prediction Map with Zipcode](./images/predictionWithZip.png?raw=true "Prediction Map with Zipcode")
 
 ##### Prediction for 10 days
 
-![Prediction Map for 10 days](./images/prediction10Days.png?raw=true "Prediction for 10 days") 
+![Prediction Map for 10 days](./images/prediction10Days.png?raw=true "Prediction for 10 days")
 
 
 ### Exploratory Analysis and Diagnostics
 
 SafeRoad provides additional flexibility for end-users to perform exploratory analysis and model tuning and testing through two Jupyter notebooks with a Spark kernel. The notebooks can be accessed through `notebook\NYC_Collision_Analysis_with_Pyspark.ipynb` and `notebook\SafeRoad_Model_Tuning_and_Diagnostics.ipynb`. Below are examples of exploratory analysis done with Pyspark using various data visualization and model tuning techniques.
 
-![Fatalities by Cause](./images/Fatality_by_Cause.png?raw=true "Fatalities by Cause") 
+![Fatalities by Cause](./images/Fatality_by_Cause.png?raw=true "Fatalities by Cause")
 
 ##### Total Fatalities by Listed Cause
 
-![Injuries and Fatalities by Victim](./images/Inj+Fatality_by_Victim.png?raw=true "Injuries and Fatalities by Victim") 
+![Injuries and Fatalities by Victim](./images/Inj+Fatality_by_Victim.png?raw=true "Injuries and Fatalities by Victim")
 
 ##### Total Injuries and Fatalities by Victim Type
 
-![Fatalities Density Maps](./images/Fatality_by_Location.png?raw=true "Fatalities by Year and Victim") 
+![Fatalities Density Maps](./images/Fatality_by_Location.png?raw=true "Fatalities by Year and Victim")
 
 ##### Fatalities by Year and Victim
 
-![Injury Heatmap](./images/Injury_by_Month_and_Hour.png?raw=true "Injuries by Month and Hour") 
+![Injury Heatmap](./images/Injury_by_Month_and_Hour.png?raw=true "Injuries by Month and Hour")
 
 ##### Injuries by Month and Hour
 
 ## Section 6: Conclusion
 
-### Lessons Learned [All of us]
+### Lessons Learned and the Road Ahead
 
-### Next Steps for SafeRoad [All of us]
+For our original product we focused our data grid on New York City zip codes; however in discussion with a traffic safety subject matter expert we determined that zip codes are not contextual for our intended end-user. We have provided through the user interface map layers representing NYPD precinct, New York City council districts, and New York City public school districts to be toggled on and off the prediction heat map to aid public policy specialists. A next step for SafeRoad is to create new feature and prediction grids that utilize these more contextual zones, and update the SafeRoad user interface to toggle between various predictions based on the various city zone types.
+
+While our Random Forest model shows fairly high overall accuracy, the precision of the model was very low, leading to a very low F1 score. This is not surprising; we found in our exploratory analysis that the leading cause of serious collisions is due to "driver inattention" and human behavior is an extremely difficult factor to predict. So, perhaps predicting human behavior in one particular geographic area and time is not the best goal. We currently display an overall daily average probability of serious collision by zip code, however in the future SafeRoad may benefit from a model that shows a relative probability of collision compared against all other locations in New York City based on historical data. Additionally, an algorithm designed to find clusters, or "hot-spots" may prove to be more actionable for our intended end-user.
+
+All-in-all, our goal of this project was to show that data could be used to identify the chance of serious collision in order to provide actionable insights to reduce traffic injuries and fatalities. We have made great strides towards that goal with our tool, SafeRoad.
