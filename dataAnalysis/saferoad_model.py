@@ -14,9 +14,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
 
 #metrics/cross-validation
-from sklearn.cross_validation import cross_val_score
+from sklearn.cross_validation import cross_val_score, ShuffleSplit
 from sklearn.utils import shuffle
-from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score, roc_curve, auc
+from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score, roc_auc_score, roc_curve, auc
 
 #Python Libraries
 import sys
@@ -239,11 +239,11 @@ def update_probability(row,victim='all'):
 
 def clean_feat_rank(f):
     #converts the rating from a numpy float to a python native float
-    try:
-        f['Rating'] = f['Rating'].item()
-        f['Rank'] = f['Rank'].item()
-    except:
-        pass
+    for key in f:
+        try:
+            f[key] = f[key].item()
+        except:
+            pass
     return f
 
 ##
@@ -261,7 +261,54 @@ def get_latest_record(index,doc_type,datetime_field):
         return helpers.scan(es,index=index,doc_type=doc_type,query=query,preserve_order=True).next()['_source']
     except:
         return None
+
+def mean_decrease_accuracy(model,X,Y,feats,victim='all'):
+    #Taken from http://blog.datadive.net/selecting-good-features-part-iii-random-forests/
+    #crossvalidate the scores on a number of different random splits of the data
+    scores = {}
+    #iterate 20 times, with random splits of the training/test data
+    for train_idx, test_idx in ShuffleSplit(len(X), 20, .3):
+        X_train, X_test = X[train_idx], X[test_idx]
+        Y_train, Y_test = Y[train_idx], Y[test_idx]
+        r = model.fit(X_train, Y_train)
+        
+        #get overall accuracy
+        acc = accuracy_score(Y_test, model.predict(X_test))
+        for i in range(X.shape[1]):
+            #make a copy of test data
+            X_t = X_test.copy()
+            #randomly shuffle the ith feature
+            np.random.shuffle(X_t[:, i])
+            #test the new accuracy
+            shuff_acc = accuracy_score(Y_test, model.predict(X_t))
+            
+            if feats[i] not in scores: scores[feats[i]] = []
+            scores[feats[i]].append((acc-shuff_acc)/acc) #% change in accuracy
+            
+    #print "Features sorted by their score:"
+    importances = np.array([round(np.mean(scores[f]), 4) for f in feats])
+    indices = np.argsort(importances)[::-1]
     
+    f_sorted = zip(np.array(feats)[indices],importances[indices],np.arange(1,len(indices)+1))
+    feature_idx = []
+    for f,r,i in f_sorted:
+        feature_idx.append({
+                'Rank': i,
+                'Feature': f,
+                'Rating': r
+            })
+
+##    order=np.array(feats)feats[indices]
+##    print order
+##    df = pd.DataFrame(f_sorted)
+##    df.columns=['Features','Rating','Rank']
+##    #print df
+##    fig = plt.figure()
+##    ax = sns.barplot(x="Features", y="Rating", data=df, order=order)
+##    ax.set_xticklabels(order,rotation='vertical',horizontalalignment='center')
+    
+    return feature_idx
+
 def get_training_test_data(test_date,victim='all',fraction=1.0):
     #input: start date, OPTIONAL victim type, OPTIONAL sampling fraction and victim type (all, pedestrian, cyclist, motorist)
     #output: training RDD, test RDD, dict of training class weights
@@ -448,7 +495,8 @@ def fit_and_predict_model(model,train_data,test_data,pred_data,weights={1:0.5,0:
     #training data
     df = pd.DataFrame(train_data.collect())
     Y_train = np.array(df['label']) #extract the labels
-    df_train = df.drop(['id','label','dayOfMonth'],1)
+    #df_train = df.drop(['id','label','dayOfMonth'],1)
+    df_train = df[['hour','dayOfWeek','road_len','rd_count','rd_cond','liquor','rain','fog','snow','zip_area','zipcode']]
     X_train = df_train.as_matrix()
     #shuffle the training data and labels
     X_train, Y_train = shuffle(X_train,Y_train,random_state=0) #shuffle the labels and features
@@ -456,7 +504,8 @@ def fit_and_predict_model(model,train_data,test_data,pred_data,weights={1:0.5,0:
     #test data
     df = pd.DataFrame(test_data.collect())
     Y_test = np.array(df['label']) #extract the labels
-    df_test = df.drop(['id','label','dayOfMonth'],1)
+    #df_test = df.drop(['id','label','dayOfMonth'],1)
+    df_test = df[['hour','dayOfWeek','road_len','rd_count','rd_cond','liquor','rain','fog','snow','zip_area','zipcode']]
     X_test = df_test.as_matrix()
     #shuffle the test data and labels
     X_test, Y_test = shuffle(X_test,Y_test,random_state=0) #shuffle the labels and features
@@ -467,27 +516,33 @@ def fit_and_predict_model(model,train_data,test_data,pred_data,weights={1:0.5,0:
     
     df_pred = pd.DataFrame(pred_data.collect())
     ids = np.array(df_pred['id']) #extract the ids
-    X_pred = df_pred.drop(['id','dayOfMonth'],1).as_matrix()
+    #X_pred = df_pred.drop(['id','dayOfMonth'],1).as_matrix()
+    X_pred = df[['hour','dayOfWeek','road_len','rd_count','rd_cond','liquor','rain','fog','snow','zip_area','zipcode']].as_matrix()
     
     #predict the probabilities, match id's with probability of serious collision (1) (convert probability from numpy.float to python native)
     probabilities = sc.parallelize(zip(list(ids),list(model.predict_proba(X_pred)))).map(lambda (k,v): (k,v[1].item()))
     
     #get feature importance json
-    importances = model.feature_importances_
-    features = df_train.columns.values
-    indices = np.argsort(importances)[::-1]
+##    importances = model.feature_importances_
+##    features = df_train.columns.values
+##    indices = np.argsort(importances)[::-1]
+##
+##    f_sorted = zip(features[indices],importances[indices],np.arange(1,len(indices)+1))
+##    feature_idx = []
+##    for f,r,i in f_sorted:
+##        feature_idx.append({
+##                'id' : victim.lower() + '_' + str(i),
+##                'Rank': i,
+##                'Feature': f,
+##                'Rating': r,
+##                'entityType': victim.lower()
+##            })
 
-    f_sorted = zip(features[indices],importances[indices],np.arange(1,len(indices)+1))
-    feature_idx = []
-    for f,r,i in f_sorted:
-        feature_idx.append({
-                'id' : victim.lower() + '_' + str(i),
-                'Rank': i,
-                'Feature': f,
-                'Rating': r,
-                'entityType': victim.lower()
-            })
-
+    feature_idx = mean_decrease_accuracy(model,X_train,Y_train,feats=['hour','dayOfWeek','road_len','rd_count','rd_cond','liquor','rain','fog','snow','zip_area','zipcode'])
+    for f in feature_idx:
+        f['entityType'] = victim.lower()
+        f['id'] = victim.lower() + '_' + str(f['Rank'])
+        
     #################
     ## Diagnostics ##
     #################
@@ -565,7 +620,7 @@ predRDD = predictions.map(lambda row: row[1]).map(predictionDict).filter(lambda 
 predRDD.cache()
 
 #fit RF and predict
-rf = RandomForestClassifier(n_estimators=1000,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
+rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
 probabilities,all_features,all_diagnostics = fit_and_predict_model(rf,trainRDD,testRDD,predRDD,victim='all')
 diagnostics.update(all_diagnostics)
 
@@ -592,7 +647,7 @@ predRDD = predictions.map(lambda row: row[1]).map(predictionDict).filter(lambda 
 predRDD.cache()
 
 #fit RF and predict
-rf = RandomForestClassifier(n_estimators=1000,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
+rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
 probabilities,ped_features,ped_diagnostics = fit_and_predict_model(rf,trainRDD,testRDD,predRDD,victim='pedestrian')
 diagnostics.update(ped_diagnostics)
 
@@ -619,7 +674,7 @@ predRDD = predictions.map(lambda row: row[1]).map(predictionDict).filter(lambda 
 predRDD.cache()
 
 #fit RF and predict
-rf = RandomForestClassifier(n_estimators=1000,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
+rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
 probabilities,cyc_features,cyc_diagnostics = fit_and_predict_model(rf,trainRDD,testRDD,predRDD,victim='cyclist')
 diagnostics.update(cyc_diagnostics)
 
@@ -646,7 +701,7 @@ predRDD = predictions.map(lambda row: row[1]).map(predictionDict).filter(lambda 
 predRDD.cache()
 
 #fit RF and predict
-rf = RandomForestClassifier(n_estimators=1000,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
+rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
 probabilities,mot_features,mot_diagnostics = fit_and_predict_model(rf,trainRDD,testRDD,predRDD,victim='motorist')
 diagnostics.update(mot_diagnostics)
 
