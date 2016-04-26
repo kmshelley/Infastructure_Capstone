@@ -491,12 +491,35 @@ def get_training_test_data(test_date,victim='all',fraction=1.0):
 def fit_and_predict_model(model,train_data,test_data,pred_data,weights={1:0.5,0:0.5},victim='all'):
     #input: Spark RDD for training data, and data to predict, and OPTIONAL weights, optional victim type (all, pedestrian, cyclist, motorist)
     #output: fits a Random Forest model and returns an RDD of (id,probability) based on pred_data RDD, and feature importances
-
+    features = ['avg_aadt',
+                'bridges',
+                'dayOfWeek',
+                'fog',
+                'hour',
+                'liquor',
+                'med_aadt',
+                'med_speed',
+                'month',
+                'rain',
+                'rd_cond',
+                'rd_count',
+                'road_len',
+                'snow',
+                'speed15',
+                'speed25',
+                'speed35',
+                'speed45',
+                'speed5',
+                'speed55',
+                'speed65',
+                'speed85',
+                'tunnels',
+                'zip_area']
     #training data
     df = pd.DataFrame(train_data.collect())
     Y_train = np.array(df['label']) #extract the labels
-    #df_train = df.drop(['id','label','dayOfMonth'],1)
-    df_train = df[['hour','dayOfWeek','road_len','rd_count','rd_cond','liquor','rain','fog','snow','zip_area','zipcode']]
+    #df_train = df.drop(['id','label','dayOfMonth','zipcode','temp'],1)
+    df_train = df[features]
     X_train = df_train.as_matrix()
     #shuffle the training data and labels
     X_train, Y_train = shuffle(X_train,Y_train,random_state=0) #shuffle the labels and features
@@ -504,8 +527,8 @@ def fit_and_predict_model(model,train_data,test_data,pred_data,weights={1:0.5,0:
     #test data
     df = pd.DataFrame(test_data.collect())
     Y_test = np.array(df['label']) #extract the labels
-    #df_test = df.drop(['id','label','dayOfMonth'],1)
-    df_test = df[['hour','dayOfWeek','road_len','rd_count','rd_cond','liquor','rain','fog','snow','zip_area','zipcode']]
+    #df_test = df.drop(['id','label','dayOfMonth','zipcode','temp'],1)
+    df_test = df[features]
     X_test = df_test.as_matrix()
     #shuffle the test data and labels
     X_test, Y_test = shuffle(X_test,Y_test,random_state=0) #shuffle the labels and features
@@ -516,8 +539,8 @@ def fit_and_predict_model(model,train_data,test_data,pred_data,weights={1:0.5,0:
     
     df_pred = pd.DataFrame(pred_data.collect())
     ids = np.array(df_pred['id']) #extract the ids
-    #X_pred = df_pred.drop(['id','dayOfMonth'],1).as_matrix()
-    X_pred = df[['hour','dayOfWeek','road_len','rd_count','rd_cond','liquor','rain','fog','snow','zip_area','zipcode']].as_matrix()
+    #X_pred = df_pred.drop(['id','dayOfMonth','zipcode','temp'],1).as_matrix()
+    X_pred = df_pred[features].as_matrix()
     
     #predict the probabilities, match id's with probability of serious collision (1) (convert probability from numpy.float to python native)
     probabilities = sc.parallelize(zip(list(ids),list(model.predict_proba(X_pred)))).map(lambda (k,v): (k,v[1].item()))
@@ -538,11 +561,9 @@ def fit_and_predict_model(model,train_data,test_data,pred_data,weights={1:0.5,0:
 ##                'entityType': victim.lower()
 ##            })
 
-    feature_idx = mean_decrease_accuracy(model,X_train,Y_train,feats=['hour','dayOfWeek','road_len','rd_count','rd_cond','liquor','rain','fog','snow','zip_area','zipcode'])
-    for f in feature_idx:
-        f['entityType'] = victim.lower()
-        f['id'] = victim.lower() + '_' + str(f['Rank'])
-        
+    feature_idx = mean_decrease_accuracy(model,X_train,Y_train,feats=features)
+    #feature_idx = {}
+
     #################
     ## Diagnostics ##
     #################
@@ -620,7 +641,7 @@ predRDD = predictions.map(lambda row: row[1]).map(predictionDict).filter(lambda 
 predRDD.cache()
 
 #fit RF and predict
-rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
+rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=4,bootstrap=True)
 probabilities,all_features,all_diagnostics = fit_and_predict_model(rf,trainRDD,testRDD,predRDD,victim='all')
 diagnostics.update(all_diagnostics)
 
@@ -647,7 +668,7 @@ predRDD = predictions.map(lambda row: row[1]).map(predictionDict).filter(lambda 
 predRDD.cache()
 
 #fit RF and predict
-rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
+rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=4,bootstrap=True)
 probabilities,ped_features,ped_diagnostics = fit_and_predict_model(rf,trainRDD,testRDD,predRDD,victim='pedestrian')
 diagnostics.update(ped_diagnostics)
 
@@ -674,7 +695,7 @@ predRDD = predictions.map(lambda row: row[1]).map(predictionDict).filter(lambda 
 predRDD.cache()
 
 #fit RF and predict
-rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
+rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=4,bootstrap=True)
 probabilities,cyc_features,cyc_diagnostics = fit_and_predict_model(rf,trainRDD,testRDD,predRDD,victim='cyclist')
 diagnostics.update(cyc_diagnostics)
 
@@ -701,7 +722,7 @@ predRDD = predictions.map(lambda row: row[1]).map(predictionDict).filter(lambda 
 predRDD.cache()
 
 #fit RF and predict
-rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=-1,bootstrap=True)
+rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight="balanced",n_jobs=4,bootstrap=True)
 probabilities,mot_features,mot_diagnostics = fit_and_predict_model(rf,trainRDD,testRDD,predRDD,victim='motorist')
 diagnostics.update(mot_diagnostics)
 
