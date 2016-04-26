@@ -139,7 +139,6 @@ source ~/.bash_profile
 
 Make sure the elasticsearch user owns the various Elasticsearch directories.
 ```
-
 chown -R elasticsearch:elasticsearch /etc/elasticsearch
 chown -R elasticsearch:elasticsearch /usr/share/elasticsearch
 chown -R elasticsearch:elasticsearch /var
