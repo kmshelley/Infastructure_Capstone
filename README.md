@@ -7,7 +7,7 @@ Katrina Adams, Katherine Shelley, Kasane Utsumi
 ## Section 1: Background
 
 ### Problem Definition and Context
-According to the Centers for Disease Control 2014 Final Report, traffic fatalities are the leading cause of death for persons unser age 35 and the third leading cause of unintentional death amongst those under age 55. Regardless of prevalence, we believe that all traffic accidents are avoidable; which means no traffic fatality is acceptable.
+According to the Centers for Disease Control 2014 Final Report, traffic fatalities are the leading cause of death for persons under age 35 and the third leading cause of unintentional death amongst those under age 55. Regardless of prevalence, we believe that all traffic accidents are avoidable; which means no traffic fatality is acceptable.
 
 There are several programs accross major US cities aimed at using data-based decisions to design safer streets and educate the public to reduce traffic injuries and fatalities. With our product, however, we look to fill a tactical gap, providing near-real-time prediction of traffic collisions that will show public leaders and traffic safety specialists when and where serious collisions are more likely to occur.
 Our tool, SafeRoad, is a Big Data system for large-scale collision data mining and prediction. Our tool will identify what road and other conditions are important causal factors for fatal and serious injury collisions to develop long-term, city-specific strategies to meet the goal of zero traffic fatalities.
