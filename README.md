@@ -4,24 +4,18 @@
 Katrina Adams, Katherine Shelley, Kasane Utsumi
 
 
-## Section 1: Background [Adams]
+## Section 1: Background
 
 ### Problem Definition and Context
-All traffic accidents are avoidable; which means no traffic fatality is acceptable.
-* Vision Zero is a traffic collision reduction program launched in Sweden in 1997 (1).
-* Several US cities have since launched their own Vision Zero projects with the goal of eliminating traffic fatalities and major injuries.
-* Vision Zero projects focus on long-term strategies for reducing traffic fatalities.
-* Our tool fills a tactical gap, providing near-real-time prediction of traffic collisions.
-* We have focused our end-user to public policy makers and the scope of our tool to a tactical decision support system to support Vision Zero initiatives.
-* Final Product: SafeRoad
-* SafeRoad is a Big Data system for large-scale collision data mining and prediction.
-* SafeRoad will allow public leaders to respond tactically with a near-real-time predictive model that shows where accidents are more likely to occur.
-* Our model will identify what road and other conditions are important causal factors for fatal and serious injury collisions to develop long-term, city-specific strategies to meet the goal of zero traffic fatalities.
+According to the Centers for Disease Control 2014 Final Report, traffic fatalities are the leading cause of death for persons unser age 35 and the third leading cause of unintentional death amongst those under age 55. Regardless of prevalence, we believe that all traffic accidents are avoidable; which means no traffic fatality is acceptable.
+
+There are several programs accross major US cities aimed at using data-based decisions to design safer streets and educate the public to reduce traffic injuries and fatalities. With our product, however, we look to fill a tactical gap, providing near-real-time prediction of traffic collisions that will show public leaders and traffic safety specialists when and where serious collisions are more likely to occur.
+Our tool, SafeRoad, is a Big Data system for large-scale collision data mining and prediction. Our tool will identify what road and other conditions are important causal factors for fatal and serious injury collisions to develop long-term, city-specific strategies to meet the goal of zero traffic fatalities.
 
 ## Section 2: Data Sources
 
 ### Open Data
-SafeRoad is built entirely on open and freely available data sets. In order to model the complexity of automobile collisions in a large metropolitan city street system, several datasets are collected and used as input to the SafeRoad model.  
+SafeRoad is built entirely on open and freely available data sets. In order to model the complexity of automobile collisions in a large metropolitan city street system, several datasets are collected and used as input to the SafeRoad model.
 
 We identify collisions using historical automobile collision data retrieved from the New York City [Vision Zero](http://www.visionzeroinitiative.com/) project. The collisions data set contains geocoded records for all automobile collisions reported to the New York Police Department dating back to July, 2012.  Additional data are collected to enhance the accuracy of the model, such as weather retrieved from the [National Oceanic and Atmospheric Administration (NOAA)](http://www.noaa.gov/), and other city and state-specific data sets made available through the [New York State](https://data.ny.gov/) and [New York City](https://nycopendata.socrata.com/) open data initiatives. Below is a list of the data sources used in the SafeRoad model and user interface:
 
@@ -123,14 +117,17 @@ In a similar process a prediction grid containing the same data features as the 
 
 The data grid is used to train the predictive model, after which predictions are updated based on the prediction grid.
 
-### Machine Learning Model [Adams]
-*This text is from the webpage; still needs details on training and validation*
-
+### Machine Learning Model
 SafeRoad uses a [Random Forest](https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm) model to predict the probability of a serious collision occurring in a given New York City zip code and hour; those probabilities are then averaged across a 24 hour period. Custom time periods can also be analyzed based on user input.
 
 A serious collision is defined as a collision that resulted in at least one injury or fatality. The Vision Zero data set of historical collisions also allows for a more specific model predicting the probability of collisions affecting pedestrians, cyclists, and motorists.
 
 A Random Forest is a machine learning algorithm that builds a series of decision trees, each with a randomly selected subset fields from the training, or truth data; data that has a label of the true outcome that is being predicted. Each decision tree builds rules that define whether or not an outcome will occur based on the data fields available to that particular tree, and the true outcomes available in the training data. To make a prediction, data is sent through each individual decision tree and a classification of the outcome is made. Each tree then "votes" on the outcome and a majority classification becomes the ultimate prediction. In our model we output not just a single classification, but a probability of that classification by averaging the number of positive outcomes, i.e. serious collision, by the number of trees in the forest. For example, if our model uses 100 decision trees and 75 of them predict that in a particular zip code and hour a serious collision will occur, then the probability is $75/100$ or 75%.
+
+Our model is trained using data from the start of our data grid, up to 90 days prior to the latest timestamp available. As serious as traffic collisions are, in our entire data grid the occurrence of a collision that results in injury or death is still quite rare when considering our data grid of every New York City zip code and hour for almost 5 years. All-in-all the data have approximately 2% postive outcomes (a serious collision occurred) and 98% negative outcomes. This skewed truth data does not lend itself well to training a robust machine learning model, so we built a smaller training set from the data grid containing the positive records, and a similar sized set of negative records that have been randomly sampled, with replacement. Thus, for training our model we have a data set that is approximately evenly weighted. The remaining 90 days of data are used for validating the model and assessing various accuracy scores. All validation of the model is done with the full set of data from the previous 90 days, and is hence weighted realistically.
+
+### Feature Importance
+A natural output of a decision tree or Random Forest model is a metric known as **feature importance**. There are various algorithms for determining feature importance, but generally speaking a feature’s importance is measured by averaging the difference in error caused by permuting the values of the feature in the training set on each tree. A feature importance rating is the normalized value (divided by the standard deviation) of the average change in the error. We provide the feature importance rating of each model generated as a tool for identifiying key factors in serious collisions.
 
 
 ## Section 5: User Interface
