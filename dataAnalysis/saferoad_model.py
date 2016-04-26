@@ -1,6 +1,6 @@
 # # Serious Accident Prediction with PySpark and Sci-Kit Learn
 from pyspark import SparkContext, SparkConf
-conf = SparkConf().setAppName('sklearn_RandomForest_serious_collisions')
+conf = SparkConf().setAppName('SafeRoad Model')
 sc = SparkContext(conf=conf)
 
 from pyspark.sql import SQLContext
@@ -562,6 +562,9 @@ def fit_and_predict_model(model,train_data,test_data,pred_data,weights={1:0.5,0:
 ##            })
 
     feature_idx = mean_decrease_accuracy(model,X_train,Y_train,feats=features)
+    for f in feature_idx:
+        f['id'] = victim.lower() + '_' + str(f['Rank'])
+        f['entityType'] = victim.lower()
     #feature_idx = {}
 
     #################
@@ -745,6 +748,9 @@ predictions.saveAsNewAPIHadoopFile(
         valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
         conf=pred_write_conf)
 
+
+
+    
 #convert ratings from numpy float to python native float, convert to tuple for loading into ES
 featuresRDD = featuresRDD.map(lambda f: (f['id'],clean_feat_rank(f)))
 
