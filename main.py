@@ -97,6 +97,11 @@ def run_predictions():
            './dataAnalysis/saferoad_model.py']
            
 
+    print (' ').join(cmd)
+    print
+    print
+    print
+    
     index = update.split('/')[0]
     doc_type = update.split('/')[1]
     try:
@@ -204,4 +209,5 @@ def daily_update():
 if __name__ == '__main__':
     '''Main Entry Point to the Program'''
     daily_update()
+    #run_predictions()
 
