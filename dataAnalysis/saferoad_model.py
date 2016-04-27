@@ -767,4 +767,64 @@ featuresRDD.saveAsNewAPIHadoopFile(
 #
 index,doc_type=diag.split('/')
 diagnostics.update({ 'id' : '1' })
+
+mapping = {'properties':
+               {
+                   'all_percent_accidents': { 'type': 'double' },
+                   'pedestrian_percent_accidents': { 'type': 'double' },
+                   'cyclist_percent_accidents': { 'type': 'double' },
+                   'motorist_percent_accidents': { 'type': 'double' },
+                   'all_false_postive_rate': { 'type': 'double' },
+                   'pedestrian_false_postive_rate': { 'type': 'double' },
+                   'cyclist_false_postive_rate': { 'type': 'double' },
+                   'motorist_false_postive_rate': { 'type': 'double' },
+                   'all_true_postive_rate': { 'type': 'double' },
+                   'pedestrian_true_postive_rate': { 'type': 'double' },
+                   'cyclist_true_postive_rate': { 'type': 'double' },
+                   'motorist_true_postive_rate': { 'type': 'double' },
+                   'all_false_negative_rate': { 'type': 'double' },
+                   'pedestrian_false_negative_rate': { 'type': 'double' },
+                   'cyclist_false_negative_rate': { 'type': 'double' },
+                   'motorist_false_negative_rate': { 'type': 'double' },
+                   'all_true_negative_rate': { 'type': 'double' },
+                   'pedestrian_true_negative_rate': { 'type': 'double' },
+                   'cyclist_true_negative_rate': { 'type': 'double' },
+                   'motorist_true_negative_rate': { 'type': 'double' },
+                   'all_F1': { 'type': 'double' },
+                   'pedestrian_F1': { 'type': 'double' },
+                   'cyclist_F1': { 'type': 'double' },
+                   'motorist_F1': { 'type': 'double' },
+                   'all_Precision': { 'type': 'double' },
+                   'pedestrian_Precision': { 'type': 'double' },
+                   'cyclist_Precision': { 'type': 'double' },
+                   'motorist_Precision': { 'type': 'double' },
+                   'all_Recall': { 'type': 'double' },
+                   'pedestrian_Recall': { 'type': 'double' },
+                   'cyclist_Recall': { 'type': 'double' },
+                   'motorist_Recall': { 'type': 'double' },
+                   'all_Test_set_accuracy': { 'type': 'double' },
+                   'pedestrian_Test_set_accuracy': { 'type': 'double' },
+                   'cyclist_Test_set_accuracy': { 'type': 'double' },
+                   'motorist_Test_set_accuracy': { 'type': 'double' },
+                   'all_AUC': { 'type': 'double' },
+                   'pedestrian_AUC': { 'type': 'double' },
+                   'cyclist_AUC': { 'type': 'double' },
+                   'motorist_AUC': { 'type': 'double' },
+                   'all_ROC': { 'type': 'object' },
+                   'pedestrian_ROC': { 'type': 'object' },
+                   'cyclist_ROC': { 'type': 'object' },
+                   'motorist_ROC': { 'type': 'object' }
+                 }
+              }
+try:
+    es_url = 'http://%s:%s@%s:9200' % (ES_username,ES_password,ES_url)
+    es = Elasticsearch(es_url)
+    
+    #use cURL to put the mapping
+    p = subprocess.Popen(['curl','%s/%s/_mapping/%s' % (es_url,index,doc_type),'-d','%s' % json.dumps(mapping)],stderr=subprocess.PIPE)
+    out, err = p.communicate()
+    if err: print '\n' + err + '\n\n'
+except:
+    pass
+
 upload_to_Elasticsearch.update_ES_records_curl([diagnostics],index=index,doc_type=doc_type,id_field="id")
