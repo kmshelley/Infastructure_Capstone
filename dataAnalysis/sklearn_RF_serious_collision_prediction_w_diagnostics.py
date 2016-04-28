@@ -1,6 +1,6 @@
 # # Serious Accident Prediction with PySpark and Sci-Kit Learn
 from pyspark import SparkContext, SparkConf
-conf = SparkConf().setAppName('sklearn_RandomForest_serious_collisions')
+conf = SparkConf().setAppName('SafeRoad_Model')
 sc = SparkContext(conf=conf)
 
 from pyspark.sql import SQLContext
@@ -447,7 +447,7 @@ def fit_and_predict_model(train_data,test_data,pred_data,weights={1:0.5,0:0.5},v
     #training data
     df = pd.DataFrame(train_data.collect())
     Y_train = np.array(df['label']) #extract the labels
-    df_train = df.drop(['id','label','dayOfMonth'],1)
+    df_train = df.drop(['id','label','dayOfMonth','temp','zipcode'],1)
     X_train = df_train.as_matrix()
     #shuffle the training data and labels
     X_train, Y_train = shuffle(X_train,Y_train,random_state=0) #shuffle the labels and features
@@ -455,18 +455,18 @@ def fit_and_predict_model(train_data,test_data,pred_data,weights={1:0.5,0:0.5},v
     #test data
     df = pd.DataFrame(test_data.collect())
     Y_test = np.array(df['label']) #extract the labels
-    df_test = df.drop(['id','label','dayOfMonth'],1)
+    df_test = df.drop(['id','label','dayOfMonth','temp','zipcode'],1)
     X_test = df_test.as_matrix()
     #shuffle the test data and labels
     X_test, Y_test = shuffle(X_test,Y_test,random_state=0) #shuffle the labels and features
     
     #Train the model
-    rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight=weights)
+    rf = RandomForestClassifier(n_estimators=100,min_samples_split=50,max_features=None,max_depth=15,class_weight='balanced')
     rf.fit(X_train,Y_train)
     
     df_pred = pd.DataFrame(pred_data.collect())
     ids = np.array(df_pred['id']) #extract the ids
-    X_pred = df_pred.drop(['id','dayOfMonth'],1).as_matrix()
+    X_pred = df_pred.drop(['id','dayOfMonth','temp','zipcode'],1).as_matrix()
     
     #predict the probabilities, match id's with probability of serious collision (1) (convert probability from numpy.float to python native)
     probabilities = sc.parallelize(zip(list(ids),list(rf.predict_proba(X_pred)))).map(lambda (k,v): (k,v[1].item()))
