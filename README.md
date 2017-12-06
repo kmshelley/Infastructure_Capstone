@@ -32,7 +32,7 @@ We identify collisions using historical automobile collision data retrieved from
 	* New York City City Council districts
 	* New York City School districts
 
-Each set of data is stored in a separate Elasticsearch index. Locational fields are mapped as Elasticsearch geo-shape point or polygon types for fast geospatial queries. For more information about Elasticsearch see section (XX).
+Each set of data is stored in a separate Elasticsearch index. Locational fields are mapped as Elasticsearch geo-shape point or polygon types for fast geospatial queries.
 
 ### The Data Grid
 
